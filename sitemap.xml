@@ -1,27 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!--
+  Both language editions of every page are listed, and each <url> declares
+  the whole set of alternates including itself, which is what the protocol
+  asks for. A crawler that reaches either edition then knows about the
+  other and treats the two as one page in two languages.
+
+  The bare root is not listed: it is a redirector, not a page.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://edouardbutaye.github.io/en/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/index.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/index.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/index.html" />
+    <lastmod>2026-08-28</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://edouardbutaye.github.io/fr/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/index.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/index.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/index.html" />
     <lastmod>2026-08-28</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://edouardbutaye.github.io/en/research.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/research.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/research.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/research.html" />
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edouardbutaye.github.io/fr/research.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/research.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/research.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/research.html" />
     <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edouardbutaye.github.io/en/publications.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/publications.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/publications.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/publications.html" />
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edouardbutaye.github.io/fr/publications.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/publications.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/publications.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/publications.html" />
     <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edouardbutaye.github.io/en/teaching.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/teaching.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/teaching.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/teaching.html" />
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edouardbutaye.github.io/fr/teaching.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/teaching.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/teaching.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/teaching.html" />
     <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edouardbutaye.github.io/en/cv.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/cv.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/cv.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/cv.html" />
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edouardbutaye.github.io/fr/cv.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/cv.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/cv.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/cv.html" />
     <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
