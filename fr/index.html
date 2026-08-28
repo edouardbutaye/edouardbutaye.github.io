@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Édouard Butaye, chercheur et développeur de solveurs CFD</title>
+    <meta name="description" content="Édouard Butaye, chercheur et développeur de solveurs CFD" />
+  <!-- Open Graph and Twitter card: what LinkedIn, Slack, X and many mail
+       clients show when this URL is shared. The URLs must be absolute,
+       because the scraper resolves them from its own server. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Édouard Butaye" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:url" content="https://edouardbutaye.github.io/fr/index.html" />
+  <meta property="og:title" content="Édouard Butaye, chercheur et développeur de solveurs CFD" />
+  <meta property="og:description" content="Recherche et développement de solveurs CFD pour les écoulements turbulents et polyphasiques." />
+  <meta property="og:image" content="https://edouardbutaye.github.io/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Édouard Butaye, chercheur et développeur de solveurs CFD" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- The two editions of this page point at each other, so a search
+       engine treats them as one page in two languages rather than as
+       duplicates competing with each other. x-default names the one to
+       serve when neither language matches the visitor. -->
+  <link rel="canonical" href="https://edouardbutaye.github.io/fr/index.html" />
+  <link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/index.html" />
+  <link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/index.html" />
+  <link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/index.html" />
+
+    <link rel="icon" href="../images/favicon.ico" />
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon-180x180.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script defer src="../js/main.js"></script>
+    <!-- Applies the saved theme BEFORE the page paints. This must be an
+       ordinary inline script, not deferred and not in main.js: anything
+       that runs after first paint would let a dark-mode visitor see a
+       flash of white first. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      } catch (e) { /* private mode, storage disabled - just use the OS setting */ }
+    })();
+  </script>
+</head>
+  <body>
+    <aside class="sidebar">
+    <div class="sidebar-elements">
+      <img
+        class="sidebar__avatar"
+        src="../images/profile.jpg"
+        alt="Photographie d'Édouard Butaye"
+      />
+      <p class="sidebar__name">Édouard Butaye</p>
+      <p class="sidebar__bio">Chercheur / <span class="nowrap">développeur de solveurs CFD</span></p>
+
+        <button class="links-toggle" id="linksToggle" type="button"
+                aria-expanded="false" aria-controls="sidebarLinks">Liens &#9662;</button>
+      <ul class="sidebar__links" id="sidebarLinks">
+        <li>
+          <a href="mailto:ebutaye@sfr.fr">
+            <span class="icon">📧</span> ebutaye@sfr.fr
+          </a>
+        </li>
+        <li>
+          <a href="https://orcid.org/0000-0003-3111-9904" target="_blank" rel="noopener">
+            <span class="badge badge--orcid">iD</span> ORCID
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr" target="_blank" rel="noopener">
+            <span class="icon">🎓</span> Google Scholar
+          </a>
+        </li>
+        <li>
+          <a href="https://www.researchgate.net/profile/Edouard-Butaye" target="_blank" rel="noopener">
+            <span class="badge badge--researchgate">RG</span> ResearchGate
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/edouard-butaye" target="_blank" rel="noopener">
+            <span class="badge badge--linkedin">in</span> LinkedIn
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="page">
+      <header>
+        <nav class="topnav">
+          <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+          <ul class="topnav-links" id="navLinks">
+            <li><a href="index.html" class="active">Accueil</a></li>
+            <li><a href="research.html">Recherche</a></li>
+            <li><a href="teaching.html">Enseignement</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="cv.html">CV</a></li>
+          </ul>
+        <p class="lang-switch" role="group" aria-label="Langue">
+          <a href="../en/index.html" hreflang="en" lang="en" aria-label="This page in English">EN</a>
+          <span class="lang-switch__current" aria-current="true">FR</span>
+        </p>
+        <button class="theme-toggle" id="themeToggle" type="button"
+                aria-label="Passer au thème sombre" title="Changer de thème">🌙</button>
+        </nav>
+      </header>
+
+      <main class="page-content">
+        <h1>Recherche et développement de solveurs CFD pour les écoulements turbulents et polyphasiques</h1>
+        <p class="page-content-intro">
+          Je travaille sur la simulation numérique des écoulements turbulents
+          et polyphasiques, sur toute la chaîne : l'analyse physique d'un
+          écoulement, le modèle qui le décrit, son implémentation dans un code
+          de calcul industriel, et sa validation par comparaison à
+          l'expérience.
+        </p>
+
+        <p class="home-actions">
+          <a class="button-link" href="../files/cv_butaye_francais.pdf" target="_blank" rel="noopener">Télécharger mon CV (PDF)</a>
+        </p>
+
+        <p class="home-now">
+          <span class="tag">Actuellement</span>
+          <span>
+            Chercheur postdoctoral au CEA Saclay, où j'implémente la méthode
+            hybride RANS-LES HTLES dans TrioCFD et l'applique à l'écoulement
+            turbulent autour des assemblages combustibles, avec A. Burlot.
+          </span>
+        </p>
+
+        <p>
+          Auparavant, j'ai soutenu ma thèse en 2024 au laboratoire PROMES de
+          l'Université de Perpignan Via Domitia, sur la simulation résolue
+          d'écoulements fluide-particules anisothermes pour le solaire à
+          concentration, sous la direction d'A. Toutant, S. Mer et
+          F. Bataille.
+        </p>
+
+        <h2>Thématiques de recherche</h2>
+        <p>
+          La simulation haute-fidélité reste hors de portée pour la plupart
+          des configurations industrielles, tandis que les modèles employés à
+          sa place sont le plus souvent calibrés sur des cas académiques
+          éloignés de ceux auxquels on les applique. Ce qui m'intéresse est de
+          réduire cet écart : déterminer quelle part d'un écoulement doit
+          réellement être résolue, et récupérer ce qu'un calcul grossier
+          laisse de côté plutôt que d'en accepter l'erreur. Les formulations
+          hybrides RANS/LES et les corrections de sous-maille sont deux voies
+          que j'ai empruntées jusqu'ici, et je souhaite continuer à travailler
+          sur la question qui leur est commune : ce qui rend fiable un calcul
+          abordable.
+        </p>
+
+        <h3>Compétences que je souhaite développer</h3>
+        <ul class="interest-list">
+          <li>Apprentissage automatique appliqué à la modélisation de la turbulence et des écoulements polyphasiques</li>
+          <li>Méthodes de Boltzmann sur réseau</li>
+          <li>Architectures GPU et portabilité des codes</li>
+        </ul>
+
+        <h3>Domaines dans lesquels je souhaite travailler</h3>
+        <ul class="interest-list">
+          <li>Énergies renouvelables</li>
+          <li>Turbulence atmosphérique</li>
+          <li>Énergie nucléaire</li>
+        </ul>
+
+        <h2>Recherche</h2>
+        <ul class="home-cards">
+          <li>
+            <a class="topic-card" href="research.html#hybrid-rans-les">
+              <img src="../images/home/thumb-rans-les.jpg"
+                   alt="Maillage tétraédrique anisotrope de la configuration de la colline périodique." />
+              <div class="topic-card__body">
+                <h3>Simulation hybride RANS-LES</h3>
+                <p>
+                  Implémentation de la méthode HTLES dans TrioCFD, et
+                  définition d'un critère physique pour localiser les régions
+                  du domaine qui nécessitent une description instationnaire.
+                </p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="topic-card" href="research.html#particle-resolved">
+              <img src="../images/home/thumb-particles.jpg"
+                   alt="Particules résolues d'un lit fluidisé colorées par leur vitesse verticale." />
+              <div class="topic-card__body">
+                <h3>Simulation résolue de particules</h3>
+                <p>
+                  Hydrodynamique et transferts thermiques dans les lits
+                  fluidisés anisothermes, et une échelle de résolution
+                  corrigée en sous-maille pour les simulations qui ne peuvent
+                  pas résoudre les couches limites.
+                </p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="topic-card" href="research.html#boiling-flows">
+              <img src="../images/home/thumb-boiling.jpg"
+                   alt="Structures de vapeur dans un tube serpentin horizontal." />
+              <div class="topic-card__body">
+                <h3>Écoulements diphasiques bouillants</h3>
+                <p>
+                  Simulation Euler-Euler d'écoulements bouillants dans les
+                  tubes récepteurs des centrales à génération directe de
+                  vapeur, avec transfert thermique conjugué dans la paroi du
+                  tube.
+                </p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <a class="more-link" href="research.html">Toutes les activités de recherche</a>
+
+        <h2>Développements logiciels</h2>
+        <p>
+          Mes développements sont intégrés à <strong>TRUST/Trio_CFD</strong>,
+          la plateforme CFD open source du CEA, où ils deviennent accessibles
+          à tous les autres utilisateurs du code. Pendant ma thèse, j'y ai
+          ajouté le calcul des forces hydrodynamiques et du flux de chaleur
+          sur les particules résolues, une détection de collisions optimisée
+          combinant la méthode Link-Cell et les tables de Verlet, qui a réduit
+          de 20 % le temps de calcul global, un indicateur de phase plus
+          précis aux faces et aux arêtes des volumes de contrôle, et la
+          correction de sous-maille de la force hydrodynamique à résolution
+          grossière. Le travail actuel y ajoute la formulation HTLES et son
+          terme de forçage de la turbulence.
+        </p>
+        <p>
+          Chacun de ces développements s'accompagne de fiches de validation et
+          de cas tests de non-régression, sans lesquels une contribution ne
+          survit pas à la version suivante. J'ai également travaillé avec
+          NEPTUNE_CFD, Code_Saturne, SYRTHES, Salomé et le remailleur MMG, en
+          C++ et en Python, sur des supercalculateurs nationaux jusqu'à
+          3 800 processeurs, et sur le portage GPU via Kokkos.
+        </p>
+        <a class="more-link" href="research.html">Comment ces méthodes sont utilisées</a>
+
+        <h2>Publications récentes</h2>
+        <ul class="home-pubs">
+          <li>
+            <span class="home-pubs__year">2026</span>
+            <span class="home-pubs__title" lang="en">Extensive analysis of hydrodynamics in liquid–solid fluidized beds with particle-resolved simulations</span>
+            <span class="home-pubs__venue">International Journal of Multiphase Flow · 202, 105789</span>
+          </li>
+          <li>
+            <span class="home-pubs__year">2025</span>
+            <span class="home-pubs__title" lang="en">Investigation of heat transfers with particle-resolved simulations: from Stokes flow to fluidized bed</span>
+            <span class="home-pubs__venue">International Journal of Heat and Mass Transfer · 241, 126687</span>
+          </li>
+          <li>
+            <span class="home-pubs__year">2024</span>
+            <span class="home-pubs__title">Modélisation et simulations résolues d'écoulement fluide-particules : du régime de Stokes aux lits fluidisés anisothermes</span>
+            <span class="home-pubs__venue">Thèse de doctorat · Université de Perpignan Via Domitia</span>
+          </li>
+        </ul>
+        <a class="more-link" href="publications.html">Toutes les publications</a>
+
+        <h2>Enseignement et responsabilités</h2>
+        <p>
+          92 heures de travaux dirigés et de travaux pratiques en mécanique
+          des fluides, transferts radiatifs, méthodes numériques et énergie
+          éolienne, à l'Université de Perpignan Via Domitia et à Sup'ENR,
+          entre 2022 et 2024. Trois stages encadrés pendant la thèse.
+        </p>
+        <p>
+          Relecteur pour l'<em lang="en">International Journal of Heat and
+          Mass Transfer</em>.
+        </p>
+        <a class="more-link" href="teaching.html">Cours enseignés</a>
+
+
+      </main>
+
+      <footer>
+        <p>
+          &copy; <span id="year"></span> Édouard Butaye
+          <span class="footer-sep">&middot;</span>
+          Dernière mise à jour <span id="lastUpdated"></span>
+        </p>
+      </footer>
+    </div>
+
+  </body>
+
+</html>
