@@ -1,0 +1,1044 @@
+/* =============================================================
+   STYLE.CSS
+   ---------------------------------------------------------------
+   This is the ONE stylesheet used by every page of the site.
+   All pages link to it with:  <link rel="stylesheet" href="css/style.css">
+
+   It is organized into clearly labeled sections, in this order:
+     1. Variables      - colors, sizes, fonts (change the look here)
+     2. Reset          - small tweaks so browsers behave consistently
+     3. Page layout    - the overall sidebar + content structure
+     4. Sidebar        - profile photo, name, bio, social links
+     5. Top navigation - the row of links between pages
+     6. Content         - headings, paragraphs, generic content area
+     7. Cards          - the boxes used for publications/talks/etc.
+     8. Footer
+     9. Responsive     - adjustments for narrow (mobile) screens
+
+   Tip: search for a section title in quotes (e.g. "4. SIDEBAR")
+   to jump straight to it in your editor.
+   ============================================================= */
+
+
+/* -------------------------------------------------------------
+   1. VARIABLES
+   ------------------------------------------------------------- */
+:root {
+  color-scheme: light dark;     /* let scrollbars and form widgets follow suit */
+
+  --color-bg: #ffffff;          /* main page background */
+  --color-bg-alt: #f6f6f8;      /* sidebar / card background */
+  --color-text: #24262b;        /* main text color */
+  --color-text-muted: #6b6f76;  /* secondary/lighter text */
+  --color-accent: #6b4ea6;      /* links, highlights, buttons */
+  --color-accent-dark: #52397f; /* stronger accent: tag text, sub-headings */
+  --color-border: #e3e3e8;      /* thin lines / card borders */
+  --color-tag-bg: #ece6f5;      /* pale accent behind .tag pills */
+
+  /* The GitHub mark exists in two versions and has to swap with the
+     theme (see .badge--github). In light mode the <img> in the page
+     is used and there is no background mark. */
+  --github-mark: none;
+  --github-mark-opacity: 1;
+
+  --sidebar-width: 280px;       /* width of the left sidebar on desktop */
+  --content-max-width: 780px;   /* main content never gets wider than this */
+  --radius: 10px;               /* rounded corner size, used everywhere */
+
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 Helvetica, Arial, sans-serif;
+}
+
+
+/* -------------------------------------------------------------
+   1b. DARK THEME
+   Only the colors above are redefined - every rule in the rest of
+   the file goes through var(), so nothing else needs touching.
+
+   There are THREE states, not two:
+     - no data-theme  -> follow the operating system
+     - data-theme="light" -> forced light, even on a dark OS
+     - data-theme="dark"  -> forced dark, even on a light OS
+
+   js/main.js writes data-theme onto <html> and remembers the choice
+   in localStorage; a small inline script in each page's <head>
+   re-applies it before the first paint, so a dark-mode visitor never
+   sees a white flash.
+
+   Note --color-accent-dark: on a dark background the "stronger"
+   accent has to be LIGHTER, not darker. The name describes its role
+   (more emphasis), not its lightness.
+   ------------------------------------------------------------- */
+
+/* Follow the OS, unless the visitor has explicitly chosen light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #17181c;
+    --color-bg-alt: #1f2126;
+    --color-text: #e4e5e9;
+    --color-text-muted: #9ea3ad;
+    --color-accent: #b49ae8;
+    --color-accent-dark: #cdb9f5;
+    --color-border: #2d3037;
+    --color-tag-bg: #2b2440;
+
+    /* Light Octocat on a dark ground - the inverse of the SVG. */
+    --github-mark: url("../images/github-6980894_640_black.png");
+    --github-mark-opacity: 0;
+  }
+}
+
+/* An explicit choice of dark wins on any operating system. */
+:root[data-theme="dark"] {
+  --color-bg: #17181c;
+  --color-bg-alt: #1f2126;
+  --color-text: #e4e5e9;
+  --color-text-muted: #9ea3ad;
+  --color-accent: #b49ae8;
+  --color-accent-dark: #cdb9f5;
+  --color-border: #2d3037;
+  --color-tag-bg: #2b2440;
+
+  /* Light Octocat on a dark ground - the inverse of the SVG. */
+  --github-mark: url("../images/github-6980894_640_black.png");
+  --github-mark-opacity: 0;
+}
+
+
+/* -------------------------------------------------------------
+   2. RESET
+   ------------------------------------------------------------- */
+* {
+  box-sizing: border-box; /* padding/border no longer make elements bigger */
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%; /* images never overflow their container */
+  display: block;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* -------------------------------------------------------------
+   3. PAGE LAYOUT
+   Every page has the same two-column skeleton:
+
+     <body>
+       <aside class="sidebar">...</aside>
+       <div class="page">
+         <nav class="topnav">...</nav>
+         <main class="content">...</main>
+         <footer class="site-footer">...</footer>
+       </div>
+     </body>
+
+   "display: flex" on the body puts the sidebar and the ".page"
+   div side by side. On mobile this switches to a stacked layout
+   (see the "9. RESPONSIVE" section at the bottom of this file).
+   ------------------------------------------------------------- */
+body {
+  display: flex;
+  min-height: 100vh;
+}
+
+.page {
+  flex: 1;              /* take up all remaining width next to the sidebar */
+  min-width: 0;          /* allows content to shrink instead of overflowing */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+/* -------------------------------------------------------------
+   4. SIDEBAR
+   The profile card on the left: photo, name, short bio and the
+   list of contact / social links. This same block of HTML is
+   repeated at the top of every page (see any .html file).
+   ------------------------------------------------------------- */
+.sidebar {
+  width: var(--sidebar-width);
+  /* height: 100vh; */
+  flex-shrink: 0; /* never let the sidebar shrink to make room for content */
+  background: var(--color-bg-alt);
+  border-right: 1px solid var(--color-border);
+  padding: 2.5rem 1.75rem;
+  text-align: center;
+}
+
+.sidebar__avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;   /* turns the square photo into a circle */
+  object-fit: cover;    /* crops the photo instead of stretching it */
+  margin: 0 auto 1.25rem;
+  border: 3px solid var(--color-bg);
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.sidebar__name {
+  margin: 0 0 0.25rem;
+  font-size: 1.3rem;
+}
+
+.sidebar__bio {
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* The list of contact/social links (email, ORCID, Scholar, LinkedIn...) */
+.sidebar__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.sidebar__links li + li {
+  margin-top: 0.6rem;
+}
+
+.sidebar__links a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.sidebar__links a:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.sidebar-elements {
+  position: sticky;
+  top: 2.5rem;
+  z-index: 1;
+}
+
+/* Reveals the contact/social links on narrow screens. Hidden on desktop,
+   where the list is always visible - see the RESPONSIVE section. */
+.links-toggle {
+  display: none;
+}
+
+/* Small emoji icon shown before each social link's label,
+   e.g. <span class="icon">📧</span> Email */
+.sidebar__links .icon {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* Small colored "logo" badges for sites with a well-known brand mark
+   (LinkedIn, ORCID, ResearchGate, GitHub). Rather than pulling in an
+   icon font or SVG library, each badge is just a small colored box
+   with the platform's initials (or, for GitHub, a tiny inline drawing
+   of its logo) in it, styled to match its real brand colors — e.g.
+   <span class="badge badge--linkedin">in</span> */
+.sidebar__links .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.badge--linkedin {
+  background: #0a66c2; /* LinkedIn blue */
+}
+
+.badge--orcid {
+  background: #a6ce39; /* ORCID green */
+  border-radius: 50%;  /* ORCID's logo is a circle, not a square */
+}
+
+.badge--researchgate {
+  background: #00ccb8; /* ResearchGate teal */
+}
+
+/* Unlike the other badges, GitHub's logo comes from an actual image
+   file (images/Octicons-mark-github.svg) rather than being drawn with
+   CSS, and that file's color is fixed to a dark near-black. So instead
+   of a dark badge (which would make the dark logo invisible), this
+   badge uses a light background with a thin border to match the
+   sidebar's style. */
+/* GitHub is the one brand mark that cannot be a flat colour, because the
+   logo is a shape rather than a background. It therefore ships in two
+   versions and swaps with the theme:
+
+     light - the near-black SVG in the page, on a white badge
+     dark  - images/github-6980894_640_black.png, a light Octocat on a
+             dark ground, applied as the badge BACKGROUND
+
+   Both switches are driven by the --github-mark variables set in the
+   palettes at the top of this file, so the theme difference lives with
+   every other theme difference rather than hiding down here. In dark
+   mode the background mark covers the badge and the <img> is faded
+   out; in light mode there is no background mark and the <img> shows. */
+.badge--github {
+  background: #ffffff var(--github-mark) center / cover no-repeat;
+  border: 1px solid var(--color-border);
+}
+
+.badge--github img {
+  width: 11px;
+  height: 11px;
+  display: block;
+  opacity: var(--github-mark-opacity);
+}
+
+
+/* -------------------------------------------------------------
+   5. TOP NAVIGATION
+   ------------------------------------------------------------- */
+/* The header had no background of its own and simply showed the body
+   colour through. Stating it explicitly ties it to the footer, which
+   must be opaque because it is sticky - both now read from the same
+   variable instead of one being implicit. */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--color-bg);
+}
+
+.topnav {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.topnav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.topnav-links a {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.topnav-links a:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* The current page's link is highlighted using the "active" class,
+   which is added by hand in each page's <nav> (see any .html file). */
+.topnav-links a.active {
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.2rem;
+}
+
+/* Light/dark switch, sitting at the right-hand end of the top nav.
+   js/main.js swaps the emoji and the aria-label as it toggles. */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0.3rem 0.4rem;
+  border-radius: var(--radius);
+  color: inherit;
+}
+
+.theme-toggle:hover {
+  background: var(--color-bg-alt);
+}
+
+/* Hamburger button - only shown on narrow screens (see RESPONSIVE) */
+.nav-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+
+/* -------------------------------------------------------------
+   6. CONTENT
+   Generic styling for the main content area shared by all pages:
+   headings, paragraphs, and the page title block.
+   ------------------------------------------------------------- */
+.page-content {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 0;
+  /* top | right | bottom | left - a narrower gutter on the right, where
+     nothing sits beside the content, than on the left where it meets
+     the sidebar. */
+  padding: 2.5rem 1rem 2.5rem 2rem;
+}
+
+.page-content h1 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.page-content h2 {
+  margin-top: 2.5rem;
+  font-size: 1.4rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.4rem;
+}
+
+.page-content p {
+  color: var(--color-text);
+}
+
+.page-content-intro {
+  color: var(--color-text-muted);
+  margin-top: -0.5rem;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------
+   6b. RESEARCH PAGE
+   research.html is built from one <section class="research-topic">
+   per research activity. Inside each, a <div class="subtopic"> per
+   workstream. Unlike the boxed ".card" used elsewhere, these are
+   flat: long-form prose reads badly inside a border, so the
+   structure is carried by spacing and by the rule under each <h2>.
+   ------------------------------------------------------------- */
+
+/* The row of jump links under the page intro. */
+.topic-index {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+  margin: 0 0 1rem;
+}
+
+/* research.html runs wider than the other pages. Prose fills the whole
+   column; only the figures are capped, further down. */
+.page-content--wide {
+  max-width: 1040px;
+}
+
+.research-topic {
+  margin-bottom: 3.5rem;
+}
+
+/* The scene-setting paragraph under the activity heading: slightly
+   larger than body text so the eye lands on it first. */
+.research-topic__lead {
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+/* One workstream. The left rule ties its paragraphs, equations and
+   figure together as a single unit without boxing them in. */
+.subtopic {
+  border-left: 2px solid var(--color-border);
+  padding-left: 1.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.subtopic h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  color: var(--color-accent-dark);
+}
+
+.subtopic p {
+  margin: 0 0 1rem;
+}
+
+/* Figures. The image sits on the page background with a thin border,
+   because most of these plots have white backgrounds that would
+   otherwise bleed into the page. */
+/* "auto" on the left and right centres the figure inside the text
+   column. The caption stays left-aligned inside it: centred prose is
+   hard to read once it runs past a line. */
+.subtopic figure {
+  margin: 1.5rem auto 0;
+}
+
+/* Figures are capped below the text width so the prose, not the
+   images, sets the rhythm of the page. Three steps: wide/short plots
+   get the most room, near-square ones the least - at full width a
+   1:1 figure would be as tall as the screen. */
+.subtopic figure {
+  max-width: 800px;
+}
+
+.subtopic figure.figure--medium {
+  max-width: 620px;
+}
+
+.subtopic figure.figure--narrow {
+  max-width: 470px;
+}
+
+/* width:100% is doing real work here, not just max-width. An SVG
+   converted from a PDF carries a small intrinsic size (often ~230px),
+   and max-width alone never makes an image GROW past that - so the
+   plots rendered at thumbnail size. width:100% forces them to fill
+   the column; being vector, they lose nothing in the process. */
+.subtopic figure img,
+.subtopic figure video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  /* Kept white in dark mode too. These are scientific plots drawn on a
+     white ground; theming the box behind them would leave the axes and
+     labels floating on the wrong background. */
+  background: #ffffff;
+}
+
+.subtopic figure img {
+  padding: 0.75rem;
+}
+
+/* -------------------------------------------------------------
+   HOME PAGE
+   The landing page is built from a short lead, a row of cards
+   pointing into research.html, and a compact list of recent
+   publications.
+   ------------------------------------------------------------- */
+
+/* A one-line statement of the current position, set apart from the
+   surrounding prose. */
+.home-now {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.9rem 1.1rem;
+  margin: 0 0 2.5rem;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-alt);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.95rem;
+}
+
+.home-now .tag {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+/* The whole card is the link, so the thumbnail and the text are one
+   target rather than a small "read more" at the bottom. */
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;   /* clips the thumbnail to the rounded corners */
+  background: var(--color-bg);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.topic-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.topic-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.topic-card__body {
+  padding: 0.85rem 1.1rem 1.1rem;
+}
+
+.topic-card__body h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.topic-card__body p {
+  margin: 0;
+  font-size: 0.87rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Compact publication entries on the home page. */
+.home-pubs {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.home-pubs li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.home-pubs li:last-child {
+  border-bottom: none;
+}
+
+.home-pubs__year {
+  display: inline-block;
+  min-width: 3.2rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+  font-size: 0.87rem;
+}
+
+.home-pubs__title {
+  font-weight: 500;
+}
+
+.home-pubs__venue {
+  display: block;
+  margin-left: 3.2rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* A quiet "see everything" link under a section. */
+.more-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 800px) {
+  .home-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .home-pubs__venue {
+    margin-left: 0;
+  }
+}
+
+
+/* Simple data table, used for the teaching hours. The wrapper scrolls
+   sideways on narrow screens rather than forcing the page to. */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 0.45rem 0.9rem 0.45rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-table thead th {
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-bottom-width: 2px;
+}
+
+.data-table tfoot td {
+  font-weight: 600;
+  border-bottom: none;
+}
+
+/* A list without bullets or indentation, for entries that are already
+   sentences (the teaching referents). */
+.plain-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.plain-list li {
+  margin-bottom: 0.6rem;
+}
+
+/* Citation markers in the body text. Kept small and superscript-like
+   so they do not interrupt the line, and coloured with the accent so
+   they read as links rather than as part of the sentence. */
+.cite {
+  font-size: 0.8em;
+  vertical-align: 0.25em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cite:hover {
+  text-decoration: underline;
+}
+
+/* The numbered reference list. list-style-position: outside keeps the
+   numbers in their own column so the wrapped lines of an entry align
+   under its first line rather than under the number. */
+.reference-list {
+  margin: 0;
+  padding-left: 2.2rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.reference-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* Highlights the entry you have just jumped to from a citation. */
+.reference-list li:target {
+  background: var(--color-tag-bg);
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  margin-left: -0.4rem;
+}
+
+/* A set of small panels that belong to one figure, two per row. The
+   whole set shares a single <figcaption>, because it is one figure
+   from the paper rather than six unrelated ones. */
+.figure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem 1.25rem;
+}
+
+.figure-grid__cell {
+  margin: 0;
+}
+
+/* The six source files were re-exported to identical dimensions, so the
+   panels already line up. This pins the ratio anyway, so swapping in a
+   figure of a different shape cannot break the rows: the box stays the
+   same and "contain" fits the new drawing inside it. */
+.figure-grid__cell img {
+  aspect-ratio: 272 / 213;
+  object-fit: contain;
+}
+
+.figure-grid__label {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+/* A grid of photographs rather than plots. The two images have
+   different native aspect ratios, so a common portrait ratio is
+   imposed and "cover" crops them to it. That is acceptable for a
+   photograph, unlike the plots above where "contain" is used so that
+   no axis or colour bar is ever cut off. */
+.figure-grid--photos .figure-grid__cell img {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  padding: 0;
+}
+
+/* One column once the panels would be too small to read. */
+@media (max-width: 620px) {
+  .figure-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.subtopic figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* KaTeX puts display equations in their own block. Give them room,
+   and let a long one scroll sideways rather than push the page wide. */
+.subtopic .katex-display {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
+
+/* -------------------------------------------------------------
+   7. CARDS
+   The boxed layout used to list publications, talks, teaching
+   entries and portfolio items. Each entry is one ".card".
+   ------------------------------------------------------------- */
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  background: var(--color-bg);
+}
+
+.card__title {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+/* The author list, shown just under the title. Same size as .card__meta
+   below, but in the normal text color rather than the muted grey: on a
+   publications list the co-authors matter more to a reader than the
+   journal name does. Wrap your own name in <strong> so it stands out. */
+.card__authors {
+  margin: 0 0 0.15rem;
+  font-size: 0.9rem;
+}
+
+.card__meta {
+  margin: 0 0 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.card__description {
+  margin: 0;
+}
+
+.card__links {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.publication-type {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;   /* pills drop onto a second row on narrow screens */
+  gap: 0.5rem;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+
+.publication-type .tag {
+  margin-bottom: 0;      /* .tag's bottom margin misaligns a flex row */
+  border: none;          /* buttons ship with their own border */
+  font-family: inherit;  /* buttons do NOT inherit the page font */
+  cursor: pointer;
+}
+
+.tag__count {
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+/* The pressed filter. Using the aria-pressed attribute as the hook
+   means the accessibility state and the visual state can never
+   disagree - there is only one of them. */
+.publication-type .tag[aria-pressed="true"] {
+  background: var(--color-accent);
+  /* var(--color-bg), not a fixed white: the accent is a DARK purple in
+     light mode but a LIGHT one in dark mode, so fixed white text would
+     end up light-on-light. Using the page background always contrasts
+     against the accent, in either theme. */
+  color: var(--color-bg);
+}
+
+/* Added by js/main.js to every card the current filter excludes. */
+.card.is-hidden {
+  display: none;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  background: var(--color-tag-bg);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+
+/* -------------------------------------------------------------
+   8. FOOTER
+   ------------------------------------------------------------- */
+footer {
+  margin-top: auto; /* pushes the footer to the bottom of short pages */
+  /* padding: 1.5rem 2rem; */
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--color-border);
+  bottom: 0;
+  position: sticky;
+  background-color: var(--color-bg);
+  z-index: 1000;
+}
+
+
+/* -------------------------------------------------------------
+   9. RESPONSIVE
+   Below 800px wide (roughly a tablet held upright, or a phone),
+   we stack the sidebar above the content and turn the navigation
+   links into a collapsible menu opened by the hamburger button.
+   ------------------------------------------------------------- */
+@media (max-width: 800px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    text-align: left;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.25rem 1.5rem;
+  }
+
+  /* The profile becomes a compact strip instead of a full screen of
+     chrome: the avatar and the name share the first row, and
+     flex-basis:100% forces the bio and the link list onto rows of
+     their own.
+
+     The flex container is .sidebar-elements, NOT .sidebar - a flex
+     container only lays out its DIRECT children, and .sidebar's only
+     child is now the wrapper. Sticking these rules on .sidebar would
+     lay out that single div and leave the avatar and name stacked.
+
+     Sticky is also switched off here: on a phone the sidebar is only
+     as tall as its own content, so there is nothing to scroll past
+     and nothing to stick to. */
+  .sidebar-elements {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+  }
+
+  .sidebar__avatar {
+    width: 56px;
+    height: 56px;
+    margin: 0;
+  }
+
+  .sidebar__name {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .sidebar__bio {
+    flex-basis: 100%;
+    margin: 0;
+  }
+
+  /* The links collapse behind the button, and open as a plain list
+     underneath it. js/main.js adds "is-open". */
+  .links-toggle {
+    display: block;
+    font: inherit;
+    font-size: 0.85rem;
+    color: inherit;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.25rem 0.7rem;
+    cursor: pointer;
+  }
+
+  .sidebar__links {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  .sidebar__links.is-open {
+    display: block;
+  }
+
+  .topnav {
+    justify-content: space-between;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  /* The nav menu is a card, not a full-width strip. It is anchored on
+     the LEFT because that is where the hamburger sits once
+     justify-content:space-between pushes the two buttons apart: a menu
+     should drop from the control that opened it. top is measured from
+     the header rather than guessed, so changing the nav's padding
+     cannot detach the two. */
+  .topnav-links {
+    display: none;               /* hidden until the menu is opened */
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 1rem;
+    right: auto;
+    min-width: 180px;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    z-index: 10;
+  }
+
+  /* js/main.js adds this class when the hamburger button is clicked */
+  .topnav-links.is-open {
+    display: flex;
+  }
+}
