@@ -192,9 +192,14 @@ body {
   box-shadow: 0 0 0 1px var(--color-border);
 }
 
+/* A <p>, not a heading: the name repeats on every page, so making it an
+   <h1> gave each page two competing top-level headings. font-weight is
+   set explicitly because a <p> does not inherit the bold an <h1> had. */
 .sidebar__name {
   margin: 0 0 0.25rem;
   font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .sidebar__bio {
