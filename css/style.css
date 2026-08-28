@@ -538,6 +538,33 @@ header {
    publications.
    ------------------------------------------------------------- */
 
+/* The row of actions under the introduction: the CV download first,
+   because it is the first thing a reader evaluating a candidate looks
+   for, then the pages that back it up. */
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin: 0 0 2rem;
+  font-size: 0.92rem;
+}
+
+.button-link {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.button-link:hover {
+  background: var(--color-accent-dark);
+  color: var(--color-bg);
+  text-decoration: none;
+}
+
 /* A one-line statement of the current position, set apart from the
    surrounding prose. */
 .home-now {
@@ -913,6 +940,12 @@ header {
 /* -------------------------------------------------------------
    8. FOOTER
    ------------------------------------------------------------- */
+/* Separates the copyright from the last-updated date in the footer. */
+.footer-sep {
+  padding: 0 0.4rem;
+  opacity: 0.5;
+}
+
 footer {
   margin-top: auto; /* pushes the footer to the bottom of short pages */
   /* padding: 1.5rem 2rem; */

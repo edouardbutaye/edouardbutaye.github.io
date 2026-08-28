@@ -189,3 +189,32 @@ if (linksToggle && sidebarLinks) {
     linksToggle.setAttribute("aria-expanded", String(open));
   });
 }
+
+
+/* -------------------------------------------------------------
+   6. LAST UPDATED
+   Fills the "Last updated" date in the footer.
+
+   document.lastModified is the Last-Modified header the server sent
+   with this page, which on GitHub Pages is the time the file was
+   deployed. It is therefore accurate on its own and never needs to be
+   edited by hand, unlike a date typed into the HTML, which goes stale
+   the moment someone forgets to change it.
+   ------------------------------------------------------------- */
+const lastUpdated = document.getElementById("lastUpdated");
+
+if (lastUpdated) {
+  const when = new Date(document.lastModified);
+  /* Guard against a browser that reports something unparseable: better
+     to hide the line than to print "Invalid Date" in the footer. */
+  if (isNaN(when)) {
+    lastUpdated.closest("p")?.querySelectorAll(".footer-sep").forEach((s) => s.remove());
+    lastUpdated.textContent = "";
+  } else {
+    lastUpdated.textContent = when.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  }
+}
