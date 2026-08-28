@@ -589,15 +589,25 @@ header {
   flex-shrink: 0;
 }
 
-/* The "what next" list on the home page. Bulleted, because these are
-   distinct directions rather than a sequence. */
-.interests {
-  margin: 0 0 2.5rem;
-  padding-left: 1.2rem;
+/* The two labelled lines under the research interests paragraph. The
+   label is a block so the list beneath it starts on its own line and
+   the two entries line up. */
+.interests-line {
+  margin: 0 0 1rem;
 }
 
-.interests li {
-  margin-bottom: 0.6rem;
+.interests-line:last-of-type {
+  margin-bottom: 2.5rem;
+}
+
+.interests-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.15rem;
 }
 
 .home-cards {
