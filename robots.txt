@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://edouardbutaye.github.io/sitemap.xml
