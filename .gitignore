@@ -1,0 +1,12 @@
+# Working material: paper sources, defence slides, uncompressed originals.
+# Kept locally only. It is larger than the site itself and is not meant
+# to be published.
+_data/
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*~
+*.swp
+.vscode/
+.idea/
