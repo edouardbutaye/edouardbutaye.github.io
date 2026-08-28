@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV - Édouard Butaye</title>
+  <!-- Open Graph and Twitter card: what LinkedIn, Slack, X and many mail
+       clients show when this URL is shared. The URLs must be absolute,
+       because the scraper resolves them from its own server. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Édouard Butaye" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:url" content="https://edouardbutaye.github.io/fr/cv.html" />
+  <meta property="og:title" content="Curriculum vitae · Édouard Butaye" />
+  <meta property="og:description" content="Expérience de recherche, formation, compétences, conférences et séminaires." />
+  <meta property="og:image" content="https://edouardbutaye.github.io/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Édouard Butaye, chercheur et développeur de solveurs CFD" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- The two editions of this page point at each other, so a search
+       engine treats them as one page in two languages rather than as
+       duplicates competing with each other. x-default names the one to
+       serve when neither language matches the visitor. -->
+  <link rel="canonical" href="https://edouardbutaye.github.io/fr/cv.html" />
+  <link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/cv.html" />
+  <link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/cv.html" />
+  <link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/cv.html" />
+
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon-180x180.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script defer src="../js/main.js"></script>
+  <!-- Applies the saved theme BEFORE the page paints. This must be an
+       ordinary inline script, not deferred and not in main.js: anything
+       that runs after first paint would let a dark-mode visitor see a
+       flash of white first. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      } catch (e) { /* private mode, storage disabled - just use the OS setting */ }
+    })();
+  </script>
+</head>
+<body>
+    <aside class="sidebar">
+    <div class="sidebar-elements">
+      <img
+        class="sidebar__avatar"
+        src="../images/profile.jpg"
+        alt="Photographie d'Édouard Butaye"
+      />
+      <p class="sidebar__name">Édouard Butaye</p>
+      <p class="sidebar__bio">Chercheur / <span class="nowrap">développeur de solveurs CFD</span></p>
+
+        <button class="links-toggle" id="linksToggle" type="button"
+                aria-expanded="false" aria-controls="sidebarLinks">Liens &#9662;</button>
+      <ul class="sidebar__links" id="sidebarLinks">
+        <li>
+          <a href="mailto:ebutaye@sfr.fr">
+            <span class="icon">📧</span> ebutaye@sfr.fr
+          </a>
+        </li>
+        <li>
+          <a href="https://orcid.org/0000-0003-3111-9904" target="_blank" rel="noopener">
+            <span class="badge badge--orcid">iD</span> ORCID
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr" target="_blank" rel="noopener">
+            <span class="icon">🎓</span> Google Scholar
+          </a>
+        </li>
+        <li>
+          <a href="https://www.researchgate.net/profile/Edouard-Butaye" target="_blank" rel="noopener">
+            <span class="badge badge--researchgate">RG</span> ResearchGate
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/edouard-butaye" target="_blank" rel="noopener">
+            <span class="badge badge--linkedin">in</span> LinkedIn
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <div class="page">
+    <header>
+      <nav class="topnav">
+        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+        <ul class="topnav-links" id="navLinks">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="research.html">Recherche</a></li>
+          <li><a href="teaching.html">Enseignement</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="cv.html" class="active">CV</a></li>
+        </ul>
+        <p class="lang-switch" role="group" aria-label="Langue">
+          <a href="../en/cv.html" hreflang="en" lang="en" aria-label="This page in English">EN</a>
+          <span class="lang-switch__current" aria-current="true">FR</span>
+        </p>
+        <button class="theme-toggle" id="themeToggle" type="button"
+                aria-label="Passer au thème sombre" title="Changer de thème">🌙</button>
+      </nav>
+    </header>
+
+    <main class="page-content">
+      <h1>Curriculum vitae</h1>
+      <p class="page-content-intro">
+        Chercheur et développeur de solveurs CFD, travaillant sur la simulation
+        résolue de particules et la simulation hybride RANS-LES. Vous pouvez
+        aussi
+        <a href="../files/cv_butaye_francais.pdf" target="_blank" rel="noopener">télécharger la version PDF</a>.
+      </p>
+
+      <h2>Expérience de recherche</h2>
+      <ul class="card-list">
+        <li class="card">
+          <span class="tag">En cours</span>
+          <h3 class="card__title">Chercheur postdoctoral : modélisation hybride RANS-LES</h3>
+          <p class="card__meta">CEA Saclay, France · 2025 – aujourd'hui · avec A. Burlot</p>
+          <p class="card__description">
+            Implémentation de la méthode Hybrid Temporal Large Eddy Simulation
+            (HTLES) de Rémi Manceau dans TRUST/Trio_CFD (C++), où un terme de
+            forçage turbulent est ajouté à l'équation de quantité de mouvement
+            pour traiter le problème de zone grise dans la transition RANS vers
+            LES. L'objectif est un critère physique indépendant du maillage,
+            construit à partir des seules grandeurs RANS, pour décider où
+            raffiner vers la LES. Validé sur la marche descendante, la colline
+            périodique et la jonction en T. Portage GPU avec Kokkos.
+          </p>
+        </li>
+
+        <li class="card">
+          <h3 class="card__title">Thèse en mécanique des fluides : DNS à particules résolues d'écoulements fluide–solide anisothermes</h3>
+          <p class="card__meta">PROMES – CNRS, Perpignan, France · 2021 – 2024 · avec A. Toutant, S. Mer, F. Bataille</p>
+          <p class="card__description">
+            Simulation numérique directe à particules résolues de lits fluidisés
+            anisothermes de plus de 8 500 particules solides, à l'aide d'une
+            formulation un fluide couplée à la méthode Front-Tracking,
+            développée dans TRUST/Trio_CFD (C++) sur plus de 3 800 CPU.
+            Statistiques lagrangiennes et eulériennes calculées avec Pandas ;
+            post-traitement avec GNU Parallel, VisIt et PyVista. Comprend 92 h
+            d'enseignement et l'encadrement de trois stagiaires.
+          </p>
+        </li>
+
+        <li class="card">
+          <h3 class="card__title">Stage de master 2 : simulation multi-échelle d'écoulements bouillants horizontaux</h3>
+          <p class="card__meta">PROMES – CNRS, Perpignan, France · 2021 (6 mois) · avec A. Toutant, S. Mer, F. Bataille</p>
+          <p class="card__description">
+            Étude d'écoulements diphasiques bouillants turbulents horizontaux
+            dans les centrales solaires à concentration à génération directe de
+            vapeur, à l'aide de Neptune_CFD couplé à Syrthes pour résoudre la
+            conduction dans la paroi du tube récepteur.
+          </p>
+        </li>
+      </ul>
+
+      <h2>Formation</h2>
+      <ul class="card-list">
+        <li class="card">
+          <h3 class="card__title">Master 2 recherche : sciences thermiques</h3>
+          <p class="card__meta">ISAE-ENSMA (Institut PPRIME), Poitiers, France · 2020 – 2021</p>
+          <p class="card__description">
+            Spécialisation thermique : nano-transferts et méthodes inverses.
+          </p>
+        </li>
+
+        <li class="card">
+          <h3 class="card__title">Diplôme d'ingénieur</h3>
+          <p class="card__meta">ISAE-ENSMA, Poitiers, France · 2018 – 2021</p>
+          <p class="card__description">
+            Mécanique des fluides, écoulements turbulents, écoulements
+            diphasiques, aérodynamique, modélisation thermique et simulation
+            numérique.
+          </p>
+        </li>
+
+        <li class="card">
+          <h3 class="card__title">Classes préparatoires en mathématiques et physique</h3>
+          <p class="card__meta">Lycée Kerichen, Brest, France · 2016 – 2018</p>
+          <p class="card__description">
+            Deux années de préparation intensive aux concours d'entrée aux
+            écoles d'ingénieurs.
+          </p>
+        </li>
+      </ul>
+
+      <h2>Enseignement</h2>
+      <ul class="card-list">
+        <li class="card">
+          <h3 class="card__title">Vacataire d'enseignement, 92 h</h3>
+          <p class="card__meta">Université de Perpignan, France · 2022 – 2024</p>
+          <p class="card__description">
+            Mécanique des fluides et transferts thermiques, outils numériques,
+            énergie éolienne et transferts radiatifs, en travaux dirigés et
+            travaux pratiques. Détail complet sur la page
+            <a href="teaching.html">Enseignement</a>.
+          </p>
+        </li>
+      </ul>
+
+      <h2>Compétences</h2>
+      <ul class="card-list">
+        <li class="card">
+          <p class="card__meta">Développement CFD</p>
+          <p class="card__description">C/C++, git</p>
+        </li>
+        <li class="card">
+          <p class="card__meta">Logiciels CFD</p>
+          <p class="card__description">TRUST/Trio_CFD, Neptune_CFD, Code_Saturne, Syrthes, Salomé (maillage), Mmg (remaillage)</p>
+        </li>
+        <li class="card">
+          <p class="card__meta">Post-traitement et visualisation</p>
+          <p class="card__description">Python (Pandas, multiprocessing), ParaView, VisIt, PyVista, Jupyter, GNU Parallel, LaTeX</p>
+        </li>
+        <li class="card">
+          <p class="card__meta">Calcul haute performance</p>
+          <p class="card__description">Calculs à grande échelle sur plus de 3 800 CPU, portage GPU avec Kokkos, automatisation Bash</p>
+        </li>
+      </ul>
+
+      <h2>Langues</h2>
+      <p>
+        Français (langue maternelle) · anglais (TOEIC 865) · espagnol (notions) ·
+        chinois (HSK 2, A2)
+      </p>
+
+      <!-- Talk titles keep the language they were given in, like the
+           bibliography on the research page: they name a specific
+           communication, and a translated title would not find it. -->
+      <h2>Communications en conférence</h2>
+      <ul>
+        <li>
+          <strong lang="en">Hybrid RANS-LES simulation: definition of a remeshing criterion based on
+          physical consideration.</strong> DLES15, Delft, mai 2026. Avec A. Burlot.
+        </li>
+        <li>
+          <strong>Simulations d'écoulements anisothermes gaz-particules appliqués aux centrales
+          solaires à concentration (CSP).</strong> 32<sup>e</sup> Congrès Français de Thermique,
+          Strasbourg, juin 2024. Avec G. Ologaray, A. Toutant, S. Mer, F. Bataille.
+        </li>
+        <li>
+          <strong lang="en">Particle-Resolved Simulation of anisothermal fluidized beds.</strong>
+          9th International Conference on Multiphase Flow and Heat Transfer (ICMFHT),
+          Londres, avril 2024. Avec R. Quintana, A. Toutant, S. Mer, F. Bataille.
+        </li>
+        <li>
+          <strong lang="en">Direct numerical simulation of fluid–solid particle flows using a
+          front-tracking approach.</strong> IUTAM Symposium: From Stokesian suspension
+          dynamics to particulate flows in turbulence, Toulouse, septembre 2022.
+          Avec S. Mer, A. Toutant, F. Bataille.
+        </li>
+        <li>
+          <strong lang="en">Euler–Euler multi-scale simulations of internal turbulent boiling flow with
+          conjugated transfer.</strong> Dispersed two-phase flow, SHF, en ligne, octobre 2021.
+          Avec M. Ploquin, S. Mer, A. Toutant, F. Bataille.
+        </li>
+      </ul>
+
+      <h2>Séminaires invités</h2>
+      <ul>
+        <li>
+          <strong>Modélisation hybride RANS/LES.</strong> CEA-ISAS Annual Scientific
+          Conference, Saclay, juin 2026. Avec A. Burlot.
+        </li>
+        <li>
+          <strong lang="en">Hybrid RANS-LES modelling.</strong> 6<sup>e</sup> séminaire TrioCFD, Massy,
+          octobre 2025. Avec A. Burlot.
+        </li>
+        <li>
+          <strong>Simulations anisothermes d'écoulements fluide-particules solides.</strong>
+          CEA-ISAS Annual Scientific Conference, Saclay, juin 2025.
+          Avec A. Toutant, S. Mer, F. Bataille.
+        </li>
+        <li>
+          <strong lang="en">Particle-Resolved Simulations of fluid–solid particle flows with
+          TrioCFD.</strong> Séminaire de département, Saclay, avril 2025.
+          Avec A. Toutant, S. Mer, F. Bataille.
+        </li>
+        <li>
+          <strong lang="en">Particle-Resolved Simulations (PRS) of anisothermal fluid–solid particle
+          flows.</strong> 5<sup>e</sup> séminaire TrioCFD, Massy, octobre 2023.
+          Avec A. Toutant, S. Mer, F. Bataille.
+        </li>
+      </ul>
+
+      <h2>Responsabilités</h2>
+      <p>
+        Relecteur pour l'<em lang="en">International Journal of Heat and Mass Transfer</em>
+        (2 relectures).
+      </p>
+
+      <h2>En dehors de la recherche</h2>
+      <p>
+        Bénévolat dans des associations humanitaires étudiantes, à la
+        Croix-Rouge et aux Banques Alimentaires. Volley-ball au niveau régional,
+        musculation et course à pied.
+      </p>
+
+      <h2>Publications</h2>
+      <p>
+        La liste complète des articles de revue se trouve sur la page
+        <a href="publications.html">Publications</a>.
+      </p>
+
+    </main>
+
+    <footer>
+      <p>
+        &copy; <span id="year"></span> Édouard Butaye
+        <span class="footer-sep">&middot;</span>
+        Dernière mise à jour <span id="lastUpdated"></span>
+      </p>
+    </footer>
+  </div>
+
+</body>
+</html>
