@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://edouardbutaye.github.io/</loc>
+    <loc>https://edouardbutaye.github.io/en/index.html</loc>
     <lastmod>2026-08-28</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://edouardbutaye.github.io/research.html</loc>
+    <loc>https://edouardbutaye.github.io/en/research.html</loc>
     <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://edouardbutaye.github.io/publications.html</loc>
+    <loc>https://edouardbutaye.github.io/en/publications.html</loc>
     <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://edouardbutaye.github.io/teaching.html</loc>
+    <loc>https://edouardbutaye.github.io/en/teaching.html</loc>
     <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://edouardbutaye.github.io/cv.html</loc>
+    <loc>https://edouardbutaye.github.io/en/cv.html</loc>
     <lastmod>2026-08-28</lastmod>
     <priority>0.7</priority>
   </url>
