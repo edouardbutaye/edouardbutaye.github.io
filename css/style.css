@@ -584,6 +584,17 @@ header {
   flex-shrink: 0;
 }
 
+/* The "what next" list on the home page. Bulleted, because these are
+   distinct directions rather than a sequence. */
+.interests {
+  margin: 0 0 2.5rem;
+  padding-left: 1.2rem;
+}
+
+.interests li {
+  margin-bottom: 0.6rem;
+}
+
 .home-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
