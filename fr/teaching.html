@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--
+  TEACHING.HTML: same "card list" pattern as publications.html.
+-->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enseignement - Édouard Butaye</title>
+  <!-- Open Graph and Twitter card: what LinkedIn, Slack, X and many mail
+       clients show when this URL is shared. The URLs must be absolute,
+       because the scraper resolves them from its own server. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Édouard Butaye" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:url" content="https://edouardbutaye.github.io/fr/teaching.html" />
+  <meta property="og:title" content="Enseignement · Édouard Butaye" />
+  <meta property="og:description" content="Cours de mécanique des fluides, transferts radiatifs, méthodes numériques et énergie éolienne." />
+  <meta property="og:image" content="https://edouardbutaye.github.io/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Édouard Butaye, chercheur et développeur de solveurs CFD" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- The two editions of this page point at each other, so a search
+       engine treats them as one page in two languages rather than as
+       duplicates competing with each other. x-default names the one to
+       serve when neither language matches the visitor. -->
+  <link rel="canonical" href="https://edouardbutaye.github.io/fr/teaching.html" />
+  <link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/teaching.html" />
+  <link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/teaching.html" />
+  <link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/teaching.html" />
+
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon-180x180.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script defer src="../js/main.js"></script>
+  <!-- Applies the saved theme BEFORE the page paints. This must be an
+       ordinary inline script, not deferred and not in main.js: anything
+       that runs after first paint would let a dark-mode visitor see a
+       flash of white first. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      } catch (e) { /* private mode, storage disabled - just use the OS setting */ }
+    })();
+  </script>
+</head>
+<body>
+    <aside class="sidebar">
+    <div class="sidebar-elements">
+      <img
+        class="sidebar__avatar"
+        src="../images/profile.jpg"
+        alt="Photographie d'Édouard Butaye"
+      />
+      <p class="sidebar__name">Édouard Butaye</p>
+      <p class="sidebar__bio">Chercheur / <span class="nowrap">développeur de solveurs CFD</span></p>
+
+        <button class="links-toggle" id="linksToggle" type="button"
+                aria-expanded="false" aria-controls="sidebarLinks">Liens &#9662;</button>
+      <ul class="sidebar__links" id="sidebarLinks">
+        <li>
+          <a href="mailto:ebutaye@sfr.fr">
+            <span class="icon">📧</span> ebutaye@sfr.fr
+          </a>
+        </li>
+        <li>
+          <a href="https://orcid.org/0000-0003-3111-9904" target="_blank" rel="noopener">
+            <span class="badge badge--orcid">iD</span> ORCID
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr" target="_blank" rel="noopener">
+            <span class="icon">🎓</span> Google Scholar
+          </a>
+        </li>
+        <li>
+          <a href="https://www.researchgate.net/profile/Edouard-Butaye" target="_blank" rel="noopener">
+            <span class="badge badge--researchgate">RG</span> ResearchGate
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/edouard-butaye" target="_blank" rel="noopener">
+            <span class="badge badge--linkedin">in</span> LinkedIn
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <div class="page">
+    <header>
+      <nav class="topnav">
+        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+        <ul class="topnav-links" id="navLinks">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="research.html">Recherche</a></li>
+          <li><a href="teaching.html" class="active">Enseignement</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="cv.html">CV</a></li>
+        </ul>
+        <p class="lang-switch" role="group" aria-label="Langue">
+          <a href="../en/teaching.html" hreflang="en" lang="en" aria-label="This page in English">EN</a>
+          <span class="lang-switch__current" aria-current="true">FR</span>
+        </p>
+        <button class="theme-toggle" id="themeToggle" type="button"
+                aria-label="Passer au thème sombre" title="Changer de thème">🌙</button>
+      </nav>
+    </header>
+
+    <main class="page-content">
+      <h1>Enseignement</h1>
+      <p class="page-content-intro">
+        Pendant ma thèse, j'ai candidaté à des vacations d'enseignement à
+        l'Université de Perpignan Via Domitia et à l'école d'ingénieurs
+        Sup'ENR, afin d'acquérir une première expérience de l'enseignement.
+        J'y ai assuré des travaux dirigés et des travaux pratiques en mécanique
+        des fluides, transferts radiatifs, méthodes numériques et production
+        d'énergie éolienne, pour un total de 92 heures entre 2022 et 2024. Ces
+        enseignements font partie du Master Énergie Solaire de l'Université de
+        Perpignan et du cursus d'ingénieur de Sup'ENR.
+      </p>
+
+      <h2>Cours</h2>
+      <ul class="card-list">
+
+        <li class="card">
+          <h3 class="card__title">Mécanique des fluides et transferts thermiques</h3>
+          <p class="card__meta">Master 1, Master Énergie Solaire · 24 h de TD, 12 h de TP · 2022 à 2024</p>
+          <p class="card__description">
+            Travaux dirigés sur le calcul du nombre de Nusselt pour les
+            écoulements sur plaque plane à l'aide de corrélations, et sur le
+            calcul des épaisseurs de couche limite dynamique et thermique.
+            Travaux pratiques sur le théorème de Bernoulli et les pertes de
+            charge.
+          </p>
+        </li>
+
+        <li class="card">
+          <h3 class="card__title">Transferts radiatifs approfondis</h3>
+          <p class="card__meta">Master 2, Master Énergie Solaire · 13,5 h de TD · 2022 à 2023</p>
+          <p class="card__description">
+            Définition, calcul et exercices sur les grandeurs fondamentales :
+            luminance, émittance, radiosité, facteurs de forme, corps gris et
+            corps noirs, et analogie électrique. Projet Matlab sur
+            l'optimisation du transfert radiatif vers un récepteur solaire.
+          </p>
+        </li>
+
+        <li class="card">
+          <h3 class="card__title">Outils numériques et EDP pour l'énergie solaire</h3>
+          <p class="card__meta">Master 1 et Licence 3, Master Énergie Solaire et Sup'ENR · 18 h de TD · 2023 à 2024</p>
+          <p class="card__description">
+            Discrétisation d'équations aux dérivées partielles par la méthode
+            des différences finies.
+          </p>
+        </li>
+
+        <li class="card">
+          <h3 class="card__title">Technologies des énergies renouvelables 2</h3>
+          <p class="card__meta">Master 1, Sup'ENR · 12 h de TD · 2022 à 2024</p>
+          <p class="card__description">
+            Exercices et développement d'un code Python fondé sur la théorie de
+            l'élément de pale, pour le calcul de la portance, de la traînée et
+            de la poussée axiale. Le code est ensuite utilisé dans le cadre
+            d'un projet pour étudier la portance, la poussée et la traînée d'un
+            profil NACA.
+          </p>
+        </li>
+
+        <li class="card">
+          <h3 class="card__title">Sources d'énergie et modes de conversion</h3>
+          <p class="card__meta">Licence 3, Sup'ENR · 12 h de TD · 2022 à 2024</p>
+          <p class="card__description">
+            Exercices sur l'évaluation de la production d'une éolienne avec le
+            logiciel WindPro. Les étudiants rédigent un rapport détaillé
+            présentant la méthode et les résultats obtenus.
+          </p>
+        </li>
+
+      </ul>
+
+      <h2>Heures d'enseignement</h2>
+      <p>
+        Enseignements dispensés à l'Université de Perpignan Via Domitia et à
+        Sup'ENR.
+      </p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Année</th>
+              <th scope="col">Cours</th>
+              <th scope="col">Niveau</th>
+              <th scope="col">Type</th>
+              <th scope="col">Heures</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>2022–2023</td><td>Mécanique des fluides et transferts thermiques</td><td>M1</td><td>TD</td><td>12</td></tr>
+            <tr><td>2022–2023</td><td>Sources d'énergie et modes de conversion</td><td>L3</td><td>TD</td><td>6</td></tr>
+            <tr><td>2022–2023</td><td>Technologies des énergies renouvelables 2</td><td>M1</td><td>TD</td><td>6</td></tr>
+            <tr><td>2022–2023</td><td>Transferts radiatifs approfondis</td><td>M2</td><td>TD</td><td>13,5</td></tr>
+            <tr><td>2023–2024</td><td>Mécanique des fluides et transferts thermiques</td><td>M1</td><td>TD</td><td>12</td></tr>
+            <tr><td>2023–2024</td><td>Sources d'énergie et modes de conversion</td><td>L3</td><td>TD</td><td>6</td></tr>
+            <tr><td>2023–2024</td><td>Technologies des énergies renouvelables 2</td><td>M1</td><td>TD</td><td>6</td></tr>
+            <tr><td>2023–2024</td><td>Outils numériques</td><td>M1</td><td>TD</td><td>9</td></tr>
+            <tr><td>2023–2024</td><td>EDP pour l'énergie solaire</td><td>L3</td><td>TD</td><td>9</td></tr>
+            <tr><td>2023–2024</td><td>Mécanique des fluides</td><td>L3</td><td>TP</td><td>12</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="4">Total</td><td>91,5</td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <h2>Encadrement</h2>
+      <p>
+        Trois stages encadrés pendant la thèse, de deux à cinq mois chacun.
+      </p>
+
+      <h2>Référents pédagogiques</h2>
+      <ul class="plain-list">
+        <li>
+          Adrien Toutant, Professeur des Universités, Université de Perpignan
+          Via Domitia, laboratoire PROMES. Référent pour les transferts
+          radiatifs approfondis, les sources d'énergie et modes de conversion,
+          et les technologies des énergies renouvelables 2.
+        </li>
+        <li>
+          Samuel Mer, Maître de Conférences HDR, Université de Perpignan Via
+          Domitia, laboratoire PROMES. Référent pour les travaux pratiques de
+          mécanique des fluides et pour les outils numériques et EDP pour
+          l'énergie solaire.
+        </li>
+        <li>
+          Françoise Bataille, Professeure des Universités, Université de
+          Perpignan Via Domitia, laboratoire PROMES. Référente pour les travaux
+          dirigés de mécanique des fluides.
+        </li>
+      </ul>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Édouard Butaye
+        <span class="footer-sep">&middot;</span>
+        Dernière mise à jour <span id="lastUpdated"></span>
+      </p>
+    </footer>
+  </div>
+
+</body>
+</html>
