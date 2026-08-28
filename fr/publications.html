@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,25 +9,26 @@
        because the scraper resolves them from its own server. -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Édouard Butaye" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:locale:alternate" content="fr_FR" />
-  <meta property="og:url" content="https://edouardbutaye.github.io/en/publications.html" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:url" content="https://edouardbutaye.github.io/fr/publications.html" />
   <meta property="og:title" content="Publications · Édouard Butaye" />
-  <meta property="og:description" content="Journal articles and PhD thesis on particle-resolved simulation and multiphase flow." />
+  <meta property="og:description" content="Articles de revue et thèse de doctorat sur la simulation résolue de particules et les écoulements polyphasiques." />
   <meta property="og:image" content="https://edouardbutaye.github.io/images/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Édouard Butaye, research scientist and CFD solver developer" />
+  <meta property="og:image:alt" content="Édouard Butaye, chercheur et développeur de solveurs CFD" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- The two editions of this page point at each other, so a search
        engine treats them as one page in two languages rather than as
        duplicates competing with each other. x-default names the one to
        serve when neither language matches the visitor. -->
-  <link rel="canonical" href="https://edouardbutaye.github.io/en/publications.html" />
+  <link rel="canonical" href="https://edouardbutaye.github.io/fr/publications.html" />
   <link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/publications.html" />
   <link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/publications.html" />
   <link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/publications.html" />
+
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="apple-touch-icon" href="../images/apple-touch-icon-180x180.png" />
   <link rel="stylesheet" href="../css/style.css" />
@@ -54,13 +55,13 @@
       <img
         class="sidebar__avatar"
         src="../images/profile.jpg"
-        alt="Photo of Édouard Butaye"
+        alt="Photographie d'Édouard Butaye"
       />
       <p class="sidebar__name">Édouard Butaye</p>
-      <p class="sidebar__bio">Research scientist / <span class="nowrap">CFD solver developer</span></p>
+      <p class="sidebar__bio">Chercheur / <span class="nowrap">développeur de solveurs CFD</span></p>
 
         <button class="links-toggle" id="linksToggle" type="button"
-                aria-expanded="false" aria-controls="sidebarLinks">Links &#9662;</button>
+                aria-expanded="false" aria-controls="sidebarLinks">Liens &#9662;</button>
       <ul class="sidebar__links" id="sidebarLinks">
         <li>
           <a href="mailto:ebutaye@sfr.fr">
@@ -90,46 +91,48 @@
       </ul>
     </div>
   </aside>
-
   <div class="page">
     <header>
       <nav class="topnav">
-        <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
         <ul class="topnav-links" id="navLinks">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="teaching.html" >Teaching</a></li>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="research.html">Recherche</a></li>
+          <li><a href="teaching.html">Enseignement</a></li>
           <li><a href="publications.html" class="active">Publications</a></li>
           <li><a href="cv.html">CV</a></li>
         </ul>
-        <p class="lang-switch" role="group" aria-label="Language">
-          <span class="lang-switch__current" aria-current="true">EN</span>
-          <a href="../fr/publications.html" hreflang="fr" lang="fr" aria-label="Cette page en français">FR</a>
+        <p class="lang-switch" role="group" aria-label="Langue">
+          <a href="../en/publications.html" hreflang="en" lang="en" aria-label="This page in English">EN</a>
+          <span class="lang-switch__current" aria-current="true">FR</span>
         </p>
         <button class="theme-toggle" id="themeToggle" type="button"
-                aria-label="Switch to dark theme" title="Switch theme">🌙</button>
+                aria-label="Passer au thème sombre" title="Changer de thème">🌙</button>
       </nav>
     </header>
 
     <main class="page-content">
       <h1>Publications</h1>
-      
+
+      <!-- The filter matches on data-filter / data-type, never on these
+           labels, so translating them cannot break it. -->
       <ul class="publication-type" id="typeFilter">
-        <li><button type="button" class="tag" data-filter="all" aria-pressed="true">All</button></li>
-        <li><button type="button" class="tag" data-filter="journal" aria-pressed="false">Journal article</button></li>
-        <li><button type="button" class="tag" data-filter="thesis" aria-pressed="false">PhD thesis</button></li>
+        <li><button type="button" class="tag" data-filter="all" aria-pressed="true">Toutes</button></li>
+        <li><button type="button" class="tag" data-filter="journal" aria-pressed="false">Article de revue</button></li>
+        <li><button type="button" class="tag" data-filter="thesis" aria-pressed="false">Thèse de doctorat</button></li>
       </ul>
-      
+
       <ul class="card-list">
         <li class="card" data-type="journal">
-          <span class="tag">Journal article</span>
-          <h3 class="card__title">Extensive analysis of hydrodynamics in liquid–solid fluidized beds with particle-resolved simulations</h3>
+          <span class="tag">Article de revue</span>
+          <h3 class="card__title" lang="en">Extensive analysis of hydrodynamics in liquid–solid fluidized beds with particle-resolved simulations</h3>
           <p class="card__authors"><strong>E. Butaye</strong>, S. Mer, F. Bataille, A. Toutant</p>
           <p class="card__meta">International Journal of Multiphase Flow · 202 (2026) 105789</p>
           <p class="card__description">
-            Particle-resolved simulations of a liquid–solid fluidized bed, analyzing the
-            mechanisms that generate turbulence. Extends the correlation of Alméras et
-            al. (2019) to predict the fluid velocity variance.
+            Simulations résolues d'un lit fluidisé liquide–solide, analysant les
+            mécanismes générateurs de turbulence. Étend la corrélation
+            d'Alméras et al. (2019) pour prédire la variance de la vitesse du
+            fluide.
           </p>
           <p class="card__links">
             <a href="../files/Butaye_et_al_2026.pdf" target="_blank" rel="noopener">PDF</a>
@@ -138,15 +141,15 @@
         </li>
 
         <li class="card" data-type="journal">
-          <span class="tag">Journal article</span>
-          <h3 class="card__title">Investigation of heat transfers with particle-resolved simulations: from Stokes flow to fluidized bed</h3>
+          <span class="tag">Article de revue</span>
+          <h3 class="card__title" lang="en">Investigation of heat transfers with particle-resolved simulations: from Stokes flow to fluidized bed</h3>
           <p class="card__authors"><strong>E. Butaye</strong>, R. Quintana, S. Mer, F. Bataille, A. Toutant</p>
           <p class="card__meta">International Journal of Heat and Mass Transfer · 241 (2025) 126687</p>
           <p class="card__description">
-            Particle-resolved simulations of fluid–particle and wall-to-bed heat
-            transfer, from a settling particle in Stokes flow to an anisothermal
-            fluidized bed. Heat transfer proves far more grid-sensitive than bed
-            expansion.
+            Simulations résolues des transferts thermiques fluide–particule et
+            paroi–lit, de la sédimentation d'une particule en régime de Stokes
+            au lit fluidisé anisotherme. Les transferts thermiques se révèlent
+            bien plus sensibles au maillage que l'expansion du lit.
           </p>
           <p class="card__links">
             <a href="../files/Butaye_et_al_2025.pdf" target="_blank" rel="noopener">PDF</a>
@@ -155,15 +158,16 @@
         </li>
 
         <li class="card" data-type="thesis">
-          <span class="tag">PhD thesis</span>
-          <h3 class="card__title" lang="fr">Modélisation et simulations résolues d'écoulement fluide-particules : du régime de Stokes aux lits fluidisés anisothermes</h3>
-          <p class="card__authors"><strong>E. Butaye</strong> · supervised by A. Toutant, S. Mer, F. Bataille</p>
-          <p class="card__meta">Université de Perpignan Via Domitia · defended 9 December 2024 · in French</p>
+          <span class="tag">Thèse de doctorat</span>
+          <h3 class="card__title">Modélisation et simulations résolues d'écoulement fluide-particules : du régime de Stokes aux lits fluidisés anisothermes</h3>
+          <p class="card__authors"><strong>E. Butaye</strong> · sous la direction d'A. Toutant, S. Mer, F. Bataille</p>
+          <p class="card__meta">Université de Perpignan Via Domitia · soutenue le 9 décembre 2024 · en français</p>
           <p class="card__description">
-            Particle-resolved direct numerical simulation of anisothermal
-            fluid–particle flows for solar receivers, covering fluidized bed
-            hydrodynamics and wall heat transfer. Introduces the PR-SCS
-            subgrid-corrected resolution scale.
+            Simulation numérique directe à particules résolues d'écoulements
+            fluide–particules anisothermes pour les récepteurs solaires,
+            couvrant l'hydrodynamique du lit fluidisé et les transferts
+            thermiques à la paroi. Introduit l'échelle de résolution corrigée
+            en sous-maille PR-SCS.
           </p>
           <p class="card__links">
             <a href="../files/These_Butaye_Edouard_2024.pdf" target="_blank" rel="noopener">PDF</a>
@@ -171,14 +175,16 @@
         </li>
 
         <li class="card" data-type="journal">
-          <span class="tag">Journal article</span>
-          <h3 class="card__title">Development of Particle Resolved – Subgrid Corrected Simulations: hydrodynamic force calculation and flow sub-resolution corrections</h3>
+          <span class="tag">Article de revue</span>
+          <h3 class="card__title" lang="en">Development of Particle Resolved – Subgrid Corrected Simulations: hydrodynamic force calculation and flow sub-resolution corrections</h3>
           <p class="card__authors"><strong>E. Butaye</strong>, A. Toutant, S. Mer, F. Bataille</p>
           <p class="card__meta">Computers &amp; Fluids · 267 (2023) 106071</p>
           <p class="card__description">
-            Quantifies how far hydrodynamic forces are under-resolved at ten cells per
-            particle diameter, then builds a mesh-dependent correction. The resulting
-            PR-SCS approach is assessed over Reynolds numbers and density ratios.
+            Quantifie à quel point les forces hydrodynamiques sont sous-résolues
+            à dix mailles par diamètre de particule, puis construit une
+            correction dépendante du maillage. L'approche PR-SCS qui en résulte
+            est évaluée sur une gamme de nombres de Reynolds et de rapports de
+            masses volumiques.
           </p>
           <p class="card__links">
             <a href="../files/Butaye_et_al_2023_b_HAL.pdf" target="_blank" rel="noopener">PDF</a>
@@ -187,14 +193,15 @@
         </li>
 
         <li class="card" data-type="journal">
-          <span class="tag">Journal article</span>
-          <h3 class="card__title">Euler–Euler multi-scale simulations of internal boiling flow with conjugated heat transfer</h3>
+          <span class="tag">Article de revue</span>
+          <h3 class="card__title" lang="en">Euler–Euler multi-scale simulations of internal boiling flow with conjugated heat transfer</h3>
           <p class="card__authors"><strong>E. Butaye</strong>, A. Toutant, S. Mer</p>
           <p class="card__meta">Applied Mechanics · 4 (2023) 191–209</p>
           <p class="card__description">
-            Euler–Euler two-fluid simulations of boiling R141b in a horizontal
-            serpentine tube, coupling NEPTUNE_CFD to SYRTHES for wall conduction. Shows
-            strong coupling between the solid temperature field and the flow regimes.
+            Simulations bifluides Euler–Euler de l'ébullition du R141b dans un
+            tube serpentin horizontal, couplant NEPTUNE_CFD à SYRTHES pour la
+            conduction dans la paroi. Met en évidence le fort couplage entre le
+            champ de température du solide et les régimes d'écoulement.
           </p>
           <p class="card__links">
             <a href="../files/Butaye_et_al_2023_a_HAL.pdf" target="_blank" rel="noopener">PDF</a>
@@ -209,7 +216,7 @@
       <p>
         &copy; <span id="year"></span> Édouard Butaye
         <span class="footer-sep">&middot;</span>
-        Last updated <span id="lastUpdated"></span>
+        Dernière mise à jour <span id="lastUpdated"></span>
       </p>
     </footer>
   </div>
