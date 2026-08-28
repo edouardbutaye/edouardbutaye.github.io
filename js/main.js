@@ -17,6 +17,45 @@
 
 
 /* -------------------------------------------------------------
+   0. LANGUAGE
+
+   The site is served twice, from /en/ and /fr/, and both editions load
+   THIS file - one script rather than one per language, so a fix to the
+   filter or the theme toggle cannot land in one language and be
+   forgotten in the other.
+
+   Everything language-dependent is therefore collected here: the few
+   strings this file writes into the page, and the locale it formats
+   the date with. Which set to use is read off <html lang>, which every
+   page already declares for screen readers and search engines, so
+   there is nothing extra to keep in step.
+
+   Note that the visible text of the page is NOT here. That lives in the
+   HTML of each edition, where it can be translated properly. What this
+   holds is only what JavaScript generates at runtime and so cannot be
+   written into either page by hand.
+   ------------------------------------------------------------- */
+const LANG = document.documentElement.lang === "fr" ? "fr" : "en";
+
+const STRINGS = {
+  en: {
+    locale: "en-GB",
+    themeSwitchTo: { dark: "Switch to dark theme", light: "Switch to light theme" },
+    publication: "publication",
+    publications: "publications",
+  },
+  fr: {
+    locale: "fr-FR",
+    themeSwitchTo: { dark: "Passer au thème sombre", light: "Passer au thème clair" },
+    publication: "publication",
+    publications: "publications",
+  },
+};
+
+const T = STRINGS[LANG];
+
+
+/* -------------------------------------------------------------
    1. MOBILE NAVIGATION TOGGLE
    ------------------------------------------------------------- */
 const navToggle = document.getElementById("navToggle");
@@ -76,7 +115,7 @@ if (typeFilter) {
     /* "all" counts every card, including any that is missing a
        data-type and so cannot be reached by a specific filter. */
     const total = filter === "all" ? cards.length : counts[filter] || 0;
-    const plural = total === 1 ? "publication" : "publications";
+    const plural = total === 1 ? T.publication : T.publications;
 
     /* Set the spoken name BEFORE adding the visible count, otherwise
        the number would be read into the label twice. The bracketed
@@ -140,7 +179,7 @@ if (themeToggle) {
   const describeButton = () => {
     const goingTo = currentTheme() === "dark" ? "light" : "dark";
     themeToggle.textContent = goingTo === "dark" ? "🌙" : "☀️";
-    themeToggle.setAttribute("aria-label", `Switch to ${goingTo} theme`);
+    themeToggle.setAttribute("aria-label", T.themeSwitchTo[goingTo]);
   };
 
   describeButton();
@@ -211,10 +250,43 @@ if (lastUpdated) {
     lastUpdated.closest("p")?.querySelectorAll(".footer-sep").forEach((s) => s.remove());
     lastUpdated.textContent = "";
   } else {
-    lastUpdated.textContent = when.toLocaleDateString("en-GB", {
+    lastUpdated.textContent = when.toLocaleDateString(T.locale, {
       day: "numeric",
       month: "long",
       year: "numeric",
     });
   }
+}
+
+
+/* -------------------------------------------------------------
+   7. REMEMBERING THE LANGUAGE
+
+   The EN/FR switch in the top nav is a plain link and needs no
+   JavaScript to work. This only records which way it was used.
+
+   The root page (/index.html) is a gate: with nothing stored it sends
+   the visitor wherever the browser's language points, which is right
+   for a first visit and wrong for every one after it if the visitor
+   disagreed with that guess. Writing the choice down here is what lets
+   the gate honour it instead of guessing again.
+
+   The listener sits on the container rather than on the link, matching
+   the filter buttons in section 3: one listener, and adding a third
+   language later needs no new wiring.
+   ------------------------------------------------------------- */
+const langSwitch = document.querySelector(".lang-switch");
+
+if (langSwitch) {
+  langSwitch.addEventListener("click", (event) => {
+    const link = event.target.closest("a[hreflang]");
+    if (!link) return; // the current language, or the gap between the two
+
+    try {
+      localStorage.setItem("lang", link.getAttribute("hreflang"));
+    } catch (e) {
+      /* Storage can be unavailable in private mode. The link still
+         works; the choice just will not be remembered. */
+    }
+  });
 }

@@ -394,6 +394,49 @@ header {
   color: var(--color-text);
 }
 
+/* EN | FR switch, between the page links and the theme toggle.
+
+   Two items: the language being read, as an inert <span>, and the other
+   one as an ordinary link to the SAME page in the other tree. Because it
+   is a real link and not a script, it survives JavaScript being off - the
+   only thing js/main.js adds is remembering the choice for the root gate.
+
+   The separator is a border on the second item rather than a typed "|":
+   a literal character would be read out by a screen reader and would need
+   its own element to be hidden again. */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.lang-switch > * {
+  padding: 0 0.5rem;
+}
+
+.lang-switch > * + * {
+  border-left: 1px solid var(--color-border);
+}
+
+/* The current language is shown the way the current page is shown in the
+   nav above - in the accent colour - so the two "you are here" marks
+   agree with each other. */
+.lang-switch__current {
+  color: var(--color-accent);
+}
+
+.lang-switch a {
+  color: var(--color-text-muted);
+}
+
+.lang-switch a:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
 
 /* -------------------------------------------------------------
    6. CONTENT
@@ -1065,12 +1108,20 @@ footer {
     display: block;
   }
 
+  /* Three controls are visible once the page links collapse: the
+     hamburger, the language switch and the theme toggle. The hamburger
+     belongs on its own at the left - the menu drops from it - while the
+     other two are a cluster of small switches and read better together
+     at the right than spread across the bar. margin-right:auto on the
+     hamburger does that: it absorbs all the free space, so flex-end
+     packs the remaining two against the right edge. */
   .topnav {
-    justify-content: space-between;
+    justify-content: flex-end;
   }
 
   .nav-toggle {
     display: block;
+    margin-right: auto;
   }
 
   /* The nav menu is a card, not a full-width strip. It is anchored on
