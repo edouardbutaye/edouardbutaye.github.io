@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Édouard Butaye, research scientist and CFD solver developer</title>
+    <meta name="description" content="Édouard Butaye, research scientist and CFD solver developer" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon-180x180.png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js"></script>
+    <!-- Applies the saved theme BEFORE the page paints. This must be an
+       ordinary inline script, not deferred and not in main.js: anything
+       that runs after first paint would let a dark-mode visitor see a
+       flash of white first. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      } catch (e) { /* private mode, storage disabled - just use the OS setting */ }
+    })();
+  </script>
+</head>
+  <body>
+    <aside class="sidebar">
+    <div class="sidebar-elements">
+      <img
+        class="sidebar__avatar"
+        src="images/profile.jpg"
+        alt="Photo of Édouard Butaye"
+      />
+      <h1 class="sidebar__name">Édouard Butaye</h1>
+      <p class="sidebar__bio">Research scientist / <span class="nowrap">CFD solver developer</span></p>
+
+        <button class="links-toggle" id="linksToggle" type="button"
+                aria-expanded="false" aria-controls="sidebarLinks">Links &#9662;</button>
+      <ul class="sidebar__links" id="sidebarLinks">
+        <li>
+          <a href="mailto:ebutaye@sfr.fr">
+            <span class="icon">📧</span> ebutaye@sfr.fr
+          </a>
+        </li>
+        <li>
+          <a href="https://orcid.org/0000-0003-3111-9904" target="_blank" rel="noopener">
+            <span class="badge badge--orcid">iD</span> ORCID
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr" target="_blank" rel="noopener">
+            <span class="icon">🎓</span> Google Scholar
+          </a>
+        </li>
+        <li>
+          <a href="https://www.researchgate.net/profile/Edouard-Butaye" target="_blank" rel="noopener">
+            <span class="badge badge--researchgate">RG</span> ResearchGate
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/edouard-butaye" target="_blank" rel="noopener">
+            <span class="badge badge--linkedin">in</span> LinkedIn
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/edouardbutaye" target="_blank" rel="noopener">
+            <span class="badge badge--github"><img src="images/Octicons-mark-github.svg" alt="" /></span> GitHub
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="page">
+      <header>
+        <nav class="topnav">
+          <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+          <ul class="topnav-links" id="navLinks">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="teaching.html">Teaching</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="cv.html">CV</a></li>
+          </ul>
+        <button class="theme-toggle" id="themeToggle" type="button"
+                aria-label="Switch to dark theme" title="Switch theme">🌙</button>
+        </nav>
+      </header>
+      
+      <main class="page-content">
+        <h1>Research and CFD solver development for turbulent and multiphase flows</h1>
+        <p class="page-content-intro">
+          My work sits between the physics of turbulent and multiphase flows and
+          the codes used to simulate them. I characterise these flows, derive and
+          assess the models that describe them, and implement those models in
+          production CFD solvers. It covers the whole chain, from a physical
+          question to the C++ implementation, its validation against experimental
+          data, and the non-regression test cases that keep it working for the
+          other users of the code.
+        </p>
+
+        <p class="home-now">
+          <span class="tag">Now</span>
+          <span>
+            Postdoctoral researcher at CEA Saclay, implementing the hybrid
+            RANS-LES method HTLES in TrioCFD and applying it to the turbulent
+            flow around nuclear fuel assemblies, with A. Burlot.
+          </span>
+        </p>
+
+        <p>
+          Most of my development work is carried out in TRUST/Trio_CFD, the
+          open-source platform developed by CEA, where the methods I implement
+          are made available to the other users of the code. During my PhD I
+          added to it the computation of the hydrodynamic forces and of the heat
+          flux on resolved particles, an optimised collision detection that
+          reduced the overall computation time by 20%, and an improved treatment
+          of the phase indicator at the faces and edges of the control volumes. I
+          have also worked with NEPTUNE_CFD, Code_Saturne and SYRTHES, and the
+          simulations are run in high performance computing, on up to 3 800
+          processors on national supercomputers, including GPU porting with
+          Kokkos.
+        </p>
+
+        <p>
+          The physics behind these developments concerns the scale at which a
+          flow has to be resolved. Resolving every scale is rarely affordable in
+          an industrial configuration, and the models used at coarser resolutions
+          are often calibrated on academic cases far removed from the ones in
+          which they are applied. My work consists in quantifying what a given
+          resolution leaves unresolved, and in building corrections and criteria
+          that make that choice explicit rather than left to the judgement of the
+          person setting up the computation.
+        </p>
+
+        <p>
+          I completed my PhD in 2024 at the PROMES laboratory of the University
+          of Perpignan Via Domitia, on particle-resolved simulation of
+          anisothermal fluid-particle flows for concentrated solar power, under
+          the supervision of A. Toutant, S. Mer and F. Bataille.
+        </p>
+
+        <h2>Research</h2>
+        <ul class="home-cards">
+          <li>
+            <a class="topic-card" href="research.html#hybrid-rans-les">
+              <img src="images/home/thumb-rans-les.jpg"
+                   alt="Anisotropic tetrahedral mesh of the periodic hill configuration." />
+              <div class="topic-card__body">
+                <h3>Hybrid RANS-LES simulation</h3>
+                <p>
+                  Implementation of the HTLES method in TrioCFD, and definition
+                  of a physical criterion to locate the regions of the domain
+                  that require an unsteady description.
+                </p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="topic-card" href="research.html#particle-resolved">
+              <img src="images/home/thumb-particles.jpg"
+                   alt="Resolved particles of a fluidized bed coloured by their vertical velocity." />
+              <div class="topic-card__body">
+                <h3>Particle-resolved simulation</h3>
+                <p>
+                  Hydrodynamics and heat transfer in anisothermal fluidized beds,
+                  and a subgrid-corrected resolution scale for simulations that
+                  cannot afford to resolve the boundary layers.
+                </p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="topic-card" href="research.html#boiling-flows">
+              <img src="images/home/thumb-boiling.jpg"
+                   alt="Vapour structures in a horizontal serpentine tube." />
+              <div class="topic-card__body">
+                <h3>Two-phase boiling flows</h3>
+                <p>
+                  Euler-Euler simulation of boiling flows in the receiver tubes
+                  of direct steam generation plants, with conjugate heat transfer
+                  in the tube wall.
+                </p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <a class="more-link" href="research.html">All research activities</a>
+
+        <h2>Recent publications</h2>
+        <ul class="home-pubs">
+          <li>
+            <span class="home-pubs__year">2026</span>
+            <span class="home-pubs__title">Extensive analysis of hydrodynamics in liquid–solid fluidized beds with particle-resolved simulations</span>
+            <span class="home-pubs__venue">International Journal of Multiphase Flow · 202, 105789</span>
+          </li>
+          <li>
+            <span class="home-pubs__year">2025</span>
+            <span class="home-pubs__title">Investigation of heat transfers with particle-resolved simulations: from Stokes flow to fluidized bed</span>
+            <span class="home-pubs__venue">International Journal of Heat and Mass Transfer · 241, 126687</span>
+          </li>
+          <li>
+            <span class="home-pubs__year">2024</span>
+            <span class="home-pubs__title" lang="fr">Modélisation et simulations résolues d'écoulement fluide-particules : du régime de Stokes aux lits fluidisés anisothermes</span>
+            <span class="home-pubs__venue">PhD thesis · Université de Perpignan Via Domitia</span>
+          </li>
+        </ul>
+        <a class="more-link" href="publications.html">All publications</a>
+
+        <h2>Teaching</h2>
+        <p>
+          92 hours of tutorial classes and laboratory sessions in fluid
+          mechanics, radiative transfer, numerical methods and wind energy, at
+          the University of Perpignan Via Domitia and at Sup'ENR, between 2022
+          and 2024.
+        </p>
+        <a class="more-link" href="teaching.html">Courses taught</a>
+
+      </main>
+    
+      <footer>
+        <p>&copy; <span id="year"></span> Édouard Butaye</p>
+      </footer>
+    </div>
+
+  </body>
+
+</html>
