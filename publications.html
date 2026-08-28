@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publications - Édouard Butaye</title>
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon-180x180.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/main.js"></script>
+  <!-- Applies the saved theme BEFORE the page paints. This must be an
+       ordinary inline script, not deferred and not in main.js: anything
+       that runs after first paint would let a dark-mode visitor see a
+       flash of white first. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      } catch (e) { /* private mode, storage disabled - just use the OS setting */ }
+    })();
+  </script>
+</head>
+
+<body>
+    <aside class="sidebar">
+    <div class="sidebar-elements">
+      <img
+        class="sidebar__avatar"
+        src="images/profile.jpg"
+        alt="Photo of Édouard Butaye"
+      />
+      <h1 class="sidebar__name">Édouard Butaye</h1>
+      <p class="sidebar__bio">Research scientist / <span class="nowrap">CFD solver developer</span></p>
+
+        <button class="links-toggle" id="linksToggle" type="button"
+                aria-expanded="false" aria-controls="sidebarLinks">Links &#9662;</button>
+      <ul class="sidebar__links" id="sidebarLinks">
+        <li>
+          <a href="mailto:ebutaye@sfr.fr">
+            <span class="icon">📧</span> ebutaye@sfr.fr
+          </a>
+        </li>
+        <li>
+          <a href="https://orcid.org/0000-0003-3111-9904" target="_blank" rel="noopener">
+            <span class="badge badge--orcid">iD</span> ORCID
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr" target="_blank" rel="noopener">
+            <span class="icon">🎓</span> Google Scholar
+          </a>
+        </li>
+        <li>
+          <a href="https://www.researchgate.net/profile/Edouard-Butaye" target="_blank" rel="noopener">
+            <span class="badge badge--researchgate">RG</span> ResearchGate
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/edouard-butaye" target="_blank" rel="noopener">
+            <span class="badge badge--linkedin">in</span> LinkedIn
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/edouardbutaye" target="_blank" rel="noopener">
+            <span class="badge badge--github"><img src="images/Octicons-mark-github.svg" alt="" /></span> GitHub
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <div class="page">
+    <header>
+      <nav class="topnav">
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+        <ul class="topnav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="teaching.html" >Teaching</a></li>
+          <li><a href="publications.html" class="active">Publications</a></li>
+          <li><a href="cv.html">CV</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button"
+                aria-label="Switch to dark theme" title="Switch theme">🌙</button>
+      </nav>
+    </header>
+
+    <main class="page-content">
+      <h1>Publications</h1>
+      
+      <ul class="publication-type" id="typeFilter">
+        <li><button type="button" class="tag" data-filter="all" aria-pressed="true">All</button></li>
+        <li><button type="button" class="tag" data-filter="journal" aria-pressed="false">Journal article</button></li>
+        <li><button type="button" class="tag" data-filter="thesis" aria-pressed="false">PhD thesis</button></li>
+      </ul>
+      
+      <ul class="card-list">
+        <li class="card" data-type="journal">
+          <span class="tag">Journal article</span>
+          <h3 class="card__title">Extensive analysis of hydrodynamics in liquid–solid fluidized beds with particle-resolved simulations</h3>
+          <p class="card__authors"><strong>E. Butaye</strong>, S. Mer, F. Bataille, A. Toutant</p>
+          <p class="card__meta">International Journal of Multiphase Flow · 202 (2026) 105789</p>
+          <p class="card__description">
+            Particle-resolved simulations of a liquid–solid fluidized bed, analyzing the
+            mechanisms that generate turbulence. Extends the correlation of Alméras et
+            al. (2019) to predict the fluid velocity variance.
+          </p>
+          <p class="card__links">
+            <a href="files/Butaye_et_al_2026.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://doi.org/10.1016/j.ijmultiphaseflow.2026.105789" target="_blank" rel="noopener">DOI</a>
+          </p>
+        </li>
+
+        <li class="card" data-type="journal">
+          <span class="tag">Journal article</span>
+          <h3 class="card__title">Investigation of heat transfers with particle-resolved simulations: from Stokes flow to fluidized bed</h3>
+          <p class="card__authors"><strong>E. Butaye</strong>, R. Quintana, S. Mer, F. Bataille, A. Toutant</p>
+          <p class="card__meta">International Journal of Heat and Mass Transfer · 241 (2025) 126687</p>
+          <p class="card__description">
+            Particle-resolved simulations of fluid–particle and wall-to-bed heat
+            transfer, from a settling particle in Stokes flow to an anisothermal
+            fluidized bed. Heat transfer proves far more grid-sensitive than bed
+            expansion.
+          </p>
+          <p class="card__links">
+            <a href="files/Butaye_et_al_2025.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://doi.org/10.1016/j.ijheatmasstransfer.2025.126687" target="_blank" rel="noopener">DOI</a>
+          </p>
+        </li>
+
+        <li class="card" data-type="thesis">
+          <span class="tag">PhD thesis</span>
+          <h3 class="card__title" lang="fr">Modélisation et simulations résolues d'écoulement fluide-particules : du régime de Stokes aux lits fluidisés anisothermes</h3>
+          <p class="card__authors"><strong>E. Butaye</strong> · supervised by A. Toutant, S. Mer, F. Bataille</p>
+          <p class="card__meta">Université de Perpignan Via Domitia · defended 9 December 2024 · in French</p>
+          <p class="card__description">
+            Particle-resolved direct numerical simulation of anisothermal
+            fluid–particle flows for solar receivers, covering fluidized bed
+            hydrodynamics and wall heat transfer. Introduces the PR-SCS
+            subgrid-corrected resolution scale.
+          </p>
+          <p class="card__links">
+            <a href="files/These_Butaye_Edouard_2024.pdf" target="_blank" rel="noopener">PDF</a>
+          </p>
+        </li>
+
+        <li class="card" data-type="journal">
+          <span class="tag">Journal article</span>
+          <h3 class="card__title">Development of Particle Resolved – Subgrid Corrected Simulations: hydrodynamic force calculation and flow sub-resolution corrections</h3>
+          <p class="card__authors"><strong>E. Butaye</strong>, A. Toutant, S. Mer, F. Bataille</p>
+          <p class="card__meta">Computers &amp; Fluids · 267 (2023) 106071</p>
+          <p class="card__description">
+            Quantifies how far hydrodynamic forces are under-resolved at ten cells per
+            particle diameter, then builds a mesh-dependent correction. The resulting
+            PR-SCS approach is assessed over Reynolds numbers and density ratios.
+          </p>
+          <p class="card__links">
+            <a href="files/Butaye_et_al_2023_b_HAL.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://doi.org/10.1016/j.compfluid.2023.106071" target="_blank" rel="noopener">DOI</a>
+          </p>
+        </li>
+
+        <li class="card" data-type="journal">
+          <span class="tag">Journal article</span>
+          <h3 class="card__title">Euler–Euler multi-scale simulations of internal boiling flow with conjugated heat transfer</h3>
+          <p class="card__authors"><strong>E. Butaye</strong>, A. Toutant, S. Mer</p>
+          <p class="card__meta">Applied Mechanics · 4 (2023) 191–209</p>
+          <p class="card__description">
+            Euler–Euler two-fluid simulations of boiling R141b in a horizontal
+            serpentine tube, coupling NEPTUNE_CFD to SYRTHES for wall conduction. Shows
+            strong coupling between the solid temperature field and the flow regimes.
+          </p>
+          <p class="card__links">
+            <a href="files/Butaye_et_al_2023_a_HAL.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://doi.org/10.3390/applmech4010011" target="_blank" rel="noopener">DOI</a>
+          </p>
+        </li>
+
+      </ul>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year"></span> Édouard Butaye</p>
+    </footer>
+  </div>
+
+</body>
+</html>
