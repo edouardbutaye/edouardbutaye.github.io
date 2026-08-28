@@ -15,6 +15,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Édouard Butaye" />
   <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="fr_FR" />
   <meta property="og:url" content="https://edouardbutaye.github.io/en/research.html" />
   <meta property="og:title" content="Research · Édouard Butaye" />
   <meta property="og:description" content="Hybrid RANS-LES simulation, particle-resolved simulation of fluid-particle flows, and two-phase boiling flows." />
@@ -24,7 +25,14 @@
   <meta property="og:image:alt" content="Édouard Butaye, research scientist and CFD solver developer" />
   <meta name="twitter:card" content="summary_large_image" />
 
+  <!-- The two editions of this page point at each other, so a search
+       engine treats them as one page in two languages rather than as
+       duplicates competing with each other. x-default names the one to
+       serve when neither language matches the visitor. -->
   <link rel="canonical" href="https://edouardbutaye.github.io/en/research.html" />
+  <link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/research.html" />
+  <link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/research.html" />
+  <link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/research.html" />
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="apple-touch-icon" href="../images/apple-touch-icon-180x180.png" />
   <link rel="stylesheet" href="../css/style.css" />
@@ -109,6 +117,10 @@
           <li><a href="publications.html">Publications</a></li>
           <li><a href="cv.html">CV</a></li>
         </ul>
+        <p class="lang-switch" role="group" aria-label="Language">
+          <span class="lang-switch__current" aria-current="true">EN</span>
+          <a href="../fr/research.html" hreflang="fr" lang="fr" aria-label="Cette page en français">FR</a>
+        </p>
         <button class="theme-toggle" id="themeToggle" type="button"
                 aria-label="Switch to dark theme" title="Switch theme">🌙</button>
       </nav>
@@ -392,7 +404,7 @@
 
           <figure>
             <video controls muted loop playsinline preload="metadata"
-                   poster="images/research/fluidized-bed-poster.jpg">
+                   poster="../images/research/fluidized-bed-poster.jpg">
               <source src="../images/research/fluidized-bed.mp4" type="video/mp4" />
               Your browser cannot play this video.
             </video>

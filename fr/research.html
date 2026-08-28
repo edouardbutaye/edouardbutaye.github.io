@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<!--
+  RESEARCH.HTML: one section per research activity, each broken into
+  the sub-topics it covers. Maths is written as LaTeX between $...$ or
+  $$...$$ and rendered by KaTeX, loaded from a CDN in <head> below.
+
+  The section ids stay in English (#hybrid-rans-les and the rest) so that
+  a deep link works whichever edition it was copied from.
+-->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recherche - Édouard Butaye</title>
+  <!-- Open Graph and Twitter card: what LinkedIn, Slack, X and many mail
+       clients show when this URL is shared. The URLs must be absolute,
+       because the scraper resolves them from its own server. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Édouard Butaye" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:url" content="https://edouardbutaye.github.io/fr/research.html" />
+  <meta property="og:title" content="Recherche · Édouard Butaye" />
+  <meta property="og:description" content="Simulation hybride RANS-LES, simulation résolue d'écoulements fluide-particules, et écoulements diphasiques bouillants." />
+  <meta property="og:image" content="https://edouardbutaye.github.io/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Édouard Butaye, chercheur et développeur de solveurs CFD" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- The two editions of this page point at each other, so a search
+       engine treats them as one page in two languages rather than as
+       duplicates competing with each other. x-default names the one to
+       serve when neither language matches the visitor. -->
+  <link rel="canonical" href="https://edouardbutaye.github.io/fr/research.html" />
+  <link rel="alternate" hreflang="en" href="https://edouardbutaye.github.io/en/research.html" />
+  <link rel="alternate" hreflang="fr" href="https://edouardbutaye.github.io/fr/research.html" />
+  <link rel="alternate" hreflang="x-default" href="https://edouardbutaye.github.io/en/research.html" />
+
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon-180x180.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!-- KaTeX renders the LaTeX on this page. Three files: the stylesheet,
+       the engine, and the auto-render extension that scans the page for
+       $...$ / $$...$$ and replaces them with typeset maths. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+          onload="renderMathInElement(document.body, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '$',  right: '$',  display: false }
+            ]
+          });"></script>
+  <!-- Applies the saved theme BEFORE the page paints. This must be an
+       ordinary inline script, not deferred and not in main.js: anything
+       that runs after first paint would let a dark-mode visitor see a
+       flash of white first. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      } catch (e) { /* private mode, storage disabled - just use the OS setting */ }
+    })();
+  </script>
+</head>
+<body>
+    <aside class="sidebar">
+    <div class="sidebar-elements">
+      <img
+        class="sidebar__avatar"
+        src="../images/profile.jpg"
+        alt="Photographie d'Édouard Butaye"
+      />
+      <p class="sidebar__name">Édouard Butaye</p>
+      <p class="sidebar__bio">Chercheur / <span class="nowrap">développeur de solveurs CFD</span></p>
+
+        <button class="links-toggle" id="linksToggle" type="button"
+                aria-expanded="false" aria-controls="sidebarLinks">Liens &#9662;</button>
+      <ul class="sidebar__links" id="sidebarLinks">
+        <li>
+          <a href="mailto:ebutaye@sfr.fr">
+            <span class="icon">📧</span> ebutaye@sfr.fr
+          </a>
+        </li>
+        <li>
+          <a href="https://orcid.org/0000-0003-3111-9904" target="_blank" rel="noopener">
+            <span class="badge badge--orcid">iD</span> ORCID
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr" target="_blank" rel="noopener">
+            <span class="icon">🎓</span> Google Scholar
+          </a>
+        </li>
+        <li>
+          <a href="https://www.researchgate.net/profile/Edouard-Butaye" target="_blank" rel="noopener">
+            <span class="badge badge--researchgate">RG</span> ResearchGate
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/edouard-butaye" target="_blank" rel="noopener">
+            <span class="badge badge--linkedin">in</span> LinkedIn
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <div class="page">
+    <header>
+      <nav class="topnav">
+        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+        <ul class="topnav-links" id="navLinks">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="research.html" class="active">Recherche</a></li>
+          <li><a href="teaching.html">Enseignement</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="cv.html">CV</a></li>
+        </ul>
+        <p class="lang-switch" role="group" aria-label="Langue">
+          <a href="../en/research.html" hreflang="en" lang="en" aria-label="This page in English">EN</a>
+          <span class="lang-switch__current" aria-current="true">FR</span>
+        </p>
+        <button class="theme-toggle" id="themeToggle" type="button"
+                aria-label="Passer au thème sombre" title="Changer de thème">🌙</button>
+      </nav>
+    </header>
+
+    <main class="page-content page-content--wide">
+      <h1>Recherche</h1>
+      <p class="page-content-intro">
+        Mes travaux portent sur la simulation numérique des écoulements
+        turbulents et polyphasiques, et sur les échelles de résolution
+        auxquelles la physique de ces écoulements peut être décrite pour un
+        coût de calcul acceptable.
+      </p>
+
+      <p class="topic-index">
+        <a href="#hybrid-rans-les">Simulation hybride RANS-LES</a> ·
+        <a href="#particle-resolved">Simulation résolue d'écoulements fluide-particules</a> ·
+        <a href="#boiling-flows">Simulation multi-échelle d'écoulements diphasiques bouillants</a> ·
+        <a href="#references">Références</a>
+      </p>
+
+
+      <!-- ================= ACTIVITY 1 ================= -->
+      <section class="research-topic">
+        <h2 id="hybrid-rans-les">Simulation hybride RANS-LES</h2>
+        <p class="card__meta">Chercheur postdoctoral · CEA Saclay · depuis 2025</p>
+
+        <p class="research-topic__lead">
+          Dans les centrales nucléaires, le refroidissement des crayons des
+          assemblages combustibles dépend d'un écoulement interne fortement
+          turbulent, dont le nombre de Reynolds associé est d'environ
+          $5\cdot10^{5}$ <a href="#ref-1" class="cite">[1]</a>. Les conditions de
+          fonctionnement, une pression de 150 bar et une température de 600 K,
+          rendent les études expérimentales sur les grilles difficiles. La
+          simulation numérique est donc employée pour caractériser
+          l'écoulement.
+        </p>
+        <p class="research-topic__lead">
+          La simulation aux grandes échelles donne accès aux grandeurs
+          instationnaires de l'écoulement et prédit avec précision la force
+          exercée par le fluide sur la structure, mais son coût interdit les
+          études paramétriques complètes. Pour une configuration de grille de
+          combustible, un calcul RANS a nécessité 40 millions de mailles pour
+          un coût de 20 000 heures CPU, tandis que la LES de la même
+          configuration a nécessité 600 millions de mailles pour un coût de
+          6 millions d'heures CPU. Une LES est donc environ 300 fois plus
+          coûteuse qu'un calcul RANS. Les méthodes hybrides RANS/LES sont une
+          façon de répondre à cette difficulté.
+        </p>
+
+        <div class="subtopic">
+          <h3>Implémentation de la méthode HTLES dans TrioCFD</h3>
+          <p>
+            La formulation Hybrid Temporal Large Eddy Simulation (HTLES)
+            développée par Manceau <a href="#ref-2" class="cite">[2]</a> est dérivée du Partially
+            Integrated Transport Model de Chaouat et Schiestel <a href="#ref-3" class="cite">[3]</a>. Son intérêt réside dans son
+            fondement mathématique, dans lequel la LES est réécrite au moyen
+            d'un filtre temporel. Lorsque la fréquence de coupure tend vers
+            zéro, la formulation tend vers la formulation RANS, ce qui n'est
+            pas le cas d'une formulation LES classique fondée sur un filtre
+            spatial. Lorsque la fréquence de coupure tend vers l'infini, la
+            formulation tend vers la DNS. La transition est pilotée par le
+            rapport local de l'énergie modélisée sur l'énergie totale, plutôt
+            que par une distance caractéristique à la paroi comme dans la
+            Detached Eddy Simulation <a href="#ref-4" class="cite">[4]</a>.
+          </p>
+          <p>
+            La formulation HTLES <a href="#ref-6" class="cite">[6]</a> $k$-$\omega$ SST <a href="#ref-5" class="cite">[5]</a> a été implémentée dans
+            TrioCFD <a href="#ref-7" class="cite">[7]</a>. Un
+            terme de forçage de la turbulence a été ajouté à l'équation de
+            quantité de mouvement afin de traiter la zone grise à l'interface
+            RANS/LES <a href="#ref-8" class="cite">[8]</a>, où l'on observe un déficit de contraintes car le
+            filtre ne commute pas avec les opérateurs différentiels.
+          </p>
+        </div>
+
+        <div class="subtopic">
+          <h3>Identification d'un critère physique de remaillage</h3>
+          <p>
+            Dans la plupart des calculs hybrides RANS/LES, le RANS est employé
+            à la paroi et la LES ailleurs. Il peut néanmoins exister des
+            régions du domaine où un calcul RANS donne des résultats
+            satisfaisants et ne nécessite pas de simulation instationnaire.
+            Dans la configuration de la marche descendante, une simulation RANS
+            $k$-$\omega$ se comporte bien en amont de l'élargissement, alors
+            que la production de turbulence est fortement sous-estimée dans la
+            couche de cisaillement détachée en aval. Dans le cas général, la
+            physique n'est pas connue et ces régions ne peuvent pas être
+            identifiées intuitivement.
+          </p>
+          <p>
+            La définition du maillage est l'un des enjeux principaux des
+            simulations hybrides RANS/LES. Deux ingénieurs étudiant la même
+            configuration industrielle n'obtiendront pas les mêmes résultats,
+            parce qu'ils ne définiront pas les régions de transition vers la
+            LES exactement au même endroit. Cela soulève des difficultés pour
+            la certification des résultats numériques. Le critère recherché
+            doit donc être indépendant du maillage et ne dépendre que de
+            grandeurs accessibles depuis un calcul RANS.
+          </p>
+          <p>
+            À la suite de David et al. <a href="#ref-9" class="cite">[9]</a>, le rapport de la production sur
+            la dissipation calculé à partir d'un calcul RANS préalable est
+            utilisé pour localiser les régions qui nécessiteraient une
+            description LES. Le maillage est raffiné là où
+          </p>
+
+          $$\frac{P_k}{\varepsilon} > \alpha_{\mathrm{th}}$$
+
+          <p>
+            Des calculs $k$-$\omega$ SST ont été réalisés sur la marche
+            descendante et sur la colline périodique. La couche de cisaillement
+            détachée est bien identifiée par le champ dans les deux
+            configurations. L'ordre de grandeur du champ semble dépendre de la
+            configuration de l'écoulement, ce qui motive une analyse de
+            sensibilité sur la valeur seuil.
+          </p>
+
+          <figure class="figure--medium">
+            <img src="../images/research/p-over-eps-backward-step.png"
+                 alt="Champ du rapport production sur dissipation dans une marche descendante, avec les valeurs les plus élevées dans la couche de cisaillement détachée en aval de l'élargissement." />
+            <figcaption>
+              Production sur dissipation obtenue avec le modèle RANS
+              $k$-$\omega$ SST sur la marche descendante. La couche de
+              cisaillement détachée en aval de l'élargissement est identifiée
+              par le champ.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="subtopic">
+          <h3>Stratégie de remaillage automatisée</h3>
+          <p>
+            La procédure proposée par David et al. <a href="#ref-9" class="cite">[9]</a> nécessite plusieurs calculs
+            HTLES pour que le maillage converge, ce qui est trop lourd pour des
+            applications industrielles. La stratégie est modifiée ici pour
+            n'effectuer qu'une seule étape de remaillage, en s'appuyant sur le
+            seul calcul RANS pour identifier les régions LES. Le remaillage est
+            réalisé avec MMG. Une analyse de sensibilité sur la valeur seuil du
+            rapport est menée afin d'évaluer son influence sur les résultats
+            HTLES.
+          </p>
+          <p>
+            La méthodologie visée est la suivante. Une étude de convergence en
+            maillage est d'abord menée avec des calculs RANS. Le critère
+            physique est ensuite utilisé pour remailler le domaine dans les
+            régions d'intérêt. Enfin, la simulation hybride RANS/LES est
+            réalisée sur le maillage obtenu. L'implémentation de HTLES dans
+            TrioCFD a été validée au préalable par comparaison avec des études
+            numériques de la littérature sur les configurations de validation
+            classiques des méthodes hybrides RANS/LES.
+          </p>
+          <p>
+            La méthode des volumes éléments finis <a href="#ref-10" class="cite">[10]</a> employée dans TrioCFD requiert des
+            maillages tétraédriques, et le modèle $k$-$\omega$ SST requiert
+            $y^{+}=1$ à la paroi. Un maillage tétraédrique non uniforme et
+            anisotrope est donc nécessaire pour réduire significativement le
+            coût de calcul.
+          </p>
+
+          <figure class="figure--medium">
+            <img src="../images/research/anisotropic-mesh-periodic-hill.png"
+                 alt="Maillage tétraédrique anisotrope de la colline périodique, raffiné vers les parois." />
+            <figcaption>
+              Maillage tétraédrique anisotrope de la colline périodique, gradué
+              depuis les parois pour satisfaire $y^{+}=1$ à un nombre de
+              mailles raisonnable.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="subtopic">
+          <h3>Configurations d'étude</h3>
+          <p>
+            Quatre configurations sont considérées : un canal périodique à
+            $\mathrm{Re}_\tau = 590$, une marche descendante à
+            $\mathrm{Re} = 5\,000$ <a href="#ref-11" class="cite">[11]</a>, une colline périodique à
+            $\mathrm{Re} = 10\,595$ <a href="#ref-12" class="cite">[12]</a> et une jonction en T à
+            $\mathrm{Re} = 40\,000$ <a href="#ref-13" class="cite">[13]</a>. Une étude de convergence en maillage a
+            été réalisée afin de s'assurer de la convergence des champs RANS.
+          </p>
+        </div>
+      </section>
+
+
+      <!-- ================= ACTIVITY 2 ================= -->
+      <section class="research-topic">
+        <h2 id="particle-resolved">Simulation résolue d'écoulements fluide-particules</h2>
+        <p class="card__meta">Thèse · PROMES – CNRS, Université de Perpignan · 2021 à 2024</p>
+
+        <p class="research-topic__lead">
+          Les centrales solaires à tour utilisent le flux solaire concentré
+          pour chauffer un fluide caloporteur et produire de l'électricité au
+          moyen d'un cycle thermodynamique. Augmenter le rendement de
+          conversion thermique-électrique impose de porter la température de
+          sortie du récepteur à au moins 800 °C. Les particules fluidisées sont
+          une alternative aux fluides conventionnels, car elles supportent des
+          températures supérieures à 1000 °C sans dégradation de leurs
+          propriétés physiques et stockent efficacement la chaleur. Caractériser
+          l'écoulement au sein du tube récepteur et les mécanismes physiques
+          des transferts thermiques nécessite une description locale de
+          l'écoulement, obtenue ici par des simulations numériques directes à
+          particules résolues menées en calcul haute performance.
+        </p>
+
+        <figure class="figure--medium">
+          <div class="figure-grid figure-grid--photos">
+            <div class="figure-grid__cell">
+              <img src="../images/research/solar-tower-themis.jpg"
+                   alt="La tour solaire Thémis vue depuis le champ d'héliostats, avec le récepteur au sommet de la tour éclairé par le flux solaire concentré." />
+              <span class="figure-grid__label">Tour solaire Thémis, Targassonne</span>
+            </div>
+            <div class="figure-grid__cell">
+              <img src="../images/research/receiver-tube-experiment.jpg"
+                   alt="Photographie d'un tube récepteur porté au rouge lors d'une expérience de lit fluidisé anisotherme, avec des fils d'instrumentation fixés sur toute sa longueur." />
+              <span class="figure-grid__label">Expérience de lit fluidisé anisotherme</span>
+            </div>
+          </div>
+          <figcaption>
+            À gauche : la tour solaire Thémis à Targassonne, France, avec le
+            champ d'héliostats au premier plan. À droite : une expérience de
+            lit fluidisé anisotherme à l'intérieur d'un tube récepteur,
+            photographie de R. Gueguen
+            <a href="#ref-24" class="cite">[24]</a>.
+          </figcaption>
+        </figure>
+        <p class="research-topic__lead">
+          La PR-DNS est l'échelle de résolution la plus fine et capture toutes
+          les interactions hydrodynamiques, mais son coût de calcul ne permet
+          pas d'étudier les effets collectifs de plusieurs centaines de
+          milliers de particules. Les simulations Computational Fluid Dynamics
+          - Discrete Element Method ont été développées à cette fin. En
+          CFD-DEM, les particules sont plus petites que les mailles
+          eulériennes, de sorte que les effets collectifs peuvent être étudiés,
+          mais la force exercée par le fluide aux interfaces n'est pas résolue
+          et des corrélations sont nécessaires pour la modéliser. Ces
+          corrélations ont souvent été développées sur des configurations
+          académiques éloignées des configurations dans lesquelles elles sont
+          employées. Une échelle de résolution intermédiaire est donc proposée
+          dans ce travail.
+        </p>
+
+        <div class="subtopic">
+          <h3>Développements dans le solveur TRUST/Trio_CFD</h3>
+          <p>
+            La méthode de détection des collisions a été optimisée à l'aide de
+            la méthode Link-Cell associée aux tables de Verlet. La complexité
+            est réduite de $N^{2}$ à chaque pas de temps à $N$, et le temps de
+            calcul global est réduit de 20 %.
+          </p>
+          <p>
+            Une méthode lagrangienne originale a été développée pour calculer
+            les forces hydrodynamiques exercées par le fluide sur les
+            particules ainsi que le flux de chaleur reçu par les particules. La
+            pression et la vitesse sont interpolées trilinéairement en deux
+            points $P_1$ et $P_2$ situés aux distances $\delta$ et $2\delta$ de
+            l'interface. La pression est extrapolée linéairement au centre de
+            gravité des facettes lagrangiennes. Le terme visqueux
+          </p>
+
+          $$\left( \nabla \mathbf{u} + \nabla^{T} \mathbf{u} \right)\cdot \mathbf{n}$$
+
+          <p>
+            est calculé au centre de gravité des facettes suivant un schéma
+            décentré amont d'ordre deux. L'indicateur de phase est également
+            calculé aux faces et aux arêtes des volumes de contrôle, ce qui
+            améliore le calcul du flux diffusif à l'interface.
+          </p>
+          <p>
+            Ces développements ont été intégrés au logiciel TrioCFD et sont
+            accessibles à ses autres utilisateurs. Les simulations ont été
+            réalisées sur plusieurs centaines de processeurs d'un
+            supercalculateur national, en utilisant la formulation un fluide
+            associée à la méthode Front-Tracking
+            <a href="#ref-14" class="cite">[14]</a>. La simulation la plus
+            coûteuse a nécessité jusqu'à 3 800 processeurs pendant une dizaine
+            de jours de calcul.
+          </p>
+
+          <figure class="figure--narrow">
+            <img src="../images/research/force-computation-scheme.svg"
+                 alt="Schéma du calcul de la force, montrant une facette lagrangienne à l'interface fluide-solide et les deux points d'interpolation situés le long de la normale." />
+            <figcaption>
+              Calcul de la force hydrodynamique sur une facette lagrangienne.
+              La vitesse et la pression sont interpolées aux points $P_1$ et
+              $P_2$ situés le long de la normale à la facette.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="subtopic">
+          <h3>Hydrodynamique d'un lit fluidisé liquide–solide</h3>
+          <p>
+            Des simulations résolues d'un lit fluidisé liquide–solide de
+            2 134 particules, reproduisant la configuration expérimentale de
+            Corona
+            <a href="#ref-15" class="cite">[15]</a>, ont été réalisées. Quatre vitesses de fluidisation ont été
+            considérées, correspondant à des fractions volumiques solides
+            allant de 0,13 à 0,35, pour des résolutions de maillage de 12, 24
+            et 36 mailles par diamètre de particule.
+          </p>
+
+          <figure>
+            <video controls muted loop playsinline preload="metadata"
+                   poster="../images/research/fluidized-bed-poster.jpg">
+              <source src="../images/research/fluidized-bed.mp4" type="video/mp4" />
+              Votre navigateur ne peut pas lire cette vidéo.
+            </video>
+            <figcaption>
+              Lit fluidisé liquide–solide anisotherme de 2 134 particules à
+              $U_f = 0.073\ \mathrm{m\,s^{-1}}$. À gauche : particules colorées
+              par leur vitesse verticale. Au centre : vitesse verticale du
+              fluide sur deux plans de coupe. À droite : écart de température
+              dans le fluide et flux de chaleur reçu par les particules.
+            </figcaption>
+          </figure>
+
+          <p>
+            La hauteur du lit et la fraction solide sont bien prédites, même
+            avec la résolution de maillage la plus grossière, et la loi de
+            Richardson-Zaki <a href="#ref-16" class="cite">[16]</a> est retrouvée.
+            Des résolutions spatiales plus élevées sont nécessaires pour
+            capturer les profils d'énergie cinétique fluctuante et
+            l'autocorrélation de la vitesse verticale du fluide. La
+            distribution radiale de paires montre le caractère homogène du lit.
+            Les particules ont tendance à monter au centre du lit et à
+            redescendre près de la paroi.
+          </p>
+          <p>
+            Le modèle d'Alméras et al. <a href="#ref-17" class="cite">[17]</a> relie la variance de la vitesse du
+            fluide à la fraction solide et à la vitesse moyenne du fluide. Pour
+            une fraction solide donnée, l'influence des particules sur
+            l'agitation du fluide varie avec leur diamètre et leur masse
+            volumique. Une dépendance au nombre de Stokes terminal est donc
+            introduite :
+          </p>
+
+          $$\langle u_{l,i}'^{\,2}\rangle_{(x,y,z)} = \zeta_i \, \frac{\langle U_{l,y}\rangle^{2}_{(x,y,z)}}{St_t} \, \alpha(1-\alpha)$$
+
+          <p>
+            Les coefficients ont été calculés par la méthode des moindres
+            carrés, ce qui donne $\zeta_v = 11.7$ et $\zeta_h = 4.82$. La
+            corrélation prédit la variance des fluctuations de vitesse du
+            fluide dans un intervalle de confiance de 20 %. Elle a été évaluée
+            sur deux configurations supplémentaires construites à partir des
+            mesures de vitesse de sédimentation de Mordant et Pinton
+            <a href="#ref-18" class="cite">[18]</a>. La variance est bien prédite pour la première configuration.
+            Pour la seconde, à un nombre de Stokes terminal de 10,6, la
+            variance est sous-estimée par la corrélation. Au-delà d'un nombre
+            de Stokes d'environ 10, le coefficient de restitution humide
+            <a href="#ref-19" class="cite">[19]</a> commence à augmenter, et les collisions
+            entre particules sont susceptibles de contribuer au transfert
+            d'énergie. Cette contribution n'est pas prise en compte dans le
+            modèle.
+          </p>
+
+          <figure class="figure--narrow">
+            <img src="../images/research/fluid-velocity-variance.svg"
+                 alt="Variance de l'énergie cinétique fluctuante adimensionnée par le nombre de Stokes terminal, tracée en fonction du terme de fraction solide, les composantes verticale et horizontale suivant chacune une droite." />
+            <figcaption>
+              Variance de l'énergie cinétique fluctuante en fonction de la
+              fraction solide. Les croix désignent la composante verticale et
+              les carrés la composante horizontale. Les points situés au-dessus
+              de la corrélation correspondent à la configuration au nombre de
+              Stokes terminal de 10,6.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="subtopic">
+          <h3>Transferts thermiques dans un lit fluidisé anisotherme</h3>
+          <p>
+            La même configuration a été étudiée en conditions anisothermes pour
+            quatre vitesses de fluidisation et trois résolutions de maillage.
+            Le champ de température est prolongé à l'intérieur des particules
+            par une méthode ghost-fluid avant que le gradient ne soit calculé à
+            la paroi, et le flux pariétal est évalué à l'ordre deux à partir
+            des deux températures de fluide les plus proches de la paroi.
+          </p>
+          <p>
+            Le comportement macroscopique du lit est bien prédit avec le
+            maillage le plus grossier. Pour une résolution de 12 mailles par
+            diamètre de particule, en revanche, la méthode ne parvient pas à
+            prédire le comportement thermique de l'écoulement, et une
+            résolution de 24 mailles par diamètre de particule est nécessaire
+            pour prédire les transferts thermiques à un coût raisonnable. Le
+            nombre de Nusselt du fluide augmente avec la fraction solide,
+            conformément à la corrélation de Gunn <a href="#ref-20" class="cite">[20]</a>.
+          </p>
+          <p>
+            Le coefficient de transfert thermique paroi-lit augmente avec la
+            fraction solide, en accord avec la corrélation de Haid
+            <a href="#ref-21" class="cite">[21]</a>, établie sur
+            près de 2 500 expériences. L'écart
+            à la corrélation croît avec la fraction solide, ce qui est
+            inattendu puisque, à résolution de maillage égale, la résolution de
+            l'écoulement diminue lorsque la vitesse augmente.
+          </p>
+
+          <figure class="figure--medium">
+            <img src="../images/research/wall-heat-transfer-haid.svg"
+                 alt="Coefficient de transfert thermique paroi-lit moyen en fonction de la fraction volumique solide, avec la corrélation de Haid et son intervalle de confiance représentés par une bande, et les points calculés situés au-dessus." />
+            <figcaption>
+              Coefficient de transfert thermique paroi-lit moyen en fonction de
+              la fraction volumique solide. Trait plein et zone ombrée :
+              corrélation de Haid <a href="#ref-21" class="cite">[21]</a> et son intervalle de confiance de 34,4 %.
+              Symboles : présentes simulations pour les trois résolutions de
+              maillage.
+            </figcaption>
+          </figure>
+
+          <p>
+            L'étude des corrélations vitesse-température montre que le
+            transfert thermique paroi-lit est piloté par le flux de chaleur
+            convectif turbulent associé à la vitesse normale à la paroi. La
+            vitesse moyenne normale à la paroi est quasi nulle, de sorte que le
+            flux de chaleur convectif moyen est faible devant la contribution
+            turbulente. La vitesse tangente à la paroi ne contribue pas au flux
+            de chaleur turbulent. La position du pic d'agitation est fortement
+            affectée par la résolution du maillage, et se déplace de
+            $x^{+} = 16$ pour 12 mailles par diamètre de particule à
+            $x^{+} = 27$ pour 36 mailles par diamètre de particule.
+          </p>
+          <p>
+            Des corrélations du nombre de Nusselt particulaire issues de la
+            littérature ont également été évaluées sur 77 simulations d'une
+            particule en sédimentation dans un fluide au repos, pour des
+            nombres de Reynolds compris entre 1 et 32 et des nombres de Prandtl
+            compris entre 0,1 et 10, à une résolution de 20 mailles par
+            diamètre de particule. Pour deux des trois corrélations
+            considérées, le flux de chaleur prédit est à moins de 10 % d'erreur.
+          </p>
+        </div>
+
+        <div class="subtopic">
+          <h3>Simulations corrigées en sous-maille (PR-SCS)</h3>
+          <p>
+            Une distinction est proposée entre la Particle Resolved - Direct
+            Numerical Simulation, dans laquelle les gradients de vitesse et la
+            pression sont entièrement résolus, et la Particle Resolved
+            Simulation, dans laquelle la résolution du maillage est de l'ordre
+            de dix mailles par diamètre de particule et les gradients ne sont
+            que partiellement résolus. Le coût de calcul très élevé de la
+            première limite son application à des cas académiques, ce qui
+            explique que l'on trouve couramment dans la littérature des
+            simulations à une douzaine de mailles par diamètre de particule.
+            Dans ces cas, les forces hydrodynamiques exercées par le fluide à
+            l'interface sont sous-résolues.
+          </p>
+          <p>
+            Une étude de convergence en maillage de la sédimentation de Stokes
+            d'une particule isolée a été réalisée pour des résolutions de
+            maillage comprises entre 5 et 80 mailles par diamètre. La
+            convergence de la force hydrodynamique calculée est d'ordre 2. Pour
+            une résolution de maillage de 10 mailles par diamètre, une erreur
+            relative de 10 % est obtenue sur la force.
+          </p>
+          <p>
+            Une correction dépendante du maillage de la part non résolue du
+            frottement et de la pression a été construite à partir de cette
+            étude de convergence. L'échelle de résolution qui en résulte est
+            nommée Particle Resolved - Subgrid Corrected Simulation. La
+            correction est validée pour des nombres de Reynolds jusqu'à
+            $10^{-1}$ et des rapports de masses volumiques compris entre 2 et
+            3000. Une résolution de maillage de 10 mailles par diamètre ou plus
+            est nécessaire pour capturer correctement la direction de la force
+            hydrodynamique.
+          </p>
+          <p>
+            Des configurations gaz-solide ont enfin été étudiées afin de
+            valider l'outil numérique pour la simulation de ces écoulements,
+            qui sont ceux rencontrés dans les récepteurs solaires.
+          </p>
+
+          <figure>
+            <img src="../images/research/pr-scs-drag-correction.svg"
+                 alt="Coefficient hydrodynamique normalisé par le coefficient de traînée d'Abraham en fonction du nombre de Reynolds, comparant les simulations non corrigées et corrigées pour plusieurs rapports de masses volumiques." />
+            <figcaption>
+              Carte de robustesse de la correction. Coefficient hydrodynamique
+              normalisé par le coefficient de traînée d'Abraham <a href="#ref-22" class="cite">[22]</a> en fonction du
+              nombre de Reynolds. Le trait plein montre l'évolution de Stokes
+              dans son domaine de validité et le trait pointillé la prolonge
+              vers les nombres de Reynolds plus élevés. Les croix désignent la
+              PRS et les cercles la PR-SCS. L'échelle de couleur indique le
+              rapport de masses volumiques.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+
+      <!-- ================= ACTIVITY 3 ================= -->
+      <section class="research-topic">
+        <h2 id="boiling-flows">Simulation multi-échelle d'écoulements diphasiques bouillants</h2>
+        <p class="card__meta">Stage de recherche de master · PROMES – CNRS · 2021</p>
+
+        <p class="research-topic__lead">
+          La génération directe de vapeur est une autre voie pour le solaire à
+          concentration, dans laquelle l'eau est vaporisée directement à
+          l'intérieur du tube récepteur. Dans la centrale solaire de Llo, en
+          France, des miroirs de Fresnel concentrent le rayonnement solaire
+          incident sur un récepteur tubulaire horizontal. L'eau est injectée à
+          70 bar, quelques degrés sous la saturation, et un mélange diphasique
+          eau-vapeur est obtenu en sortie des lignes, qui peuvent atteindre
+          540 m de long. Le flux de chaleur surfacique appliqué au tube atteint
+          40 kW m$^{-2}$, à comparer aux 340 W m$^{-2}$ du flux solaire
+          incident moyen à la surface de la Terre.
+        </p>
+        <p class="research-topic__lead">
+          La fraction volumique de vapeur en sortie, communément appelée taux
+          de vide, dépend du débit, de la température d'injection et du flux de
+          chaleur surfacique. Elle est actuellement contrôlée par l'exploitant
+          de la centrale et limitée à 80 %. Prédire la production électrique de
+          la centrale suppose de prédire ce taux de vide, et donc de
+          caractériser l'écoulement à l'intérieur des tubes. L'objectif de ce
+          travail était de valider un outil de simulation numérique capable de
+          le faire.
+        </p>
+
+        <div class="subtopic">
+          <h3>Modélisation Euler–Euler d'un écoulement bouillant en tube horizontal</h3>
+          <p>
+            Une approche numérique a été mise en œuvre pour étudier un
+            écoulement bouillant dans un tube serpentin horizontal. Le modèle
+            bifluide de NEPTUNE_CFD a été utilisé pour étudier le comportement
+            du réfrigérant R141b dans des cas diabatiques. Le modèle repose sur
+            le formalisme Euler–Euler des équations de Navier–Stokes, dans
+            lequel les équations sont résolues pour les deux phases du fluide à
+            chaque pas de temps. Une étude de convergence en maillage a été
+            menée, qui a montré qu'une résolution de 40 mailles par diamètre de
+            tube était nécessaire pour cette configuration.
+          </p>
+          <p>
+            La simulation des écoulements bouillants horizontaux est un défi.
+            La succession des régimes d'écoulement, à savoir à bulles, à
+            poches, à bouchons, stratifié et stratifié à vagues, doit être
+            prédite. Ces régimes mettent en jeu des transferts de masse entre
+            les phases et sont caractérisés par des phénomènes physiques
+            multi-échelles. Une méthode d'identification des grandes interfaces
+            est employée. Elle détecte les phases continues, ainsi que la
+            présence d'une phase dispersée en leur sein, comme des bulles de
+            vapeur dans la phase liquide ou des gouttelettes dans la vapeur.
+          </p>
+          <figure class="figure--medium">
+            <img src="../images/research/vapour-structures-serpentine.png"
+                 alt="Teneur en vapeur instantanée dans le tube serpentin, avec les grandes interfaces représentées par un isocontour gris et les bulles dispersées colorées par le taux de vide." />
+            <figcaption>
+              Visualisation instantanée de la teneur en vapeur dans le domaine
+              de calcul. Les grandes interfaces sont produites par l'isocontour
+              $\alpha_v = 0.5$ en gris, et les bulles dispersées sont
+              représentées par la carte de couleurs.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="subtopic">
+          <h3>Transfert thermique conjugué avec la paroi du tube</h3>
+          <p>
+            Le transfert thermique conjugué entre la paroi du tube et le fluide
+            a été pris en compte au moyen d'un couplage avec le logiciel
+            SYRTHES 4.3, qui résout la conduction dans le solide en trois
+            dimensions. Les conditions aux limites traditionnelles de Neumann
+            ou de Dirichlet ne représentent pas une paroi dont la température
+            répond à l'écoulement qu'elle chauffe. L'analyse thermique de la
+            configuration a mis en évidence le fort couplage entre la
+            distribution de température dans le solide et les régimes
+            d'écoulement diphasique en jeu dans le domaine fluide.
+          </p>
+        </div>
+
+        <div class="subtopic">
+          <h3>Validation et analyse de l'écoulement</h3>
+          <p>
+            L'approche a été validée par comparaison avec une étude
+            expérimentale de la littérature <a href="#ref-23" class="cite">[23]</a>, sur la base de la
+            reproduction fidèle des positions des transitions de régime
+            d'écoulement diphasique dans le domaine. L'expérience consiste en
+            un réfrigérant s'écoulant dans un tube serpentin horizontal chauffé
+            par effet Joule. Le tube est transparent, ce qui permet une
+            comparaison qualitative entre les simulations et les données
+            expérimentales, et des résultats sont rapportés pour plusieurs
+            configurations d'entrée.
+          </p>
+          <p>
+            L'accord a été obtenu au moyen d'une étude paramétrique des modèles
+            physiques, à savoir le forçage thermique du tube, les modèles de
+            turbulence, la tension de surface et les paramètres de l'écoulement
+            bouillant, et des méthodes numériques, à savoir la résolution du
+            maillage, le raidissement de l'interface, le pas de temps et le
+            nombre de nœuds par CPU.
+          </p>
+
+          <figure class="figure--narrow">
+            <img src="../images/research/regime-transition-vs-experiment.png"
+                 alt="En haut : isocontour de vapeur simulé le long du tube serpentin avec trois transitions de régime repérées. En bas : photographie de l'expérience correspondante." />
+            <figcaption>
+              Comparaison des transitions de régime obtenues avec les résultats
+              expérimentaux de Yang et al. <a href="#ref-23" class="cite">[23]</a>. En haut : présente simulation,
+              isocontour $\alpha_v = 0.5$, avec les transitions à bulles vers
+              agité (1), agité vers bouchons (2) et bouchons vers stratifié
+              (3). En bas : expérience.
+            </figcaption>
+          </figure>
+
+          <p>
+            Un post-traitement original a été employé pour démêler les
+            caractéristiques de l'écoulement. Les champs moyens et RMS de taux
+            de vide, de température et de vitesse axiale ont été analysés dans
+            plusieurs sections, une fois la convergence statistique atteinte.
+            Un équilibre thermique est atteint dans le liquide saturé, mais pas
+            dans la phase vapeur, en raison de la dynamique de l'écoulement et
+            peut-être de la présence de gouttelettes.
+          </p>
+
+          <figure>
+            <div class="figure-grid">
+              <div class="figure-grid__cell">
+                <img src="../images/research/xs-void-fraction.png" alt="Section transversale colorée par le taux de vide moyen, avec la vapeur dans la partie supérieure du tube et le liquide en dessous." />
+                <span class="figure-grid__label">Taux de vide, moyenne</span>
+              </div>
+              <div class="figure-grid__cell">
+                <img src="../images/research/xs-void-fraction-rms.png" alt="Section transversale colorée par la RMS du taux de vide, la plus élevée dans une bande traversant le milieu du tube." />
+                <span class="figure-grid__label">Taux de vide, RMS</span>
+              </div>
+              <div class="figure-grid__cell">
+                <img src="../images/research/xs-temperature.png" alt="Section transversale colorée par la température moyenne, la plus élevée dans la vapeur au-dessus et la plus basse dans le liquide en dessous." />
+                <span class="figure-grid__label">Température, moyenne</span>
+              </div>
+              <div class="figure-grid__cell">
+                <img src="../images/research/xs-temperature-rms.png" alt="Section transversale colorée par la RMS de la température." />
+                <span class="figure-grid__label">Température, RMS</span>
+              </div>
+              <div class="figure-grid__cell">
+                <img src="../images/research/xs-velocity.png" alt="Section transversale colorée par la vitesse axiale moyenne, la plus élevée dans la vapeur dans la partie supérieure du tube." />
+                <span class="figure-grid__label">Vitesse axiale, moyenne</span>
+              </div>
+              <div class="figure-grid__cell">
+                <img src="../images/research/xs-velocity-rms.png" alt="Section transversale colorée par la RMS de la vitesse axiale." />
+                <span class="figure-grid__label">Vitesse axiale, RMS</span>
+              </div>
+            </div>
+            <figcaption>
+              Champs moyens et RMS de taux de vide, de température et de
+              vitesse axiale dans une section proche de la sortie, où un régime
+              stratifié à vagues est observé. Les champs RMS sont les plus
+              élevés à l'interface entre les deux phases.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+
+      <section class="research-topic">
+        <h2 id="references">Références</h2>
+        <!-- Bibliographic entries stay in the language they were published
+             in: a reference is an address to a specific document, and
+             translating a title would make it harder, not easier, to find. -->
+        <ol class="reference-list">
+          <li id="ref-1">J.-M. Delhaye, <em>Thermohydraulique des réacteurs</em>, EDP Sciences, 2013.</li>
+          <li id="ref-2" lang="en">R. Manceau, Progress in hybrid temporal LES, in: <em>Papers Contributed to the 6th Symposium on Hybrid RANS-LES Methods</em> 137 (2018).</li>
+          <li id="ref-3" lang="en">B. Chaouat, R. Schiestel, A new partially integrated transport model for subgrid-scale stresses and dissipation rate for turbulent developing flows, <em>Physics of Fluids</em> 17 (2005).</li>
+          <li id="ref-4" lang="en">P. Spalart, W.-H. Jou, M. Strelets, S. Allmaras, Comments on the feasibility of LES for wings, and on a hybrid RANS/LES approach, in: <em>Conference of Advances in DNS/LES</em> (1997).</li>
+          <li id="ref-5" lang="en">F. R. Menter, M. Kuntz, R. Langtry, Ten years of industrial experience with the SST turbulence model, <em>Turbulence Heat and Mass Transfer</em> 4 (2003).</li>
+          <li id="ref-6" lang="en">V. Duffal, B. de Laage de Meux, R. Manceau, Development and validation of a new formulation of hybrid temporal large eddy simulation, <em>Flow, Turbulence and Combustion</em> 108 (2022).</li>
+          <li id="ref-7" lang="en">C. Calvin, O. Cueto, P. Emonot, An object-oriented approach to the design of fluid mechanics software, <em>Mathematical Modelling and Numerical Analysis</em> 36 (2002).</li>
+          <li id="ref-8" lang="en">M. Mehta, R. Manceau, V. Duffal, B. de Laage de Meux, An active hybrid Reynolds-averaged Navier-Stokes/large eddy simulation approach for gray area mitigation, <em>Physics of Fluids</em> 35 (2025).</li>
+          <li id="ref-9" lang="en">M. David, M. Mehta, R. Manceau, On the feasibility of a self-adaptive strategy for hybrid RANS/LES based on physical criteria and its initial testing on low Reynolds number backward-facing step flow, <em>Flow, Turbulence and Combustion</em> 114 (2025).</li>
+          <li id="ref-10">P. Emonot, <em>Méthodes de volumes éléments finis: applications aux équations de Navier-Stokes et résultats de convergence</em>, thèse de doctorat, Université Claude Bernard, 1992.</li>
+          <li id="ref-11" lang="en">E. Lamballais, Direct numerical simulation of a turbulent flow in a rotating channel with a sudden expansion, <em>Journal of Fluid Mechanics</em> 745 (2014).</li>
+          <li id="ref-12" lang="en">M. Breuer, N. Peller, Ch. Rapp, M. Manhart, Flow over periodic hills: numerical and experimental study in a wide range of Reynolds numbers, <em>Computers and Fluids</em> 38 (2009).</li>
+          <li id="ref-13" lang="en">O. Braillard, R. Howard, K. Angele, A. Shams, N. Edh, Thermal mixing in a T-junction: novel CFD-grade measurements of the fluctuating temperature in the solid wall, <em>Nuclear Engineering and Design</em> 330 (2018).</li>
+          <li id="ref-14" lang="en">S. Unverdi, G. Tryggvason, A front-tracking method for viscous, incompressible, multi-fluid flows, <em>Journal of Computational Physics</em> 100 (1992).</li>
+          <li id="ref-15">A. A. Corona, <em>Agitation des particules dans un lit fluidisé</em>, thèse de doctorat, Institut National Polytechnique de Toulouse, 2008.</li>
+          <li id="ref-16" lang="en">J. Richardson, W. Zaki, The sedimentation of a suspension of uniform spheres under conditions of viscous flow, <em>Chemical Engineering Science</em> 3 (1954).</li>
+          <li id="ref-17" lang="en">E. Alméras, O. Masbernat, F. Risso, R. Fox, Fluctuations in inertial dense homogeneous suspensions, <em>Physical Review Fluids</em> (2019).</li>
+          <li id="ref-18" lang="en">N. Mordant, J.-F. Pinton, Velocity measurement of a settling sphere, <em>European Physical Journal B</em> 18 (2000).</li>
+          <li id="ref-19" lang="en">D. Legendre, R. Zenit, C. Daniel, P. Guiraud, A note on the modelling of the bouncing of spherical drops or solid spheres on a wall in viscous fluid, <em>Chemical Engineering Science</em> (2006).</li>
+          <li id="ref-20" lang="en">D. Gunn, Transfer of mass and heat to particles in fixed and fluidized beds, <em>International Journal of Heat and Mass Transfer</em> 21 (1978).</li>
+          <li id="ref-21" lang="en">M. Haid, Correlations for the prediction of heat transfer to liquid-solid fluidized beds, <em>Chemical Engineering and Processing</em> 36 (1997).</li>
+          <li id="ref-22" lang="en">F. Abraham, Functional dependence of drag coefficient of a sphere on Reynolds number, <em>Physics of Fluids</em> 13 (1970).</li>
+          <li id="ref-23" lang="en">Z. Yang, X. F. Peng, P. Ye, Numerical and experimental investigation of two phase flow during boiling in a coiled tube, <em>International Journal of Heat and Mass Transfer</em> 51 (2008).</li>
+          <li id="ref-24" lang="en">R. Gueguen, G. Sahuquet, M. Tessoneaud, JL. Sans, E. Guillot, A. Le Gal, R. Garcia, S. Mer, A. Toutant, F. Bataille, G. Flamant, Heat transfer in a fluidized bed tubular solar receiver. On-sun experimental investigation, <em>Solar Energy</em> 265 (2023) 112118. <a href="https://doi.org/10.1016/j.solener.2023.112118" target="_blank" rel="noopener">doi:10.1016/j.solener.2023.112118</a></li>
+        </ol>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>
+        &copy; <span id="year"></span> Édouard Butaye
+        <span class="footer-sep">&middot;</span>
+        Dernière mise à jour <span id="lastUpdated"></span>
+      </p>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
