@@ -590,6 +590,26 @@ header {
 }
 
 
+/* Sub-headings and lists inside the research interests section. */
+.page-content h3 {
+  margin: 2rem 0 0.5rem;
+  font-size: 1rem;
+  color: var(--color-accent-dark);
+}
+
+.interest-list {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.interest-list li {
+  margin-bottom: 0.3rem;
+}
+
+.interest-list:last-of-type {
+  margin-bottom: 2.5rem;
+}
+
 .home-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
