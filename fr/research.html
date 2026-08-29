@@ -170,34 +170,39 @@
           combustible, un calcul RANS a nécessité 40 millions de mailles pour
           un coût de 20 000 heures CPU, tandis que la LES de la même
           configuration a nécessité 600 millions de mailles pour un coût de
-          6 millions d'heures CPU. Une LES est donc environ 300 fois plus
-          coûteuse qu'un calcul RANS. Les méthodes hybrides RANS/LES sont une
-          façon de répondre à cette difficulté.
+          6 millions d'heures CPU <a href="#ref-2" class="cite">[2]</a>. Une LES est donc environ 300 fois
+          plus coûteuse qu'un calcul RANS. Les méthodes hybrides RANS/LES ont
+          été développées pour réduire ce coût.
         </p>
 
         <div class="subtopic">
           <h3>Implémentation de la méthode HTLES dans TrioCFD</h3>
           <p>
             La formulation Hybrid Temporal Large Eddy Simulation (HTLES)
-            développée par Manceau <a href="#ref-2" class="cite">[2]</a> est dérivée du Partially
-            Integrated Transport Model de Chaouat et Schiestel <a href="#ref-3" class="cite">[3]</a>. Son intérêt réside dans son
+            développée par Manceau <a href="#ref-3" class="cite">[3]</a> est dérivée du Partially
+            Integrated Transport Model de Chaouat et Schiestel <a href="#ref-4" class="cite">[4]</a>. Son intérêt réside dans son
             fondement mathématique, dans lequel la LES est réécrite au moyen
             d'un filtre temporel. Lorsque la fréquence de coupure tend vers
             zéro, la formulation tend vers la formulation RANS, ce qui n'est
             pas le cas d'une formulation LES classique fondée sur un filtre
             spatial. Lorsque la fréquence de coupure tend vers l'infini, la
-            formulation tend vers la DNS. La transition est pilotée par le
-            rapport local de l'énergie modélisée sur l'énergie totale, plutôt
-            que par une distance caractéristique à la paroi comme dans la
-            Detached Eddy Simulation <a href="#ref-4" class="cite">[4]</a>.
+            formulation tend vers la simulation numérique directe (DNS), et la
+            viscosité turbulente modélisée disparaît de l'équation de quantité
+            de mouvement. La transition est pilotée par le rapport local de
+            l'énergie modélisée sur l'énergie totale
+            <a href="#ref-5" class="cite">[5]</a>, plutôt que par une distance
+            caractéristique à la paroi comme dans la Detached Eddy Simulation
+            <a href="#ref-6" class="cite">[6]</a>.
           </p>
           <p>
-            La formulation HTLES <a href="#ref-6" class="cite">[6]</a> $k$-$\omega$ SST <a href="#ref-5" class="cite">[5]</a> a été implémentée dans
-            TrioCFD <a href="#ref-7" class="cite">[7]</a>. Un
+            La formulation HTLES <a href="#ref-5" class="cite">[5]</a> $k$-$\omega$ SST <a href="#ref-7" class="cite">[7]</a> a été implémentée dans
+            TrioCFD <a href="#ref-8" class="cite">[8]</a>. Un
             terme de forçage de la turbulence a été ajouté à l'équation de
             quantité de mouvement afin de traiter la zone grise à l'interface
-            RANS/LES <a href="#ref-8" class="cite">[8]</a>, où l'on observe un déficit de contraintes car le
-            filtre ne commute pas avec les opérateurs différentiels.
+            RANS/LES <a href="#ref-9" class="cite">[9]</a>. Cette région souffre d'un
+            déficit de contraintes modélisées (MSD, pour <span lang="en">modelled
+            stress depletion</span>), qui provient de ce que le filtre ne commute
+            pas avec les opérateurs différentiels.
           </p>
         </div>
 
@@ -226,7 +231,7 @@
             grandeurs accessibles depuis un calcul RANS.
           </p>
           <p>
-            À la suite de David et al. <a href="#ref-9" class="cite">[9]</a>, le rapport de la production sur
+            À la suite de David et al. <a href="#ref-10" class="cite">[10]</a>, le rapport de la production sur
             la dissipation calculé à partir d'un calcul RANS préalable est
             utilisé pour localiser les régions qui nécessiteraient une
             description LES. Le maillage est raffiné là où
@@ -242,15 +247,24 @@
             configuration de l'écoulement, ce qui motive une analyse de
             sensibilité sur la valeur seuil.
           </p>
+          <p>
+            Pour la stratégie de raffinement elle-même, la taille de maille
+            visée est celle qui atteint un rapport prescrit de l'énergie
+            cinétique modélisée sur l'énergie cinétique totale. La valeur de 0,2
+            a été retenue, ce qui revient à résoudre 80 % de l'énergie cinétique
+            turbulente <a href="#ref-11" class="cite">[11]</a>. Cette taille est estimée en supposant un spectre
+            de Kolmogorov <a href="#ref-10" class="cite">[10]</a>.
+          </p>
 
           <figure class="figure--medium">
-            <img src="../images/research/p-over-eps-backward-step.png"
-                 alt="Champ du rapport production sur dissipation dans une marche descendante, avec les valeurs les plus élevées dans la couche de cisaillement détachée en aval de l'élargissement." />
+            <img src="../images/research/Pk_eps_colline_10_percent_iso_v2.png"
+                 alt="Champ du rapport production sur dissipation sur la colline périodique, maximal le long de la couche de cisaillement qui se détache au sommet de la colline et se prolonge en aval au-dessus de la partie plane." />
             <figcaption>
               Production sur dissipation obtenue avec le modèle RANS
-              $k$-$\omega$ SST sur la marche descendante. La couche de
-              cisaillement détachée en aval de l'élargissement est identifiée
-              par le champ.
+              $k$-$\omega$ SST sur la colline périodique. La couche de
+              cisaillement qui se détache au sommet de la colline est identifiée
+              par le champ, et reste la structure dominante sur toute la partie
+              plane.
             </figcaption>
           </figure>
         </div>
@@ -258,14 +272,18 @@
         <div class="subtopic">
           <h3>Stratégie de remaillage automatisée</h3>
           <p>
-            La procédure proposée par David et al. <a href="#ref-9" class="cite">[9]</a> nécessite plusieurs calculs
+            La procédure proposée par David et al. <a href="#ref-10" class="cite">[10]</a> nécessite plusieurs calculs
             HTLES pour que le maillage converge, ce qui est trop lourd pour des
             applications industrielles. La stratégie est modifiée ici pour
             n'effectuer qu'une seule étape de remaillage, en s'appuyant sur le
             seul calcul RANS pour identifier les régions LES. Le remaillage est
-            réalisé avec MMG. Une analyse de sensibilité sur la valeur seuil du
-            rapport est menée afin d'évaluer son influence sur les résultats
-            HTLES.
+            réalisé avec le remailleur Mmg <a href="#ref-12" class="cite">[12]</a>. Une analyse de sensibilité
+            sur la valeur seuil du rapport est menée afin d'évaluer son influence
+            sur les résultats HTLES. Même lorsque la région de cisaillement est
+            bien localisée par le critère, l'estimation de la taille de maille
+            requise à partir des résultats RANS peut produire des singularités.
+            La taille de maille est alors bornée par une valeur minimale, et une
+            analyse de sensibilité a également été menée sur ce minimum.
           </p>
           <p>
             La méthodologie visée est la suivante. Une étude de convergence en
@@ -278,7 +296,7 @@
             classiques des méthodes hybrides RANS/LES.
           </p>
           <p>
-            La méthode des volumes éléments finis <a href="#ref-10" class="cite">[10]</a> employée dans TrioCFD requiert des
+            La méthode des volumes éléments finis <a href="#ref-13" class="cite">[13]</a> employée dans TrioCFD requiert des
             maillages tétraédriques, et le modèle $k$-$\omega$ SST requiert
             $y^{+}=1$ à la paroi. Un maillage tétraédrique non uniforme et
             anisotrope est donc nécessaire pour réduire significativement le
@@ -286,12 +304,14 @@
           </p>
 
           <figure class="figure--medium">
-            <img src="../images/research/anisotropic-mesh-periodic-hill.png"
-                 alt="Maillage tétraédrique anisotrope de la colline périodique, raffiné vers les parois." />
+            <img src="../images/research/periodic_hill_HTLES_P_eps_1_min_1e_2.png"
+                 alt="Maillage tétraédrique anisotrope de la colline périodique, finement raffiné dans une bande le long de la paroi inférieure et à travers la couche de cisaillement, et beaucoup plus grossier dans le cœur supérieur du canal." />
             <figcaption>
-              Maillage tétraédrique anisotrope de la colline périodique, gradué
-              depuis les parois pour satisfaire $y^{+}=1$ à un nombre de
-              mailles raisonnable.
+              Maillage tétraédrique de la colline périodique produit par la
+              stratégie de remaillage, pour un seuil de $P_k/\varepsilon = 1$ et
+              une taille de maille minimale de $10^{-2}$. Le raffinement suit la
+              couche de cisaillement et les parois, tandis que le cœur du canal
+              reste grossier.
             </figcaption>
           </figure>
         </div>
@@ -299,12 +319,12 @@
         <div class="subtopic">
           <h3>Configurations d'étude</h3>
           <p>
-            Quatre configurations sont considérées : un canal périodique à
-            $\mathrm{Re}_\tau = 590$, une marche descendante à
-            $\mathrm{Re} = 5\,000$ <a href="#ref-11" class="cite">[11]</a>, une colline périodique à
-            $\mathrm{Re} = 10\,595$ <a href="#ref-12" class="cite">[12]</a> et une jonction en T à
-            $\mathrm{Re} = 40\,000$ <a href="#ref-13" class="cite">[13]</a>. Une étude de convergence en maillage a
-            été réalisée afin de s'assurer de la convergence des champs RANS.
+            Trois configurations sont considérées : un canal périodique à
+            $\mathrm{Re}_\tau = 590$ <a href="#ref-14" class="cite">[14]</a>, une marche descendante à
+            $\mathrm{Re} = 5\,000$ <a href="#ref-15" class="cite">[15]</a> et une colline
+            périodique à $\mathrm{Re} = 10\,595$ <a href="#ref-16" class="cite">[16]</a>.
+            Une étude de convergence en maillage a été réalisée afin de
+            s'assurer de la convergence des champs RANS.
           </p>
         </div>
       </section>
@@ -348,7 +368,7 @@
             champ d'héliostats au premier plan. À droite : une expérience de
             lit fluidisé anisotherme à l'intérieur d'un tube récepteur,
             photographie de R. Gueguen
-            <a href="#ref-24" class="cite">[24]</a>.
+            <a href="#ref-17" class="cite">[17]</a>.
           </figcaption>
         </figure>
         <p class="research-topic__lead">
@@ -368,7 +388,7 @@
         </p>
 
         <div class="subtopic">
-          <h3>Développements dans le solveur TRUST/Trio_CFD</h3>
+          <h3>Développements dans le solveur TRUST/TrioCFD</h3>
           <p>
             La méthode de détection des collisions a été optimisée à l'aide de
             la méthode Link-Cell associée aux tables de Verlet. La complexité
@@ -399,7 +419,7 @@
             réalisées sur plusieurs centaines de processeurs d'un
             supercalculateur national, en utilisant la formulation un fluide
             associée à la méthode Front-Tracking
-            <a href="#ref-14" class="cite">[14]</a>. La simulation la plus
+            <a href="#ref-18" class="cite">[18]</a>. La simulation la plus
             coûteuse a nécessité jusqu'à 3 800 processeurs pendant une dizaine
             de jours de calcul.
           </p>
@@ -421,7 +441,7 @@
             Des simulations résolues d'un lit fluidisé liquide–solide de
             2 134 particules, reproduisant la configuration expérimentale de
             Corona
-            <a href="#ref-15" class="cite">[15]</a>, ont été réalisées. Quatre vitesses de fluidisation ont été
+            <a href="#ref-19" class="cite">[19]</a>, ont été réalisées. Quatre vitesses de fluidisation ont été
             considérées, correspondant à des fractions volumiques solides
             allant de 0,13 à 0,35, pour des résolutions de maillage de 12, 24
             et 36 mailles par diamètre de particule.
@@ -445,7 +465,7 @@
           <p>
             La hauteur du lit et la fraction solide sont bien prédites, même
             avec la résolution de maillage la plus grossière, et la loi de
-            Richardson-Zaki <a href="#ref-16" class="cite">[16]</a> est retrouvée.
+            Richardson-Zaki <a href="#ref-20" class="cite">[20]</a> est retrouvée.
             Des résolutions spatiales plus élevées sont nécessaires pour
             capturer les profils d'énergie cinétique fluctuante et
             l'autocorrélation de la vitesse verticale du fluide. La
@@ -454,7 +474,7 @@
             redescendre près de la paroi.
           </p>
           <p>
-            Le modèle d'Alméras et al. <a href="#ref-17" class="cite">[17]</a> relie la variance de la vitesse du
+            Le modèle d'Alméras et al. <a href="#ref-21" class="cite">[21]</a> relie la variance de la vitesse du
             fluide à la fraction solide et à la vitesse moyenne du fluide. Pour
             une fraction solide donnée, l'influence des particules sur
             l'agitation du fluide varie avec leur diamètre et leur masse
@@ -471,11 +491,11 @@
             fluide dans un intervalle de confiance de 20 %. Elle a été évaluée
             sur deux configurations supplémentaires construites à partir des
             mesures de vitesse de sédimentation de Mordant et Pinton
-            <a href="#ref-18" class="cite">[18]</a>. La variance est bien prédite pour la première configuration.
+            <a href="#ref-22" class="cite">[22]</a>. La variance est bien prédite pour la première configuration.
             Pour la seconde, à un nombre de Stokes terminal de 10,6, la
             variance est sous-estimée par la corrélation. Au-delà d'un nombre
             de Stokes d'environ 10, le coefficient de restitution humide
-            <a href="#ref-19" class="cite">[19]</a> commence à augmenter, et les collisions
+            <a href="#ref-23" class="cite">[23]</a> commence à augmenter, et les collisions
             entre particules sont susceptibles de contribuer au transfert
             d'énergie. Cette contribution n'est pas prise en compte dans le
             modèle.
@@ -512,12 +532,12 @@
             résolution de 24 mailles par diamètre de particule est nécessaire
             pour prédire les transferts thermiques à un coût raisonnable. Le
             nombre de Nusselt du fluide augmente avec la fraction solide,
-            conformément à la corrélation de Gunn <a href="#ref-20" class="cite">[20]</a>.
+            conformément à la corrélation de Gunn <a href="#ref-24" class="cite">[24]</a>.
           </p>
           <p>
             Le coefficient de transfert thermique paroi-lit augmente avec la
             fraction solide, en accord avec la corrélation de Haid
-            <a href="#ref-21" class="cite">[21]</a>, établie sur
+            <a href="#ref-25" class="cite">[25]</a>, établie sur
             près de 2 500 expériences. L'écart
             à la corrélation croît avec la fraction solide, ce qui est
             inattendu puisque, à résolution de maillage égale, la résolution de
@@ -530,7 +550,7 @@
             <figcaption>
               Coefficient de transfert thermique paroi-lit moyen en fonction de
               la fraction volumique solide. Trait plein et zone ombrée :
-              corrélation de Haid <a href="#ref-21" class="cite">[21]</a> et son intervalle de confiance de 34,4 %.
+              corrélation de Haid <a href="#ref-25" class="cite">[25]</a> et son intervalle de confiance de 34,4 %.
               Symboles : présentes simulations pour les trois résolutions de
               maillage.
             </figcaption>
@@ -604,7 +624,7 @@
                  alt="Coefficient hydrodynamique normalisé par le coefficient de traînée d'Abraham en fonction du nombre de Reynolds, comparant les simulations non corrigées et corrigées pour plusieurs rapports de masses volumiques." />
             <figcaption>
               Carte de robustesse de la correction. Coefficient hydrodynamique
-              normalisé par le coefficient de traînée d'Abraham <a href="#ref-22" class="cite">[22]</a> en fonction du
+              normalisé par le coefficient de traînée d'Abraham <a href="#ref-26" class="cite">[26]</a> en fonction du
               nombre de Reynolds. Le trait plein montre l'évolution de Stokes
               dans son domaine de validité et le trait pointillé la prolonge
               vers les nombres de Reynolds plus élevés. Les croix désignent la
@@ -699,7 +719,7 @@
           <h3>Validation et analyse de l'écoulement</h3>
           <p>
             L'approche a été validée par comparaison avec une étude
-            expérimentale de la littérature <a href="#ref-23" class="cite">[23]</a>, sur la base de la
+            expérimentale de la littérature <a href="#ref-27" class="cite">[27]</a>, sur la base de la
             reproduction fidèle des positions des transitions de régime
             d'écoulement diphasique dans le domaine. L'expérience consiste en
             un réfrigérant s'écoulant dans un tube serpentin horizontal chauffé
@@ -722,7 +742,7 @@
                  alt="En haut : isocontour de vapeur simulé le long du tube serpentin avec trois transitions de régime repérées. En bas : photographie de l'expérience correspondante." />
             <figcaption>
               Comparaison des transitions de régime obtenues avec les résultats
-              expérimentaux de Yang et al. <a href="#ref-23" class="cite">[23]</a>. En haut : présente simulation,
+              expérimentaux de Yang et al. <a href="#ref-27" class="cite">[27]</a>. En haut : présente simulation,
               isocontour $\alpha_v = 0.5$, avec les transitions à bulles vers
               agité (1), agité vers bouchons (2) et bouchons vers stratifié
               (3). En bas : expérience.
@@ -784,29 +804,32 @@
              translating a title would make it harder, not easier, to find. -->
         <ol class="reference-list">
           <li id="ref-1">J.-M. Delhaye, <em>Thermohydraulique des réacteurs</em>, EDP Sciences, 2013.</li>
-          <li id="ref-2" lang="en">R. Manceau, Progress in hybrid temporal LES, in: <em>Papers Contributed to the 6th Symposium on Hybrid RANS-LES Methods</em> 137 (2018).</li>
-          <li id="ref-3" lang="en">B. Chaouat, R. Schiestel, A new partially integrated transport model for subgrid-scale stresses and dissipation rate for turbulent developing flows, <em>Physics of Fluids</em> 17 (2005).</li>
-          <li id="ref-4" lang="en">P. Spalart, W.-H. Jou, M. Strelets, S. Allmaras, Comments on the feasibility of LES for wings, and on a hybrid RANS/LES approach, in: <em>Conference of Advances in DNS/LES</em> (1997).</li>
-          <li id="ref-5" lang="en">F. R. Menter, M. Kuntz, R. Langtry, Ten years of industrial experience with the SST turbulence model, <em>Turbulence Heat and Mass Transfer</em> 4 (2003).</li>
-          <li id="ref-6" lang="en">V. Duffal, B. de Laage de Meux, R. Manceau, Development and validation of a new formulation of hybrid temporal large eddy simulation, <em>Flow, Turbulence and Combustion</em> 108 (2022).</li>
-          <li id="ref-7" lang="en">C. Calvin, O. Cueto, P. Emonot, An object-oriented approach to the design of fluid mechanics software, <em>Mathematical Modelling and Numerical Analysis</em> 36 (2002).</li>
-          <li id="ref-8" lang="en">M. Mehta, R. Manceau, V. Duffal, B. de Laage de Meux, An active hybrid Reynolds-averaged Navier-Stokes/large eddy simulation approach for gray area mitigation, <em>Physics of Fluids</em> 35 (2025).</li>
-          <li id="ref-9" lang="en">M. David, M. Mehta, R. Manceau, On the feasibility of a self-adaptive strategy for hybrid RANS/LES based on physical criteria and its initial testing on low Reynolds number backward-facing step flow, <em>Flow, Turbulence and Combustion</em> 114 (2025).</li>
-          <li id="ref-10">P. Emonot, <em>Méthodes de volumes éléments finis: applications aux équations de Navier-Stokes et résultats de convergence</em>, thèse de doctorat, Université Claude Bernard, 1992.</li>
-          <li id="ref-11" lang="en">E. Lamballais, Direct numerical simulation of a turbulent flow in a rotating channel with a sudden expansion, <em>Journal of Fluid Mechanics</em> 745 (2014).</li>
-          <li id="ref-12" lang="en">M. Breuer, N. Peller, Ch. Rapp, M. Manhart, Flow over periodic hills: numerical and experimental study in a wide range of Reynolds numbers, <em>Computers and Fluids</em> 38 (2009).</li>
-          <li id="ref-13" lang="en">O. Braillard, R. Howard, K. Angele, A. Shams, N. Edh, Thermal mixing in a T-junction: novel CFD-grade measurements of the fluctuating temperature in the solid wall, <em>Nuclear Engineering and Design</em> 330 (2018).</li>
-          <li id="ref-14" lang="en">S. Unverdi, G. Tryggvason, A front-tracking method for viscous, incompressible, multi-fluid flows, <em>Journal of Computational Physics</em> 100 (1992).</li>
-          <li id="ref-15">A. A. Corona, <em>Agitation des particules dans un lit fluidisé</em>, thèse de doctorat, Institut National Polytechnique de Toulouse, 2008.</li>
-          <li id="ref-16" lang="en">J. Richardson, W. Zaki, The sedimentation of a suspension of uniform spheres under conditions of viscous flow, <em>Chemical Engineering Science</em> 3 (1954).</li>
-          <li id="ref-17" lang="en">E. Alméras, O. Masbernat, F. Risso, R. Fox, Fluctuations in inertial dense homogeneous suspensions, <em>Physical Review Fluids</em> (2019).</li>
-          <li id="ref-18" lang="en">N. Mordant, J.-F. Pinton, Velocity measurement of a settling sphere, <em>European Physical Journal B</em> 18 (2000).</li>
-          <li id="ref-19" lang="en">D. Legendre, R. Zenit, C. Daniel, P. Guiraud, A note on the modelling of the bouncing of spherical drops or solid spheres on a wall in viscous fluid, <em>Chemical Engineering Science</em> (2006).</li>
-          <li id="ref-20" lang="en">D. Gunn, Transfer of mass and heat to particles in fixed and fluidized beds, <em>International Journal of Heat and Mass Transfer</em> 21 (1978).</li>
-          <li id="ref-21" lang="en">M. Haid, Correlations for the prediction of heat transfer to liquid-solid fluidized beds, <em>Chemical Engineering and Processing</em> 36 (1997).</li>
-          <li id="ref-22" lang="en">F. Abraham, Functional dependence of drag coefficient of a sphere on Reynolds number, <em>Physics of Fluids</em> 13 (1970).</li>
-          <li id="ref-23" lang="en">Z. Yang, X. F. Peng, P. Ye, Numerical and experimental investigation of two phase flow during boiling in a coiled tube, <em>International Journal of Heat and Mass Transfer</em> 51 (2008).</li>
-          <li id="ref-24" lang="en">R. Gueguen, G. Sahuquet, M. Tessoneaud, JL. Sans, E. Guillot, A. Le Gal, R. Garcia, S. Mer, A. Toutant, F. Bataille, G. Flamant, Heat transfer in a fluidized bed tubular solar receiver. On-sun experimental investigation, <em>Solar Energy</em> 265 (2023) 112118. <a href="https://doi.org/10.1016/j.solener.2023.112118" target="_blank" rel="noopener">doi:10.1016/j.solener.2023.112118</a></li>
+          <li id="ref-2" lang="en">A. Michel, A. Bergeron, M. A. Puscas, A comparative analysis of the flow in a rod bundle with two guide-tubes and mixing grids, URANS simulation and Wall-Modeled LES of the ALAIN experiment, <em>Nuclear Engineering and Design</em> 441 (2025).</li>
+          <li id="ref-3" lang="en">R. Manceau, Progress in hybrid temporal LES, in: <em>Papers Contributed to the 6th Symposium on Hybrid RANS-LES Methods</em> 137 (2018).</li>
+          <li id="ref-4" lang="en">B. Chaouat, R. Schiestel, A new partially integrated transport model for subgrid-scale stresses and dissipation rate for turbulent developing flows, <em>Physics of Fluids</em> 17 (2005).</li>
+          <li id="ref-5" lang="en">V. Duffal, B. de Laage de Meux, R. Manceau, Development and validation of a new formulation of hybrid temporal large eddy simulation, <em>Flow, Turbulence and Combustion</em> 108 (2022).</li>
+          <li id="ref-6" lang="en">P. Spalart, W.-H. Jou, M. Strelets, S. Allmaras, Comments on the feasibility of LES for wings, and on a hybrid RANS/LES approach, in: <em>Conference of Advances in DNS/LES</em> (1997).</li>
+          <li id="ref-7" lang="en">F. R. Menter, M. Kuntz, R. Langtry, Ten years of industrial experience with the SST turbulence model, <em>Turbulence Heat and Mass Transfer</em> 4 (2003).</li>
+          <li id="ref-8" lang="en">C. Calvin, O. Cueto, P. Emonot, An object-oriented approach to the design of fluid mechanics software, <em>Mathematical Modelling and Numerical Analysis</em> 36 (2002).</li>
+          <li id="ref-9" lang="en">M. Mehta, R. Manceau, V. Duffal, B. de Laage de Meux, An active hybrid Reynolds-averaged Navier-Stokes/large eddy simulation approach for gray area mitigation, <em>Physics of Fluids</em> 35 (2025).</li>
+          <li id="ref-10" lang="en">M. David, M. Mehta, R. Manceau, On the feasibility of a self-adaptive strategy for hybrid RANS/LES based on physical criteria and its initial testing on low Reynolds number backward-facing step flow, <em>Flow, Turbulence and Combustion</em> 114 (2025).</li>
+          <li id="ref-11" lang="en">S. B. Pope, <em>Turbulent Flows</em>, Cambridge University Press, 2000.</li>
+          <li id="ref-12" lang="en">C. Dapogny, C. Dobrzynski, P. Frey, Three-dimensional adaptive domain remeshing, implicit domain meshing, and applications to free and moving boundary problems, <em>Journal of Computational Physics</em> 262 (2014). <a href="https://www.mmgtools.org" target="_blank" rel="noopener">mmgtools.org</a></li>
+          <li id="ref-13">P. Emonot, <em>Méthodes de volumes éléments finis: applications aux équations de Navier-Stokes et résultats de convergence</em>, thèse de doctorat, Université Claude Bernard, 1992.</li>
+          <li id="ref-14" lang="en">R. D. Moser, J. Kim, N. N. Mansour, Direct numerical simulation of turbulent channel flow up to $\mathrm{Re}_\tau = 590$, <em>Physics of Fluids</em> 11 (1999).</li>
+          <li id="ref-15" lang="en">E. Lamballais, Direct numerical simulation of a turbulent flow in a rotating channel with a sudden expansion, <em>Journal of Fluid Mechanics</em> 745 (2014).</li>
+          <li id="ref-16" lang="en">M. Breuer, N. Peller, Ch. Rapp, M. Manhart, Flow over periodic hills: numerical and experimental study in a wide range of Reynolds numbers, <em>Computers and Fluids</em> 38 (2009).</li>
+          <li id="ref-17" lang="en">R. Gueguen, G. Sahuquet, M. Tessoneaud, JL. Sans, E. Guillot, A. Le Gal, R. Garcia, S. Mer, A. Toutant, F. Bataille, G. Flamant, Heat transfer in a fluidized bed tubular solar receiver. On-sun experimental investigation, <em>Solar Energy</em> 265 (2023) 112118. <a href="https://doi.org/10.1016/j.solener.2023.112118" target="_blank" rel="noopener">doi:10.1016/j.solener.2023.112118</a></li>
+          <li id="ref-18" lang="en">S. Unverdi, G. Tryggvason, A front-tracking method for viscous, incompressible, multi-fluid flows, <em>Journal of Computational Physics</em> 100 (1992).</li>
+          <li id="ref-19">A. A. Corona, <em>Agitation des particules dans un lit fluidisé</em>, thèse de doctorat, Institut National Polytechnique de Toulouse, 2008.</li>
+          <li id="ref-20" lang="en">J. Richardson, W. Zaki, The sedimentation of a suspension of uniform spheres under conditions of viscous flow, <em>Chemical Engineering Science</em> 3 (1954).</li>
+          <li id="ref-21" lang="en">E. Alméras, O. Masbernat, F. Risso, R. Fox, Fluctuations in inertial dense homogeneous suspensions, <em>Physical Review Fluids</em> (2019).</li>
+          <li id="ref-22" lang="en">N. Mordant, J.-F. Pinton, Velocity measurement of a settling sphere, <em>European Physical Journal B</em> 18 (2000).</li>
+          <li id="ref-23" lang="en">D. Legendre, R. Zenit, C. Daniel, P. Guiraud, A note on the modelling of the bouncing of spherical drops or solid spheres on a wall in viscous fluid, <em>Chemical Engineering Science</em> (2006).</li>
+          <li id="ref-24" lang="en">D. Gunn, Transfer of mass and heat to particles in fixed and fluidized beds, <em>International Journal of Heat and Mass Transfer</em> 21 (1978).</li>
+          <li id="ref-25" lang="en">M. Haid, Correlations for the prediction of heat transfer to liquid-solid fluidized beds, <em>Chemical Engineering and Processing</em> 36 (1997).</li>
+          <li id="ref-26" lang="en">F. Abraham, Functional dependence of drag coefficient of a sphere on Reynolds number, <em>Physics of Fluids</em> 13 (1970).</li>
+          <li id="ref-27" lang="en">Z. Yang, X. F. Peng, P. Ye, Numerical and experimental investigation of two phase flow during boiling in a coiled tube, <em>International Journal of Heat and Mass Transfer</em> 51 (2008).</li>
         </ol>
       </section>
 
