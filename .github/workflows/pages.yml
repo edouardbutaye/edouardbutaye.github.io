@@ -1,0 +1,54 @@
+# Publication du site sur GitHub Pages.
+#
+# Ce dépôt s'en remettait au constructeur implicite de Pages, celui qui se
+# déclenche tout seul à chaque push sur main. Il a cessé de partir le
+# 29 août 2026 : les commits arrivaient bien sur GitHub, les réglages étaient
+# corrects et aucun incident n'était déclaré, mais plus aucune construction
+# n'était lancée. Ce workflow rend le déclenchement explicite, donc visible et
+# relançable à la main depuis l'onglet Actions.
+#
+# Le site est un ensemble de fichiers statiques servis depuis la racine, et le
+# .nojekyll demande à Pages de ne rien transformer : il n'y a donc rien à
+# construire, seulement à publier l'arborescence telle quelle.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Permet de relancer une publication à la main, sans avoir à commiter.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Une seule publication à la fois, sans annuler celle qui est en cours.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v7
+
+      - name: Configurer Pages
+        uses: actions/configure-pages@v6
+
+      # La racine du dépôt EST la racine du site. L'action exclut .git et
+      # .github ; _data/ est de toute façon absent, le .gitignore l'exclut.
+      - name: Empaqueter le site
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+
+      - name: Publier
+        id: deployment
+        uses: actions/deploy-pages@v5
