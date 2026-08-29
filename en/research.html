@@ -189,10 +189,10 @@
             The $k$-$\omega$ SST <a href="#ref-7" class="cite">[7]</a> HTLES formulation <a href="#ref-5" class="cite">[5]</a> was implemented in
             TrioCFD <a href="#ref-8" class="cite">[8]</a>. A
             turbulence forcing term was added to the momentum equation to address
-            the grey area at the RANS/LES interface
-            <a href="#ref-9" class="cite">[9]</a>. That region suffers from modelled
-            stress depletion (MSD), which arises because the filter does not
-            commute with the differential operators.
+            the modelled stress depletion (MSD) observed at the RANS/LES interface
+            <a href="#ref-9" class="cite">[9]</a>, also known as the grey area issue,
+            which arises because the filter does not commute with the differential
+            operators.
           </p>
         </div>
 
@@ -445,8 +445,7 @@
             back near the wall.
           </p>
           <p>
-            The model of Alméras et al. <a href="#ref-21" class="cite">[21]</a> relates the variance of the fluid
-            velocity to the solid fraction and to the mean fluid velocity. For a
+            The model of Alméras et al. <a href="#ref-21" class="cite">[21]</a> relates the fluid velocity variance to the solid fraction and to the mean fluid velocity. For a
             given solid fraction, the influence of the particles on the fluid
             agitation varies with their diameter and their density. A dependency
             on the terminal Stokes number is therefore introduced:
@@ -486,15 +485,14 @@
             The same configuration was studied under anisothermal conditions for
             four fluidization velocities and three grid resolutions. The
             temperature field is extended inside the particles by a ghost-fluid
-            method before the gradient is computed at the wall, and the wall flux
-            is evaluated to second order from the two fluid temperatures nearest
+            method. The wall flux is evaluated to second order from the two fluid temperatures nearest
             the wall.
           </p>
           <p>
             The macroscopic behaviour of the bed is well predicted with the
-            coarsest grid. For a resolution of 12 meshes per particle diameter,
+            coarsest grid. For a grid resolution of 12 meshes per particle diameter,
             however, the method fails to predict the thermal behaviour of the
-            flow, and a resolution of 24 meshes per particle diameter is required
+            flow, and a grid resolution of 24 meshes per particle diameter is required
             to predict the heat transfer at a reasonable cost. The fluid Nusselt
             number increases with the solid fraction, in accordance with Gunn's
             correlation <a href="#ref-24" class="cite">[24]</a>.
@@ -552,7 +550,7 @@
             of the former limits its application to academic cases, which explains
             why simulations at a dozen meshes per particle diameter are commonly
             found in the literature. In these cases, the hydrodynamic forces
-            exerted by the fluid at the interface are under-resolved.
+            exerted by the fluid at the particles' interface are under-resolved.
           </p>
           <p>
             A mesh convergence study of the Stokes sedimentation of an isolated
@@ -621,13 +619,12 @@
         <div class="subtopic">
           <h3>Euler–Euler modelling of a boiling flow in a horizontal tube</h3>
           <p>
-            A numerical approach was implemented to study a boiling flow in a
-            horizontal serpentine tube. The NEPTUNE_CFD two-fluid model was used
+            The NEPTUNE_CFD two-fluid model was used
             to study the behaviour of the refrigerant R141b in diabatic cases. The
             model is based on the Euler–Euler formalism of the Navier–Stokes
             equations, in which the governing equations are solved for both phases
             of the fluid at each time step. A mesh convergence study was carried
-            out, which found that a resolution of 40 meshes per tube diameter was
+            out, which found that a grid resolution of 40 meshes per tube diameter was
             necessary for this configuration.
           </p>
           <p>
