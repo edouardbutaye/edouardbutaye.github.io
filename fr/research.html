@@ -372,19 +372,19 @@
           </figcaption>
         </figure>
         <p class="research-topic__lead">
-          La PR-DNS est l'échelle de résolution la plus fine et capture
-          toutes les interactions hydrodynamiques, mais son coût de calcul
-          ne permet pas d'étudier les effets collectifs de plusieurs
-          centaines de milliers de particules. Les simulations Computational
-          Fluid Dynamics - Discrete Element Method (CFD-DEM) ont été
-          développées à cette fin. En CFD-DEM, les particules sont plus
-          petites que les mailles eulériennes, de sorte que les effets
-          collectifs peuvent être étudiés, mais la force exercée par le
-          fluide aux interfaces n'est pas résolue et des corrélations sont
-          nécessaires pour la modéliser. Ces corrélations ont souvent été
-          établies sur des cas académiques éloignés de ceux auxquels on les
-          applique. Une échelle de résolution intermédiaire est donc
-          proposée dans ce travail.
+          La Particle-Resolved Direct Numerical Simulation (PR-DNS) est
+          l'échelle de résolution la plus fine et capture toutes les
+          interactions hydrodynamiques, mais son coût de calcul ne permet
+          pas d'étudier les effets collectifs de plusieurs centaines de
+          milliers de particules. Les simulations Computational Fluid
+          Dynamics - Discrete Element Method (CFD-DEM) ont été développées à
+          cette fin. En CFD-DEM, les particules sont plus petites que les
+          mailles eulériennes, de sorte que les effets collectifs peuvent
+          être étudiés, mais la force exercée par le fluide aux interfaces
+          n'est pas résolue et des corrélations sont nécessaires pour la
+          modéliser. Ces corrélations ont souvent été établies sur des cas
+          académiques éloignés de ceux auxquels on les applique. Une échelle
+          de résolution intermédiaire est donc proposée dans ce travail.
         </p>
 
         <div class="subtopic">
@@ -405,7 +405,7 @@
             visqueux
           </p>
 
-          $$\left( \nabla \mathbf{u} + \nabla^{T} \mathbf{u} \right)\cdot \mathbf{n}$$
+          $$\mu \left( \nabla \mathbf{u} + \nabla^{T} \mathbf{u} \right)\cdot \mathbf{n}$$
 
           <p>
             est calculé au centre de gravité des facettes suivant un schéma
@@ -417,7 +417,7 @@
             Ces développements ont été intégrés au logiciel TrioCFD et sont
             accessibles à ses autres utilisateurs. Les simulations ont été
             réalisées sur plusieurs centaines de processeurs d'un
-            supercalculateur national, en utilisant la formulation un fluide
+            supercalculateur national, en utilisant la formulation à un fluide
             associée à la méthode Front-Tracking
             <a href="#ref-18" class="cite">[18]</a>. La simulation la plus
             coûteuse a nécessité jusqu'à 3 800 processeurs pendant une dizaine
@@ -468,7 +468,7 @@
             Des résolutions spatiales plus élevées sont nécessaires pour
             capturer les profils d'énergie cinétique fluctuante et
             l'autocorrélation de la vitesse verticale du fluide. La
-            distribution radiale de paires montre le caractère homogène du lit.
+            distribution radiale de paires de particules montre le caractère homogène du lit.
             Les particules ont tendance à monter au centre du lit et à
             redescendre près de la paroi.
           </p>
@@ -578,17 +578,17 @@
         <div class="subtopic">
           <h3>Simulations corrigées en sous-maille (PR-SCS)</h3>
           <p>
-            Une distinction est proposée entre la Particle Resolved - Direct
-            Numerical Simulation, dans laquelle les gradients de vitesse et la
-            pression sont entièrement résolus, et la Particle Resolved
-            Simulation, dans laquelle la résolution du maillage est de l'ordre
-            de dix mailles par diamètre de particule et les gradients ne sont
-            que partiellement résolus. Le coût de calcul très élevé de la
-            première limite son application à des cas académiques, ce qui
-            explique que l'on trouve couramment dans la littérature des
-            simulations à une douzaine de mailles par diamètre de particule.
-            Dans ces cas, les forces hydrodynamiques exercées par le fluide à
-            l'interface sont sous-résolues.
+            Une distinction est proposée entre la PR-DNS, dans laquelle les
+            gradients de vitesse et la pression sont entièrement résolus, et
+            la Particle Resolved Simulation (PRS), dans laquelle la
+            résolution du maillage est de l'ordre de dix mailles par
+            diamètre de particule et les gradients ne sont que partiellement
+            résolus. Le coût de calcul très élevé de la première limite son
+            application à des cas académiques, ce qui explique que l'on
+            trouve couramment dans la littérature des simulations à une
+            douzaine de mailles par diamètre de particule. Dans ces cas, les
+            forces hydrodynamiques exercées par le fluide à l'interface sont
+            sous-résolues.
           </p>
           <p>
             Une étude de convergence en maillage de la sédimentation de Stokes
@@ -602,12 +602,12 @@
             Une correction dépendante du maillage de la part non résolue du
             frottement et de la pression a été construite à partir de cette
             étude de convergence. L'échelle de résolution qui en résulte est
-            nommée Particle Resolved - Subgrid Corrected Simulation. La
-            correction est validée pour des nombres de Reynolds jusqu'à
-            $10^{-1}$ et des rapports de masses volumiques compris entre 2 et
-            3000. Une résolution de maillage de 10 mailles par diamètre ou plus
-            est nécessaire pour capturer correctement la direction de la force
-            hydrodynamique.
+            nommée Particle Resolved - Subgrid Corrected Simulation
+            (PR-SCS). La correction est validée pour des nombres de Reynolds
+            jusqu'à $10^{-1}$ et des rapports de masses volumiques compris
+            entre 2 et 3000. Une résolution de maillage de 10 mailles par
+            diamètre ou plus est nécessaire pour capturer correctement la
+            direction de la force hydrodynamique.
           </p>
           <p>
             Des configurations gaz-solide ont enfin été étudiées afin de

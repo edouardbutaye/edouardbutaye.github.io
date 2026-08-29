@@ -544,15 +544,16 @@
         <div class="subtopic">
           <h3>Subgrid-corrected simulations (PR-SCS)</h3>
           <p>
-            A distinction is proposed between Particle Resolved - Direct Numerical
-            Simulation, in which the velocity gradients and the pressure are fully
-            resolved, and Particle Resolved Simulation, in which the grid
-            resolution is of the order of ten meshes per particle diameter and the
-            gradients are only partly resolved. The very high computational cost
-            of the former limits its application to academic cases, which explains
-            why simulations at a dozen meshes per particle diameter are commonly
-            found in the literature. In these cases, the hydrodynamic forces
-            exerted by the fluid at the particles' interface are under-resolved.
+            A distinction is proposed between PR-DNS, in which the velocity
+            gradients and the pressure are fully resolved, and Particle
+            Resolved Simulation (PRS), in which the grid resolution is of
+            the order of ten meshes per particle diameter and the gradients
+            are only partly resolved. The very high computational cost of
+            the former limits its application to academic cases, which
+            explains why simulations at a dozen meshes per particle diameter
+            are commonly found in the literature. In these cases, the
+            hydrodynamic forces exerted by the fluid at the particles'
+            interface are under-resolved.
           </p>
           <p>
             A mesh convergence study of the Stokes sedimentation of an isolated
@@ -562,12 +563,13 @@
             error of 10% is obtained on the force.
           </p>
           <p>
-            A mesh-dependent correction of the unresolved part of the friction and
-            of the pressure was built from this convergence study. The resulting
-            scale of resolution is named Particle Resolved - Subgrid Corrected
-            Simulation. The correction is validated for Reynolds numbers up to
-            $10^{-1}$ and density ratios between 2 and 3000. A grid resolution of
-            10 meshes per diameter or higher is required to correctly capture the
+            A mesh-dependent correction of the unresolved part of the
+            friction and of the pressure was built from this convergence
+            study. The resulting scale of resolution is named Particle
+            Resolved - Subgrid Corrected Simulation (PR-SCS). The correction
+            is validated for Reynolds numbers up to $10^{-1}$ and density
+            ratios between 2 and 3000. A grid resolution of 10 meshes per
+            diameter or higher is required to correctly capture the
             direction of the hydrodynamic force.
           </p>
           <p>
