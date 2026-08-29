@@ -326,8 +326,8 @@
           properties and store heat efficiently. Characterising the flow within
           the receiver tube and the physical mechanisms of heat transfer requires
           a local description of the flow, which is obtained here with
-          particle-resolved direct numerical simulations carried out in high
-          performance computing.
+          particle-resolved simulations carried out using high
+          performance computing (HPC).
         </p>
 
         <figure class="figure--medium">
@@ -351,7 +351,7 @@
           </figcaption>
         </figure>
         <p class="research-topic__lead">
-          PR-DNS is the finest scale of resolution and captures all the
+          Particle-Resolved Direct Numerical Simulation (PR-DNS) is the finest scale of resolution and captures all the
           hydrodynamic interactions, but its computational cost does not allow
           the collective effects of several hundred thousand particles to be
           studied. Computational Fluid Dynamics - Discrete Element Method
@@ -378,14 +378,14 @@
             flux received by the particles. The pressure and the velocity are
             interpolated trilinearly at two points $P_1$ and $P_2$ located at
             distances $\delta$ and $2\delta$ from the interface. The pressure is
-            extrapolated linearly at the centre of gravity of the Lagrangian
+            extrapolated linearly at the gravity center of the Lagrangian
             facets. The viscous term
           </p>
 
-          $$\left( \nabla \mathbf{u} + \nabla^{T} \mathbf{u} \right)\cdot \mathbf{n}$$
+          $$\mu \left( \nabla \mathbf{u} + \nabla^{T} \mathbf{u} \right)\cdot \mathbf{n}$$
 
           <p>
-            is computed at the centre of gravity of the facets following a
+            is computed at the gravity center of the facets following a
             second-order upwind scheme. The phase indicator is also computed at
             the faces and the edges of the control volumes, which improves the
             computation of the diffusive flux at the interface.
@@ -429,7 +429,7 @@
             <figcaption>
               Anisothermal liquid–solid fluidized bed of 2 134 particles at
               $U_f = 0.073\ \mathrm{m\,s^{-1}}$. Left: particles coloured by their
-              vertical velocity. Centre: vertical fluid velocity on two cutting
+              vertical velocity. Center: vertical fluid velocity on two cutting
               planes. Right: temperature difference in the fluid and heat flux
               received by the particles.
             </figcaption>
@@ -441,7 +441,7 @@
             Higher spatial resolutions are required to capture the fluctuating
             kinetic energy profiles and the autocorrelation of the vertical fluid
             velocity. The radial pair distribution shows the homogeneous nature of
-            the bed. The particles tend to rise in the centre of the bed and fall
+            the bed. The particles tend to rise in the center of the bed and fall
             back near the wall.
           </p>
           <p>

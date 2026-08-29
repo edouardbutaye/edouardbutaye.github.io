@@ -135,8 +135,8 @@
       <p class="page-content-intro">
         Mes travaux portent sur la simulation numérique des écoulements
         turbulents et polyphasiques, et sur les échelles de résolution
-        auxquelles la physique de ces écoulements peut être décrite pour un
-        coût de calcul acceptable.
+        auxquelles la physique de ces écoulements peut être décrite à un coût de
+        calcul acceptable.
       </p>
 
       <p class="topic-index">
@@ -150,7 +150,7 @@
       <!-- ================= ACTIVITY 1 ================= -->
       <section class="research-topic">
         <h2 id="hybrid-rans-les">Simulation hybride RANS-LES</h2>
-        <p class="card__meta">Chercheur postdoctoral · CEA Saclay · depuis 2025</p>
+        <p class="card__meta">Post-doctorat · CEA Saclay · depuis 2025</p>
 
         <p class="research-topic__lead">
           Dans les centrales nucléaires, le refroidissement des crayons des
@@ -158,9 +158,8 @@
           turbulent, dont le nombre de Reynolds associé est d'environ
           $5\cdot10^{5}$ <a href="#ref-1" class="cite">[1]</a>. Les conditions de
           fonctionnement, une pression de 150 bar et une température de 600 K,
-          rendent les études expérimentales sur les grilles difficiles. La
-          simulation numérique est donc employée pour caractériser
-          l'écoulement.
+          rendent difficiles les études expérimentales sur les grilles. La
+          simulation numérique est donc employée pour caractériser l'écoulement.
         </p>
         <p class="research-topic__lead">
           La simulation aux grandes échelles donne accès aux grandeurs
@@ -178,31 +177,31 @@
         <div class="subtopic">
           <h3>Implémentation de la méthode HTLES dans TrioCFD</h3>
           <p>
-            La formulation Hybrid Temporal Large Eddy Simulation (HTLES)
-            développée par Manceau <a href="#ref-3" class="cite">[3]</a> est dérivée du Partially
-            Integrated Transport Model de Chaouat et Schiestel <a href="#ref-4" class="cite">[4]</a>. Son intérêt réside dans son
-            fondement mathématique, dans lequel la LES est réécrite au moyen
-            d'un filtre temporel. Lorsque la fréquence de coupure tend vers
-            zéro, la formulation tend vers la formulation RANS, ce qui n'est
-            pas le cas d'une formulation LES classique fondée sur un filtre
-            spatial. Lorsque la fréquence de coupure tend vers l'infini, la
-            formulation tend vers la simulation numérique directe (DNS), et la
-            viscosité turbulente modélisée disparaît de l'équation de quantité
-            de mouvement. La transition est pilotée par le rapport local de
-            l'énergie modélisée sur l'énergie totale
+            La formulation Hybrid Temporal Large Eddy Simulation (HTLES) développée
+            par Manceau <a href="#ref-3" class="cite">[3]</a> est dérivée du Partially
+            Integrated Transport Model de Chaouat et Schiestel
+            <a href="#ref-4" class="cite">[4]</a>. L'intérêt de la méthode réside dans
+            son fondement mathématique, où la LES est réécrite au moyen d'un filtre
+            temporel. Lorsque la fréquence de coupure tend vers zéro, la formulation
+            tend vers la formulation RANS, ce qui n'est pas le cas d'une formulation
+            LES classique fondée sur un filtre spatial. Lorsque la fréquence de
+            coupure tend vers l'infini, la formulation tend vers la simulation
+            numérique directe (DNS), et la viscosité turbulente modélisée disparaît
+            de l'équation de quantité de mouvement. La transition est pilotée par le
+            rapport local de l'énergie modélisée sur l'énergie totale
             <a href="#ref-5" class="cite">[5]</a>, plutôt que par une distance
             caractéristique à la paroi comme dans la Detached Eddy Simulation
             <a href="#ref-6" class="cite">[6]</a>.
           </p>
           <p>
-            La formulation HTLES <a href="#ref-5" class="cite">[5]</a> $k$-$\omega$ SST <a href="#ref-7" class="cite">[7]</a> a été implémentée dans
-            TrioCFD <a href="#ref-8" class="cite">[8]</a>. Un
-            terme de forçage de la turbulence a été ajouté à l'équation de
-            quantité de mouvement afin de traiter la zone grise à l'interface
-            RANS/LES <a href="#ref-9" class="cite">[9]</a>. Cette région souffre d'un
-            déficit de contraintes modélisées (MSD, pour <span lang="en">modelled
-            stress depletion</span>), qui provient de ce que le filtre ne commute
-            pas avec les opérateurs différentiels.
+            La formulation HTLES <a href="#ref-5" class="cite">[5]</a> $k$-$\omega$ SST
+            <a href="#ref-7" class="cite">[7]</a> a été implémentée dans TrioCFD
+            <a href="#ref-8" class="cite">[8]</a>. Un terme de forçage de la turbulence a
+            été ajouté à l'équation de quantité de mouvement afin de traiter la zone
+            grise à l'interface RANS/LES <a href="#ref-9" class="cite">[9]</a>. Cette
+            région souffre d'un déficit de contraintes modélisées (MSD, pour
+            <span lang="en">modelled stress depletion</span>), qui tient à ce que le
+            filtre ne commute pas avec les opérateurs différentiels.
           </p>
         </div>
 
@@ -221,19 +220,19 @@
             identifiées intuitivement.
           </p>
           <p>
-            La définition du maillage est l'un des enjeux principaux des
-            simulations hybrides RANS/LES. Deux ingénieurs étudiant la même
-            configuration industrielle n'obtiendront pas les mêmes résultats,
-            parce qu'ils ne définiront pas les régions de transition vers la
-            LES exactement au même endroit. Cela soulève des difficultés pour
-            la certification des résultats numériques. Le critère recherché
-            doit donc être indépendant du maillage et ne dépendre que de
-            grandeurs accessibles depuis un calcul RANS.
+            La définition du maillage est l'un des enjeux principaux des simulations
+            hybrides RANS/LES. Deux ingénieurs étudiant la même configuration
+            industrielle n'obtiendront pas les mêmes résultats, parce qu'ils ne
+            placeront pas les régions de transition vers la LES exactement au même
+            endroit. Cela soulève des difficultés pour la certification des
+            résultats numériques. Le critère recherché doit donc être indépendant du
+            maillage et ne dépendre que de grandeurs accessibles à partir d'un
+            calcul RANS.
           </p>
           <p>
-            À la suite de David et al. <a href="#ref-10" class="cite">[10]</a>, le rapport de la production sur
-            la dissipation calculé à partir d'un calcul RANS préalable est
-            utilisé pour localiser les régions qui nécessiteraient une
+            Suivant David et al. <a href="#ref-10" class="cite">[10]</a>, le rapport de la
+            production sur la dissipation calculé à partir d'un calcul RANS préalable
+            est utilisé pour localiser les régions qui nécessiteraient une
             description LES. Le maillage est raffiné là où
           </p>
 
@@ -248,12 +247,12 @@
             sensibilité sur la valeur seuil.
           </p>
           <p>
-            Pour la stratégie de raffinement elle-même, la taille de maille
-            visée est celle qui atteint un rapport prescrit de l'énergie
-            cinétique modélisée sur l'énergie cinétique totale. La valeur de 0,2
-            a été retenue, ce qui revient à résoudre 80 % de l'énergie cinétique
-            turbulente <a href="#ref-11" class="cite">[11]</a>. Cette taille est estimée en supposant un spectre
-            de Kolmogorov <a href="#ref-10" class="cite">[10]</a>.
+            La stratégie de raffinement vise ensuite la taille de maille qui donne
+            un rapport prescrit entre énergie cinétique modélisée et énergie
+            cinétique totale. La valeur de 0,2 a été retenue, ce qui revient à
+            résoudre 80 % de l'énergie cinétique turbulente <a href="#ref-11" class="cite">[11]</a>.
+            Cette taille est estimée en supposant un spectre de Kolmogorov
+            <a href="#ref-10" class="cite">[10]</a>.
           </p>
 
           <figure class="figure--medium">
@@ -272,18 +271,19 @@
         <div class="subtopic">
           <h3>Stratégie de remaillage automatisée</h3>
           <p>
-            La procédure proposée par David et al. <a href="#ref-10" class="cite">[10]</a> nécessite plusieurs calculs
-            HTLES pour que le maillage converge, ce qui est trop lourd pour des
-            applications industrielles. La stratégie est modifiée ici pour
-            n'effectuer qu'une seule étape de remaillage, en s'appuyant sur le
-            seul calcul RANS pour identifier les régions LES. Le remaillage est
-            réalisé avec le remailleur Mmg <a href="#ref-12" class="cite">[12]</a>. Une analyse de sensibilité
-            sur la valeur seuil du rapport est menée afin d'évaluer son influence
-            sur les résultats HTLES. Même lorsque la région de cisaillement est
-            bien localisée par le critère, l'estimation de la taille de maille
-            requise à partir des résultats RANS peut produire des singularités.
-            La taille de maille est alors bornée par une valeur minimale, et une
-            analyse de sensibilité a également été menée sur ce minimum.
+            La procédure proposée par David et al. <a href="#ref-10" class="cite">[10]</a>
+            nécessite plusieurs calculs HTLES pour que le maillage converge, ce qui
+            est trop lourd pour des applications industrielles. La stratégie est
+            modifiée ici pour ne comporter qu'une seule étape de remaillage, les
+            régions LES étant identifiées à partir du seul calcul RANS. Le remaillage
+            est réalisé avec le remailleur Mmg <a href="#ref-12" class="cite">[12]</a>. Une
+            analyse de sensibilité sur la valeur seuil du rapport est menée afin
+            d'évaluer son influence sur les résultats HTLES. Même lorsque la région
+            de cisaillement est bien localisée par le critère, l'estimation de la
+            taille de maille requise à partir des résultats RANS peut produire des
+            singularités. La taille de maille est alors bornée par une valeur
+            minimale, et une analyse de sensibilité a également été menée sur ce
+            minimum.
           </p>
           <p>
             La méthodologie visée est la suivante. Une étude de convergence en
@@ -296,11 +296,11 @@
             classiques des méthodes hybrides RANS/LES.
           </p>
           <p>
-            La méthode des volumes éléments finis <a href="#ref-13" class="cite">[13]</a> employée dans TrioCFD requiert des
-            maillages tétraédriques, et le modèle $k$-$\omega$ SST requiert
-            $y^{+}=1$ à la paroi. Un maillage tétraédrique non uniforme et
-            anisotrope est donc nécessaire pour réduire significativement le
-            coût de calcul.
+            La méthode des volumes éléments finis <a href="#ref-13" class="cite">[13]</a>
+            employée dans TrioCFD impose des maillages tétraédriques, et le modèle
+            $k$-$\omega$ SST demande $y^{+}=1$ à la paroi. Un maillage tétraédrique
+            non uniforme et anisotrope est donc nécessaire pour réduire
+            significativement le coût de calcul.
           </p>
 
           <figure class="figure--medium">
@@ -336,18 +336,17 @@
         <p class="card__meta">Thèse · PROMES – CNRS, Université de Perpignan · 2021 à 2024</p>
 
         <p class="research-topic__lead">
-          Les centrales solaires à tour utilisent le flux solaire concentré
-          pour chauffer un fluide caloporteur et produire de l'électricité au
-          moyen d'un cycle thermodynamique. Augmenter le rendement de
-          conversion thermique-électrique impose de porter la température de
-          sortie du récepteur à au moins 800 °C. Les particules fluidisées sont
-          une alternative aux fluides conventionnels, car elles supportent des
-          températures supérieures à 1000 °C sans dégradation de leurs
-          propriétés physiques et stockent efficacement la chaleur. Caractériser
-          l'écoulement au sein du tube récepteur et les mécanismes physiques
-          des transferts thermiques nécessite une description locale de
-          l'écoulement, obtenue ici par des simulations numériques directes à
-          particules résolues menées en calcul haute performance.
+          Les centrales solaires à tour utilisent le flux solaire concentré pour
+          chauffer un fluide caloporteur et produire de l'électricité au moyen
+          d'un cycle thermodynamique. Augmenter le rendement de conversion
+          thermique-électrique impose de porter la température de sortie du
+          récepteur à 800 °C au moins. Les particules fluidisées sont une
+          alternative aux fluides conventionnels, car elles supportent des
+          températures supérieures à 1000 °C sans dégradation de leurs propriétés
+          physiques et stockent efficacement la chaleur. Caractériser l'écoulement
+          dans le tube récepteur et les mécanismes des transferts thermiques
+          suppose une description locale, obtenue ici par des simulations à
+          particules résolues menées en calcul haute performance (HPC).
         </p>
 
         <figure class="figure--medium">
@@ -372,37 +371,35 @@
           </figcaption>
         </figure>
         <p class="research-topic__lead">
-          La PR-DNS est l'échelle de résolution la plus fine et capture toutes
-          les interactions hydrodynamiques, mais son coût de calcul ne permet
-          pas d'étudier les effets collectifs de plusieurs centaines de
-          milliers de particules. Les simulations Computational Fluid Dynamics
-          - Discrete Element Method ont été développées à cette fin. En
-          CFD-DEM, les particules sont plus petites que les mailles
-          eulériennes, de sorte que les effets collectifs peuvent être étudiés,
-          mais la force exercée par le fluide aux interfaces n'est pas résolue
-          et des corrélations sont nécessaires pour la modéliser. Ces
-          corrélations ont souvent été développées sur des configurations
-          académiques éloignées des configurations dans lesquelles elles sont
-          employées. Une échelle de résolution intermédiaire est donc proposée
-          dans ce travail.
+          La PR-DNS est l'échelle de résolution la plus fine et capture toutes les
+          interactions hydrodynamiques, mais son coût de calcul ne permet pas
+          d'étudier les effets collectifs de plusieurs centaines de milliers de
+          particules. Les simulations Computational Fluid Dynamics - Discrete
+          Element Method ont été développées à cette fin. En CFD-DEM, les
+          particules sont plus petites que les mailles eulériennes, de sorte que
+          les effets collectifs peuvent être étudiés, mais la force exercée par le
+          fluide aux interfaces n'est pas résolue et des corrélations sont
+          nécessaires pour la modéliser. Ces corrélations ont souvent été établies
+          sur des cas académiques éloignés de ceux auxquels on les applique. Une
+          échelle de résolution intermédiaire est donc proposée dans ce travail.
         </p>
 
         <div class="subtopic">
           <h3>Développements dans le solveur TRUST/TrioCFD</h3>
           <p>
-            La méthode de détection des collisions a été optimisée à l'aide de
-            la méthode Link-Cell associée aux tables de Verlet. La complexité
-            est réduite de $N^{2}$ à chaque pas de temps à $N$, et le temps de
-            calcul global est réduit de 20 %.
+            La méthode de détection des collisions a été optimisée à l'aide de la
+            méthode Link-Cell associée aux tables de Verlet. La complexité passe de
+            $N^{2}$ à $N$ à chaque pas de temps, et le temps de calcul global est
+            réduit de 20 %.
           </p>
           <p>
-            Une méthode lagrangienne originale a été développée pour calculer
-            les forces hydrodynamiques exercées par le fluide sur les
-            particules ainsi que le flux de chaleur reçu par les particules. La
-            pression et la vitesse sont interpolées trilinéairement en deux
-            points $P_1$ et $P_2$ situés aux distances $\delta$ et $2\delta$ de
-            l'interface. La pression est extrapolée linéairement au centre de
-            gravité des facettes lagrangiennes. Le terme visqueux
+            Une méthode lagrangienne originale a été développée pour calculer les
+            forces hydrodynamiques exercées par le fluide sur les particules ainsi
+            que le flux de chaleur qu'elles reçoivent. La pression et la vitesse sont
+            interpolées trilinéairement en deux points $P_1$ et $P_2$ situés aux
+            distances $\delta$ et $2\delta$ de l'interface. La pression est extrapolée
+            linéairement au centre de gravité des facettes lagrangiennes. Le terme
+            visqueux
           </p>
 
           $$\left( \nabla \mathbf{u} + \nabla^{T} \mathbf{u} \right)\cdot \mathbf{n}$$
@@ -438,13 +435,12 @@
         <div class="subtopic">
           <h3>Hydrodynamique d'un lit fluidisé liquide–solide</h3>
           <p>
-            Des simulations résolues d'un lit fluidisé liquide–solide de
-            2 134 particules, reproduisant la configuration expérimentale de
-            Corona
-            <a href="#ref-19" class="cite">[19]</a>, ont été réalisées. Quatre vitesses de fluidisation ont été
-            considérées, correspondant à des fractions volumiques solides
-            allant de 0,13 à 0,35, pour des résolutions de maillage de 12, 24
-            et 36 mailles par diamètre de particule.
+            Des simulations résolues ont été réalisées sur un lit fluidisé
+            liquide–solide de 2 134 particules, reproduisant la configuration
+            expérimentale de Corona <a href="#ref-19" class="cite">[19]</a>. Quatre vitesses
+            de fluidisation ont été considérées, correspondant à des fractions
+            volumiques solides allant de 0,13 à 0,35, pour des résolutions de
+            maillage de 12, 24 et 36 mailles par diamètre de particule.
           </p>
 
           <figure>
@@ -485,20 +481,18 @@
           $$\langle u_{l,i}'^{\,2}\rangle_{(x,y,z)} = \zeta_i \, \frac{\langle U_{l,y}\rangle^{2}_{(x,y,z)}}{St_t} \, \alpha(1-\alpha)$$
 
           <p>
-            Les coefficients ont été calculés par la méthode des moindres
-            carrés, ce qui donne $\zeta_v = 11.7$ et $\zeta_h = 4.82$. La
-            corrélation prédit la variance des fluctuations de vitesse du
-            fluide dans un intervalle de confiance de 20 %. Elle a été évaluée
-            sur deux configurations supplémentaires construites à partir des
+            Les coefficients ont été calculés par la méthode des moindres carrés, ce
+            qui donne $\zeta_v = 11.7$ et $\zeta_h = 4.82$. La corrélation prédit la
+            variance des fluctuations de vitesse du fluide à 20 % près. Elle a été
+            évaluée sur deux configurations supplémentaires construites à partir des
             mesures de vitesse de sédimentation de Mordant et Pinton
-            <a href="#ref-22" class="cite">[22]</a>. La variance est bien prédite pour la première configuration.
-            Pour la seconde, à un nombre de Stokes terminal de 10,6, la
-            variance est sous-estimée par la corrélation. Au-delà d'un nombre
-            de Stokes d'environ 10, le coefficient de restitution humide
+            <a href="#ref-22" class="cite">[22]</a>. La variance est bien prédite pour la
+            première configuration. Pour la seconde, à un nombre de Stokes terminal
+            de 10,6, la variance est sous-estimée par la corrélation. Au-delà d'un
+            nombre de Stokes d'environ 10, le coefficient de restitution humide
             <a href="#ref-23" class="cite">[23]</a> commence à augmenter, et les collisions
-            entre particules sont susceptibles de contribuer au transfert
-            d'énergie. Cette contribution n'est pas prise en compte dans le
-            modèle.
+            entre particules sont susceptibles de contribuer au transfert d'énergie.
+            Cette contribution n'est pas prise en compte dans le modèle.
           </p>
 
           <figure class="figure--narrow">
@@ -525,23 +519,22 @@
             des deux températures de fluide les plus proches de la paroi.
           </p>
           <p>
-            Le comportement macroscopique du lit est bien prédit avec le
-            maillage le plus grossier. Pour une résolution de 12 mailles par
-            diamètre de particule, en revanche, la méthode ne parvient pas à
-            prédire le comportement thermique de l'écoulement, et une
-            résolution de 24 mailles par diamètre de particule est nécessaire
-            pour prédire les transferts thermiques à un coût raisonnable. Le
-            nombre de Nusselt du fluide augmente avec la fraction solide,
-            conformément à la corrélation de Gunn <a href="#ref-24" class="cite">[24]</a>.
+            Le comportement macroscopique du lit est bien prédit avec le maillage le
+            plus grossier. Pour une résolution de 12 mailles par diamètre de
+            particule, en revanche, la méthode ne parvient pas à prédire le
+            comportement thermique de l'écoulement, et une résolution de 24 mailles
+            par diamètre de particule est nécessaire pour restituer les transferts
+            thermiques à un coût raisonnable. Le nombre de Nusselt du fluide augmente
+            avec la fraction solide, conformément à la corrélation de Gunn
+            <a href="#ref-24" class="cite">[24]</a>.
           </p>
           <p>
-            Le coefficient de transfert thermique paroi-lit augmente avec la
-            fraction solide, en accord avec la corrélation de Haid
-            <a href="#ref-25" class="cite">[25]</a>, établie sur
-            près de 2 500 expériences. L'écart
-            à la corrélation croît avec la fraction solide, ce qui est
-            inattendu puisque, à résolution de maillage égale, la résolution de
-            l'écoulement diminue lorsque la vitesse augmente.
+            Le coefficient de transfert thermique paroi-lit augmente avec la fraction
+            solide, en accord avec la corrélation de Haid
+            <a href="#ref-25" class="cite">[25]</a>, établie sur près de 2 500 expériences.
+            L'écart à la corrélation croît avec la fraction solide, ce qui est
+            inattendu puisque, à maillage égal, l'écoulement est d'autant moins bien
+            résolu que la vitesse augmente.
           </p>
 
           <figure class="figure--medium">
@@ -551,8 +544,8 @@
               Coefficient de transfert thermique paroi-lit moyen en fonction de
               la fraction volumique solide. Trait plein et zone ombrée :
               corrélation de Haid <a href="#ref-25" class="cite">[25]</a> et son intervalle de confiance de 34,4 %.
-              Symboles : présentes simulations pour les trois résolutions de
-              maillage.
+              Symboles : simulations du présent travail, pour les trois résolutions
+              de maillage.
             </figcaption>
           </figure>
 

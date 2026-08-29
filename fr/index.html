@@ -115,11 +115,10 @@
       <main class="page-content">
         <h1>Recherche et développement de solveurs CFD pour les écoulements turbulents et polyphasiques</h1>
         <p class="page-content-intro">
-          Je travaille sur la simulation numérique des écoulements turbulents
-          et polyphasiques, sur toute la chaîne : l'analyse physique d'un
-          écoulement, le modèle qui le décrit, son implémentation dans un code
-          de calcul industriel, et sa validation par comparaison à
-          l'expérience.
+          Je travaille sur la simulation numérique des écoulements turbulents et
+          polyphasiques, de bout en bout : l'analyse physique de l'écoulement, le
+          modèle qui le décrit, son implémentation dans un code de calcul
+          industriel et sa confrontation à l'expérience.
         </p>
 
         <p class="home-actions">
@@ -129,33 +128,32 @@
         <p class="home-now">
           <span class="tag">Actuellement</span>
           <span>
-            Chercheur postdoctoral au CEA Saclay, où j'implémente la méthode
-            hybride RANS-LES HTLES dans TrioCFD et l'applique à l'écoulement
-            turbulent autour des assemblages combustibles, avec A. Burlot.
+            Post-doctorant au CEA Saclay, où j'implémente la méthode hybride
+            RANS-LES HTLES dans TrioCFD et l'applique à l'écoulement turbulent
+            autour des assemblages combustibles, avec A. Burlot.
           </span>
         </p>
 
         <p>
-          Auparavant, j'ai soutenu ma thèse en 2024 au laboratoire PROMES de
-          l'Université de Perpignan Via Domitia, sur la simulation résolue
-          d'écoulements fluide-particules anisothermes pour le solaire à
-          concentration, sous la direction d'A. Toutant, S. Mer et
-          F. Bataille.
+          J'ai soutenu ma thèse en 2024 au laboratoire PROMES de l'Université de
+          Perpignan Via Domitia, sur la simulation résolue d'écoulements
+          fluide-particules anisothermes pour le solaire à concentration, sous la
+          direction d'A. Toutant, S. Mer et F. Bataille.
         </p>
 
         <h2>Thématiques de recherche</h2>
         <p>
-          La simulation haute-fidélité reste hors de portée pour la plupart
-          des configurations industrielles, tandis que les modèles employés à
-          sa place sont le plus souvent calibrés sur des cas académiques
-          éloignés de ceux auxquels on les applique. Ce qui m'intéresse est de
-          réduire cet écart : déterminer quelle part d'un écoulement doit
-          réellement être résolue, et récupérer ce qu'un calcul grossier
-          laisse de côté plutôt que d'en accepter l'erreur. Les formulations
-          hybrides RANS/LES et les corrections de sous-maille sont deux voies
-          que j'ai empruntées jusqu'ici, et je souhaite continuer à travailler
-          sur la question qui leur est commune : ce qui rend fiable un calcul
-          abordable.
+          La simulation haute fidélité reste hors de portée pour la plupart des
+          configurations industrielles, et les modèles qui la remplacent sont le
+          plus souvent calibrés sur des cas académiques éloignés de ceux auxquels
+          on les applique. Ce qui m'intéresse, c'est justement de réduire cet
+          écart : décider quelle part d'un écoulement doit réellement être
+          résolue, et rattraper ce qu'un calcul grossier laisse de côté au lieu de
+          s'en accommoder. Les formulations hybrides RANS/LES et les corrections
+          de sous-maille sont deux voies que j'ai empruntées jusqu'ici ; je
+          voudrais poursuivre sur la question qui leur est commune, celle des
+          conditions dans lesquelles un calcul abordable peut être tenu pour
+          fiable.
         </p>
 
         <h3>Compétences que je souhaite développer</h3>
@@ -165,7 +163,7 @@
           <li>Architectures GPU et portabilité des codes</li>
         </ul>
 
-        <h3>Domaines dans lesquels je souhaite travailler</h3>
+        <h3>Domaines où je souhaite travailler</h3>
         <ul class="interest-list">
           <li>Énergies renouvelables</li>
           <li>Turbulence atmosphérique</li>
@@ -177,7 +175,7 @@
           <li>
             <a class="topic-card" href="research.html#hybrid-rans-les">
               <img src="../images/home/thumb-rans-les.jpg"
-                   alt="Maillage tétraédrique anisotrope de la configuration de la colline périodique." />
+                   alt="Maillage tétraédrique anisotrope de la colline périodique." />
               <div class="topic-card__body">
                 <h3>Simulation hybride RANS-LES</h3>
                 <p>
@@ -195,10 +193,10 @@
               <div class="topic-card__body">
                 <h3>Simulation résolue de particules</h3>
                 <p>
-                  Hydrodynamique et transferts thermiques dans les lits
-                  fluidisés anisothermes, et une échelle de résolution
-                  corrigée en sous-maille pour les simulations qui ne peuvent
-                  pas résoudre les couches limites.
+                  Hydrodynamique et transferts thermiques dans les lits fluidisés
+                  anisothermes, et une échelle de résolution corrigée en sous-maille
+                  pour les simulations dont le coût interdit de résoudre les couches
+                  limites.
                 </p>
               </div>
             </a>
@@ -223,27 +221,26 @@
 
         <h2>Développements logiciels</h2>
         <p>
-          Mes développements sont intégrés à <strong>TRUST/Trio_CFD</strong>,
-          la plateforme CFD open source du CEA, où ils deviennent accessibles
-          à tous les autres utilisateurs du code. Pendant ma thèse, j'y ai
-          ajouté le calcul des forces hydrodynamiques et du flux de chaleur
-          sur les particules résolues, une détection de collisions optimisée
-          combinant la méthode Link-Cell et les tables de Verlet, qui a réduit
-          de 20 % le temps de calcul global, un indicateur de phase plus
-          précis aux faces et aux arêtes des volumes de contrôle, et la
-          correction de sous-maille de la force hydrodynamique à résolution
-          grossière. Le travail actuel y ajoute la formulation HTLES et son
-          terme de forçage de la turbulence.
+          Mes développements sont intégrés à <strong>TRUST/Trio_CFD</strong>, la
+          plateforme CFD open source du CEA, où ils profitent à l'ensemble des
+          utilisateurs du code. Pendant ma thèse, j'y ai ajouté le calcul des
+          forces hydrodynamiques et du flux de chaleur sur les particules
+          résolues, une détection de collisions optimisée combinant la méthode
+          Link-Cell et les tables de Verlet, qui a réduit de 20 % le temps de
+          calcul global, un indicateur de phase plus précis aux faces et aux
+          arêtes des volumes de contrôle, et la correction de sous-maille de la
+          force hydrodynamique à résolution grossière. Le travail actuel y ajoute
+          la formulation HTLES et son terme de forçage de la turbulence.
         </p>
         <p>
-          Chacun de ces développements s'accompagne de fiches de validation et
-          de cas tests de non-régression, sans lesquels une contribution ne
-          survit pas à la version suivante. J'ai également travaillé avec
-          NEPTUNE_CFD, Code_Saturne, SYRTHES, Salomé et le remailleur MMG, en
-          C++ et en Python, sur des supercalculateurs nationaux jusqu'à
-          3 800 processeurs, et sur le portage GPU via Kokkos.
+          Chacun de ces développements s'accompagne de fiches de validation et de
+          cas tests de non-régression, sans quoi une contribution ne franchit pas
+          la version suivante. J'ai également travaillé avec NEPTUNE_CFD,
+          Code_Saturne, SYRTHES, Salomé et le remailleur Mmg, en C++ et en
+          Python, sur des supercalculateurs nationaux avec jusqu'à 3 800
+          processeurs, et sur le portage GPU via Kokkos.
         </p>
-        <a class="more-link" href="research.html">Comment ces méthodes sont utilisées</a>
+        <a class="more-link" href="research.html">L'emploi de ces méthodes</a>
 
         <h2>Publications récentes</h2>
         <ul class="home-pubs">
@@ -273,7 +270,7 @@
           entre 2022 et 2024. Trois stages encadrés pendant la thèse.
         </p>
         <p>
-          Relecteur pour l'<em lang="en">International Journal of Heat and
+          Relecteur pour la revue <em lang="en">International Journal of Heat and
           Mass Transfer</em>.
         </p>
         <a class="more-link" href="teaching.html">Cours enseignés</a>
