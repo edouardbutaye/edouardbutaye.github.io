@@ -256,7 +256,7 @@ body {
    (LinkedIn, ORCID, ResearchGate, GitHub). Rather than pulling in an
    icon font or SVG library, each badge is just a small colored box
    with the platform's initials (or, for GitHub, a tiny inline drawing
-   of its logo) in it, styled to match its real brand colors — e.g.
+   of its logo) in it, styled to match its real brand colors - e.g.
    <span class="badge badge--linkedin">in</span> */
 .sidebar__links .badge {
   display: inline-flex;
