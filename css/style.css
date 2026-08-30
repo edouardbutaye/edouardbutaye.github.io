@@ -1214,25 +1214,19 @@ footer {
     justify-content: flex-end;
   }
 
-  /* On a phone the strip wraps to three lines: pinning it along with
-     the nav would hold a quarter of the screen for the whole visit,
-     with the sticky footer taking more still. So the header stops
-     being the sticky box here and the nav becomes it on its own -
-     the strip scrolls away once read, the links stay reachable. The
-     nav was already position:relative, anchoring the dropdown below
-     it; sticky keeps it a containing block, so that still holds. It
-     needs its own background and z-index now that the header is not
-     painting behind it. The sidebar dot carries the notice from then
-     on: on a phone the sidebar is stacked at the top of the page. */
-  header {
-    position: static;
-  }
-
-  .topnav {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    background-color: var(--color-bg);
+  /* <header> stays the sticky box here, exactly as on a wide screen.
+     Making .topnav sticky instead does NOT work: a sticky element
+     cannot travel outside its containing block, and .topnav's is
+     <header>, which is only as tall as the strip plus the nav - the
+     bar would unpin after a few pixels of scroll and leave with its
+     parent. So the strip is pinned along with the nav on a phone
+     too, and is kept narrow instead: smaller type and tighter
+     padding, since three wrapped lines held for the whole visit is
+     a lot of a short screen. */
+  .availability-bar {
+    padding: 0.5rem 1rem;
+    gap: 0.3rem 0.7rem;
+    font-size: 0.8rem;
   }
 
   .nav-toggle {
