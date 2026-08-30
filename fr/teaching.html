@@ -50,6 +50,57 @@
       } catch (e) { /* private mode, storage disabled - just use the OS setting */ }
     })();
   </script>
+  <!-- Machine-readable restatement of what this page already says in
+       plain sight: the job title in the sidebar, the affiliations in the
+       opening paragraphs, the topics in the skills list, the profile
+       links in the left column. Structured data must never state what a
+       visitor cannot read on the page, so if any of those change, change
+       this too. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://edouardbutaye.github.io/#person",
+    "name": "Édouard Butaye",
+    "email": "mailto:ebutaye@sfr.fr",
+    "image": "https://edouardbutaye.github.io/images/profile.jpg",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "CEA Saclay",
+      "url": "https://www.cea.fr/"
+    },
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Université de Perpignan Via Domitia",
+        "department": {
+          "@type": "Organization",
+          "name": "Laboratoire PROMES"
+        }
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "ISAE-ENSMA"
+      }
+    ],
+    "sameAs": [
+      "https://orcid.org/0000-0003-3111-9904",
+      "https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr",
+      "https://www.researchgate.net/profile/Edouard-Butaye",
+      "https://www.linkedin.com/in/edouard-butaye"
+    ],
+    "url": "https://edouardbutaye.github.io/fr/index.html",
+    "jobTitle": "Chercheur / développeur de solveurs CFD",
+    "description": "Chercheur et développeur de solveurs CFD travaillant sur la simulation numérique des écoulements turbulents et polyphasiques, de l'analyse physique de l'écoulement à son implémentation dans un code de calcul industriel et sa confrontation à l'expérience. En recherche d'un postdoctorat à l'étranger, ou d'un CDI chercheur/développeur CFD, à partir de février 2027.",
+    "knowsAbout": [
+      "Mécanique des fluides numérique",
+      "Modélisation hybride RANS/LES de la turbulence",
+      "Simulation résolue d'écoulements polyphasiques",
+      "Adaptation anisotrope de maillage",
+      "Calcul haute performance"
+    ]
+  }
+  </script>
 </head>
 <body>
     <aside class="sidebar">

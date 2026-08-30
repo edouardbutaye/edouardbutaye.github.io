@@ -46,6 +46,57 @@
       } catch (e) { /* private mode, storage disabled - just use the OS setting */ }
     })();
   </script>
+  <!-- Machine-readable restatement of what this page already says in
+       plain sight: the job title in the sidebar, the affiliations in the
+       opening paragraphs, the topics in the skills list, the profile
+       links in the left column. Structured data must never state what a
+       visitor cannot read on the page, so if any of those change, change
+       this too. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://edouardbutaye.github.io/#person",
+    "name": "Édouard Butaye",
+    "email": "mailto:ebutaye@sfr.fr",
+    "image": "https://edouardbutaye.github.io/images/profile.jpg",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "CEA Saclay",
+      "url": "https://www.cea.fr/"
+    },
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Université de Perpignan Via Domitia",
+        "department": {
+          "@type": "Organization",
+          "name": "Laboratoire PROMES"
+        }
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "ISAE-ENSMA"
+      }
+    ],
+    "sameAs": [
+      "https://orcid.org/0000-0003-3111-9904",
+      "https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr",
+      "https://www.researchgate.net/profile/Edouard-Butaye",
+      "https://www.linkedin.com/in/edouard-butaye"
+    ],
+    "url": "https://edouardbutaye.github.io/en/index.html",
+    "jobTitle": "Research scientist / CFD solver developer",
+    "description": "Research scientist and CFD solver developer working on the numerical simulation of turbulent and multiphase flows, from the physical analysis of a flow to its implementation in production CFD software and its validation against experiment. Looking for a postdoctoral position abroad, or a permanent research scientist / CFD developer role, from February 2027.",
+    "knowsAbout": [
+      "Computational fluid dynamics",
+      "Hybrid RANS/LES turbulence modelling",
+      "Particle-resolved simulation of multiphase flows",
+      "Anisotropic mesh adaptation",
+      "High-performance computing"
+    ]
+  }
+  </script>
 </head>
 <body>
     <aside class="sidebar">
