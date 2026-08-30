@@ -1,0 +1,58 @@
+# Édouard Butaye
+
+> Research scientist and CFD solver developer, currently a postdoctoral
+> researcher at CEA Saclay. I work on the numerical simulation of turbulent and
+> multiphase flows, across the whole chain: the physical analysis of a flow, the
+> model that describes it, its implementation in production CFD software, and its
+> validation against experiment.
+
+I am looking for a postdoctoral position abroad, or a permanent research
+scientist / CFD developer role, from February 2027. The best way to reach me is
+ebutaye@sfr.fr.
+
+Everything in this file is stated in plain sight on the pages it points to; it
+exists to save a reader the trouble of reconstructing it from five pages.
+
+## What I work on
+
+- **Hybrid RANS-LES turbulence modelling** — implementation of the HTLES method
+  in TrioCFD at CEA Saclay, and a physical criterion for locating the regions of
+  a domain that genuinely require an LES description.
+- **Particle-resolved simulation of fluid-particle flows** — the subject of my
+  PhD (2024, laboratoire PROMES, Université de Perpignan Via Domitia), applied to
+  anisothermal flows for concentrated solar power.
+- **Multiscale simulation of two-phase boiling flows.**
+- **Anisotropic mesh adaptation** — remeshing of inhomogeneous tetrahedral grids
+  driven by a prescribed size map (MMG).
+- **High-performance computing** — production runs on several thousand cores,
+  GPU porting with Kokkos, C++ inside industrial solvers.
+
+## Pages (English)
+
+- [Home](https://edouardbutaye.github.io/en/index.html): who I am, research
+  interests, technical skills, and the sectors I would like to work in.
+- [Research](https://edouardbutaye.github.io/en/research.html): the three
+  research topics above, in detail, with figures and references.
+- [Publications](https://edouardbutaye.github.io/en/publications.html): journal
+  articles, conference papers and the PhD thesis.
+- [Teaching](https://edouardbutaye.github.io/en/teaching.html): teaching
+  experience and supervision.
+- [CV](https://edouardbutaye.github.io/en/cv.html): research experience,
+  education, skills, conferences and seminars.
+
+## Pages (français)
+
+The same five pages, in French: [accueil](https://edouardbutaye.github.io/fr/index.html),
+[recherche](https://edouardbutaye.github.io/fr/research.html),
+[publications](https://edouardbutaye.github.io/fr/publications.html),
+[enseignement](https://edouardbutaye.github.io/fr/teaching.html),
+[CV](https://edouardbutaye.github.io/fr/cv.html).
+
+## Documents and profiles
+
+- [CV in English (PDF)](https://edouardbutaye.github.io/files/cv_butaye_anglais.pdf)
+- [CV en français (PDF)](https://edouardbutaye.github.io/files/cv_butaye_francais.pdf)
+- [ORCID](https://orcid.org/0000-0003-3111-9904)
+- [Google Scholar](https://scholar.google.com/citations?user=UcFZ37EAAAAJ&hl=fr)
+- [ResearchGate](https://www.researchgate.net/profile/Edouard-Butaye)
+- [LinkedIn](https://www.linkedin.com/in/edouard-butaye)
