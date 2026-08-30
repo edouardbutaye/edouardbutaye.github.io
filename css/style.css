@@ -474,6 +474,11 @@ header {
   display: var(--availability-bar);
   flex-wrap: wrap;
   align-items: center;
+  /* Centred as a group. text-align follows for the case where the sentence
+     itself wraps: without it the group would be centred but its lines
+     ragged-right inside. */
+  justify-content: center;
+  text-align: center;
   gap: 0.4rem 0.9rem;
   margin: 0;
   /* 2rem matches .topnav, so the text lines up with the nav below. */
