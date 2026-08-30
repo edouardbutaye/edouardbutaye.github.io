@@ -465,10 +465,13 @@ header {
      .availability-bar   a strip across the top of every page
      .sidebar__status    a dot under the bio in the sidebar
 
-   The strip sits BEFORE <header>, not inside it. The header is
-   position:sticky, so a strip placed within would stay pinned to
-   the top of the screen for the whole visit; above it, it scrolls
-   away once it has been read.
+   The strip sits INSIDE <header>, above the nav. The header is the
+   page's one position:sticky box, so putting the strip within makes
+   the two travel together and stay pinned for the whole visit -
+   the notice is the point of the page right now, not a banner to
+   be scrolled past. Placing it here rather than making it sticky
+   in its own right also avoids having to feed the header a top
+   offset equal to a strip whose height changes with the wrap.
    ------------------------------------------------------------- */
 .availability-bar {
   display: var(--availability-bar);
@@ -1209,6 +1212,27 @@ footer {
      packs the remaining two against the right edge. */
   .topnav {
     justify-content: flex-end;
+  }
+
+  /* On a phone the strip wraps to three lines: pinning it along with
+     the nav would hold a quarter of the screen for the whole visit,
+     with the sticky footer taking more still. So the header stops
+     being the sticky box here and the nav becomes it on its own -
+     the strip scrolls away once read, the links stay reachable. The
+     nav was already position:relative, anchoring the dropdown below
+     it; sticky keeps it a containing block, so that still holds. It
+     needs its own background and z-index now that the header is not
+     painting behind it. The sidebar dot carries the notice from then
+     on: on a phone the sidebar is stacked at the top of the page. */
+  header {
+    position: static;
+  }
+
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: var(--color-bg);
   }
 
   .nav-toggle {
