@@ -1214,36 +1214,14 @@ footer {
     justify-content: flex-end;
   }
 
-  /* Only the nav bar is pinned on a phone: the strip wraps to three
-     lines there, and holding those for the whole visit costs a
-     quarter of a short screen. The strip scrolls away once read and
-     the sidebar dot carries the notice from then on.
-
-     display:contents is what makes this work, and it is not
-     decoration. A sticky element cannot travel outside its
-     containing block; while <header> is a box, .topnav's containing
-     block is that header - only as tall as the strip plus the nav -
-     so a sticky nav would unpin almost immediately and leave with
-     its parent. display:contents drops the header box altogether,
-     so the nav becomes a child of .page, whose full height it can
-     then travel. The header's semantics survive it in current
-     browsers, and it painted only a background, which .topnav now
-     sets for itself since nothing sits behind it any more. */
-  header {
-    display: contents;
-  }
-
-  .topnav {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    background-color: var(--color-bg);
-  }
-
+  /* The strip goes away entirely on a phone. Wrapped to three lines
+     it costs a quarter of a short screen, and the sidebar dot right
+     above it already carries the notice - the sidebar stacks at the
+     top of the page here, so the dot is the first thing read. That
+     leaves the nav alone inside <header>, which stays the sticky box
+     as on a wide screen: nothing else is needed for the bar to pin. */
   .availability-bar {
-    padding: 0.5rem 1rem;
-    gap: 0.3rem 0.7rem;
-    font-size: 0.8rem;
+    display: none;
   }
 
   .nav-toggle {
