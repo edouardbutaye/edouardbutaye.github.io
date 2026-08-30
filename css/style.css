@@ -45,6 +45,18 @@
   --content-max-width: 780px;   /* main content never gets wider than this */
   --radius: 10px;               /* rounded corner size, used everywhere */
 
+  /* Availability notice - the strip above the top navigation and the dot
+     under the bio in the sidebar (see section 5b). Set either to "none"
+     to take that piece off all ten pages at once; the markup stays in the
+     HTML, so putting it back is one word. Both to "none" ends the notice. */
+  --availability-bar: flex;
+  --availability-dot: flex;
+
+  /* The dot. No existing variable means "available", and the colour has to
+     carry that meaning rather than the theme's accent, so it gets one of
+     its own. */
+  --color-available: #2e9e5b;
+
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                  Helvetica, Arial, sans-serif;
 }
@@ -85,6 +97,9 @@
     /* Light Octocat on a dark ground - the inverse of the SVG. */
     --github-mark: url("../images/github-6980894_640_black.png");
     --github-mark-opacity: 0;
+
+    /* The darker green goes muddy on this ground and reads as grey. */
+    --color-available: #4cc47f;
   }
 }
 
@@ -102,6 +117,9 @@
   /* Light Octocat on a dark ground - the inverse of the SVG. */
   --github-mark: url("../images/github-6980894_640_black.png");
   --github-mark-opacity: 0;
+
+  /* The darker green goes muddy on this ground and reads as grey. */
+  --color-available: #4cc47f;
 }
 
 
@@ -435,6 +453,68 @@ header {
 .lang-switch a:hover {
   color: var(--color-accent);
   text-decoration: none;
+}
+
+
+/* -------------------------------------------------------------
+   5b. AVAILABILITY NOTICE
+   Two independent pieces announcing that I am looking for a
+   position, both switched from the variables in section 1 rather
+   than by deleting markup:
+
+     .availability-bar   a strip across the top of every page
+     .sidebar__status    a dot under the bio in the sidebar
+
+   The strip sits BEFORE <header>, not inside it. The header is
+   position:sticky, so a strip placed within would stay pinned to
+   the top of the screen for the whole visit; above it, it scrolls
+   away once it has been read.
+   ------------------------------------------------------------- */
+.availability-bar {
+  display: var(--availability-bar);
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+  margin: 0;
+  /* 2rem matches .topnav, so the text lines up with the nav below. */
+  padding: 0.7rem 2rem;
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+/* .tag carries a bottom margin meant for stacked use; in a row it
+   lifts the pill off the baseline of the text beside it. */
+.availability-bar .tag {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.availability-bar a {
+  color: var(--color-accent-dark);
+  font-weight: 500;
+  white-space: nowrap;   /* the call to action never breaks in two */
+}
+
+/* The dot repeats the notice where the eye already is on a long page:
+   next to the name, in the column that stays put while the content
+   scrolls. It is not a link - the strip above says the rest. */
+.sidebar__status {
+  display: var(--availability-dot);
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0.7rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--color-accent-dark);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-available);
+  flex-shrink: 0;
 }
 
 
@@ -1083,6 +1163,13 @@ footer {
   .sidebar__bio {
     flex-basis: 100%;
     margin: 0;
+  }
+
+  /* The sidebar is left-aligned and wraps here, so the status line takes
+     a row of its own like the bio above it. */
+  .sidebar__status {
+    flex-basis: 100%;
+    justify-content: flex-start;
   }
 
   /* The links collapse behind the button, and open as a plain list
