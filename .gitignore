@@ -10,3 +10,7 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+
+# Job-hunt working material: outreach trackers, drafts, application notes.
+# Local only, never published with the site.
+_applications/
